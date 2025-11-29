@@ -21,7 +21,7 @@ const Banner = () => {
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="w-[calc(100%-3rem)] mx-auto p-5 xl:w-[1120px] h-auto bg-white absolute bottom-[-180px] lg:bottom-[-50px] left-1/2 transform -translate-x-1/2 shadow-lg rounded-2xl flex flex-col justify-center">
+      <div className="w-[calc(100%-3rem)] mx-auto p-5 xl:w-[1220px] h-auto bg-white absolute bottom-[-180px] lg:bottom-[-50px] left-1/2 transform -translate-x-1/2 shadow-lg rounded-2xl flex flex-col justify-center">
         <div className="flex flex-col lg:flex-row items-center gap-3">
           <div className="w-full lg:w-2/8 relative">
             <span className="absolute left-4 top-2 text-xs text-gray-500">
