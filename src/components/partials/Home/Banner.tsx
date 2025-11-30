@@ -1,13 +1,41 @@
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Calendar } from "../../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Minus, Plus, Ship } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { ListPierQueryOption } from "../../../api/pier";
 
 const Banner = () => {
   const backgroundImageUrl = "/src/assets/banner.jpg";
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [isStartFocused, setStartFocused] = useState<boolean>(false);
-  const [isEndFocused, setEndFocused] = useState<boolean>(false);
+  const [startPierShow, setStartPierShow] = useState<boolean>(false);
+  const [startPierSearch, setStartPierSearch] = useState<string>("");
+  const [selectedStartPierId, setSelectedStartPierId] = useState<number | null>(null);
+
+  const { data, isPending, error } = useQuery(
+    ListPierQueryOption(startPierSearch, 1, 8)
+  );
+
+  const handleStartPierChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setStartPierSearch(value);
+      if (value !== "") {
+        setSelectedStartPierId(null);
+        setStartPierShow(true);
+      } else {
+        setSelectedStartPierId(null);
+        setStartPierShow(false);
+      }
+    },
+    []
+  );
+
+  const selectStartPier = useCallback((pier: any) => {
+    setStartPierSearch(pier.name);
+    setSelectedStartPierId(pier.id);
+    setStartPierShow(false);
+  }, []);
 
   return (
     <div
@@ -30,37 +58,44 @@ const Banner = () => {
 
             <input
               type="text"
-              onFocus={() => setStartFocused(true)}
-              onBlur={() => setStartFocused(false)}
+              value={startPierSearch}
               className="text-sm w-full bg-gray-100 px-4 pt-7 pb-3 focus:outline-none rounded-xl border focus:border-orange-500"
               placeholder="Start pier"
+              onChange={handleStartPierChange}
             />
 
-            <div className={`w-auto lg:w-[480px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${isStartFocused ? "block" : "hidden"}`}>
-              <div className="flex flex-col gap-3.5">
-                <div className="flex items-start gap-2 cursor-pointer">
-                  <div>
-                    <Ship strokeWidth={1.5} />
-                  </div>
-                  <div className="text-sm text-gray-900">
-                    <div className="mb-1.5">Hello Sunshine</div>
-                    <div className="text-gray-500 text-xs">
-                      47/54 Moo 4 Tawasuki, Phra Nakhon Si Ayutthaya, Thailand
+            <div
+              className={`w-auto lg:w-[300px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${
+                startPierShow ? "block" : "hidden"
+              }`}
+            >
+              {isPending ? (
+                <div>Loading...</div>
+              ) : error ? (
+                <div>Error loading piers.</div>
+              ) : data?.data.length === 0 ? (
+                <div>No piers found.</div>
+              ) : (
+                <div className="flex flex-col gap-3.5">
+                  {data?.data?.map((pier: any) => (
+                    <div
+                      key={pier.id}
+                      className="flex items-center gap-4 cursor-pointer"
+                      onClick={() => selectStartPier(pier)}
+                    >
+                      <div>
+                        <Ship strokeWidth={1.5} />
+                      </div>
+                      <div className="text-sm text-gray-900">
+                        <div>{pier.name}</div>
+                        {/* <div className="text-gray-500 text-xs">
+                        47/54 Moo 4 Tawasuki, Phra Nakhon Si Ayutthaya, Thailand
+                      </div> */}
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-                <div className="flex items-start gap-2 cursor-pointer">
-                  <div>
-                    <Ship strokeWidth={1.5} />
-                  </div>
-                  <div className="text-sm text-gray-900">
-                    <div className="mb-1.5">Hello Sunshine</div>
-                    <div className="text-gray-500 text-xs">
-                      47/54 Moo 4 Tawasuki, Phra Nakhon Si Ayutthaya, Thailand
-                    </div>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -71,13 +106,15 @@ const Banner = () => {
 
             <input
               type="text"
-              onFocus={() => setEndFocused(true)}
-              onBlur={() => setEndFocused(false)}
               className="text-sm w-full bg-gray-100 px-4 pt-7 pb-3 focus:outline-none rounded-xl border focus:border-orange-500"
               placeholder="End pier"
             />
 
-            <div className={`w-auto lg:w-[480px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${isEndFocused ? "block" : "hidden"}`}>
+            <div
+              className={`w-auto lg:w-[480px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${
+                false ? "block" : "hidden"
+              }`}
+            >
               <div className="flex flex-col gap-3.5">
                 <div className="flex items-start gap-2 cursor-pointer">
                   <div>
@@ -169,7 +206,7 @@ const Banner = () => {
               </PopoverContent>
             </Popover>
           </div>
-          
+
           <div className="w-full lg:w-1/8 relative">
             <button className="text-sm w-full bg-orange-600 text-white px-10 py-5 rounded-xl hover:bg-orange-700 transition cursor-pointer">
               Search
