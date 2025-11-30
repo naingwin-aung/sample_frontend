@@ -73,7 +73,7 @@ const Banner = () => {
             />
 
             <div
-              className={`w-auto lg:w-[300px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${
+              className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${
                 startPierShow ? "block" : "hidden"
               }`}
             >
@@ -84,11 +84,11 @@ const Banner = () => {
               ) : data?.data.length === 0 ? (
                 <div>No piers found.</div>
               ) : (
-                <div className="flex flex-col gap-3.5">
+                <div className="flex flex-col">
                   {data?.data?.map((pier: any) => (
                     <div
                       key={pier.id}
-                      className="flex items-center gap-4 cursor-pointer"
+                      className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-lg p-[9px]"
                       onClick={() => selectStartPier(pier)}
                     >
                       <div>
