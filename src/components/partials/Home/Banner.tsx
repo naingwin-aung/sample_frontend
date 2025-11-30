@@ -16,10 +16,11 @@ const Banner = () => {
   );
 
   const debouncedSearch = useDebounce(startPierInput, 500);
-  
-  const { data, isPending, error } = useQuery(
-    ListPierQueryOption(debouncedSearch, 1, 8)
-  );
+
+  const { data, isPending, error } = useQuery({
+    ...ListPierQueryOption(debouncedSearch, 1, 8),
+    enabled: debouncedSearch.length > 0,
+  });
 
   useEffect(() => {
     if (startPierInput.length > 0 && selectedStartPierId === null) {
@@ -95,9 +96,6 @@ const Banner = () => {
                       </div>
                       <div className="text-sm text-gray-900">
                         <div>{pier.name}</div>
-                        {/* <div className="text-gray-500 text-xs">
-                        47/54 Moo 4 Tawasuki, Phra Nakhon Si Ayutthaya, Thailand
-                      </div> */}
                       </div>
                     </div>
                   ))}
