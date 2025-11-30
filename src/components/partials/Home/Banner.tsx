@@ -1,38 +1,45 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Calendar } from "../../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Minus, Plus, Ship } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { ListPierQueryOption } from "../../../api/pier";
+import useDebounce from "../../../hooks/useDebounce";
 
 const Banner = () => {
   const backgroundImageUrl = "/src/assets/banner.jpg";
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [startPierShow, setStartPierShow] = useState<boolean>(false);
-  const [startPierSearch, setStartPierSearch] = useState<string>("");
-  const [selectedStartPierId, setSelectedStartPierId] = useState<number | null>(null);
-
-  const { data, isPending, error } = useQuery(
-    ListPierQueryOption(startPierSearch, 1, 8)
+  const [startPierInput, setStartPierInput] = useState<string>("");
+  const [selectedStartPierId, setSelectedStartPierId] = useState<number | null>(
+    null
   );
+
+  const debouncedSearch = useDebounce(startPierInput, 500);
+  
+  const { data, isPending, error } = useQuery(
+    ListPierQueryOption(debouncedSearch, 1, 8)
+  );
+
+  useEffect(() => {
+    if (startPierInput.length > 0 && selectedStartPierId === null) {
+      setStartPierShow(true);
+    } else {
+      setStartPierShow(false);
+    }
+  }, [startPierInput, selectedStartPierId]);
 
   const handleStartPierChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setStartPierSearch(value);
-      if (value !== "") {
-        setSelectedStartPierId(null);
-        setStartPierShow(true);
-      } else {
-        setSelectedStartPierId(null);
-        setStartPierShow(false);
-      }
+      setStartPierInput(value);
+      setSelectedStartPierId(null);
     },
     []
   );
 
   const selectStartPier = useCallback((pier: any) => {
-    setStartPierSearch(pier.name);
+    setStartPierInput(pier.name);
     setSelectedStartPierId(pier.id);
     setStartPierShow(false);
   }, []);
@@ -58,7 +65,7 @@ const Banner = () => {
 
             <input
               type="text"
-              value={startPierSearch}
+              value={startPierInput}
               className="text-sm w-full bg-gray-100 px-4 pt-7 pb-3 focus:outline-none rounded-xl border focus:border-orange-500"
               placeholder="Start pier"
               onChange={handleStartPierChange}
@@ -171,6 +178,7 @@ const Banner = () => {
               </PopoverContent>
             </Popover>
           </div>
+
           <div className="w-full lg:w-1/8 relative">
             <span className="absolute left-4 top-2 text-xs text-gray-500">
               Passenger(s)

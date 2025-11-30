@@ -10,11 +10,11 @@ const query = new QueryClient();
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  // <StrictMode>
     <QueryClientProvider client={query}>
       <GoogleOAuthProvider clientId={CLIENT_ID}>
         <RouterProvider router={router} />
       </GoogleOAuthProvider>
     </QueryClientProvider>
-  </StrictMode>
+  // </StrictMode>
 );
