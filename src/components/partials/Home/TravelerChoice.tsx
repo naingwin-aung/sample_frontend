@@ -11,6 +11,7 @@ import {
 const products = [
   {
     title: "Beautiful Bali, Indonesia",
+    slug: "beautiful-bali-indonesia",
     image:
       "https://i.pinimg.com/1200x/2b/ab/31/2bab3159dbe18813e1c5d36bbf2573cf.jpg",
     description:
@@ -19,6 +20,7 @@ const products = [
   },
   {
     title: "Phi Phi Islands, Thailand",
+    slug: "phi-phi-islands-thailand",
     image:
       "https://i.pinimg.com/736x/a5/46/f0/a546f0c5bf17ed1cf7edc496b7ee338e.jpg",
     description:
@@ -27,6 +29,7 @@ const products = [
   },
   {
     title: "Koh Samui, Thailand",
+    slug: "koh-samui-thailand",
     image:
       "https://i.pinimg.com/1200x/c7/b9/62/c7b9623e58290c74241dce8d56622d92.jpg",
     description:
@@ -35,6 +38,7 @@ const products = [
   },
   {
     title: "Maui, Hawaii",
+    slug: "maui-hawaii",
     image:
       "https://i.pinimg.com/736x/69/29/e0/6929e05929a463592929377f6a22aa16.jpg",
     description:
@@ -43,6 +47,7 @@ const products = [
   },
   {
     title: "Santorini, Greece",
+    slug: "santorini-greece",
     image:
       "https://i.pinimg.com/736x/71/30/60/7130602940580cded07ddcbb4b36dba4.jpg",
     description:
@@ -51,6 +56,7 @@ const products = [
   },
   {
     title: "Kyoto, Japan",
+    slug: "kyoto-japan",
     image:
       "https://i.pinimg.com/1200x/3a/c2/7f/3ac27f43265607c504b70f9e4348acaf.jpg",
     description:
@@ -59,6 +65,7 @@ const products = [
   },
   {
     title: "Paris, France",
+    slug: "paris-france",
     image:
       "https://i.pinimg.com/1200x/65/dd/cc/65ddccaf9dc75773a876816f7e89281c.jpg",
     description:
@@ -67,6 +74,7 @@ const products = [
   },
   {
     title: "New York City, USA",
+    slug: "new-york-city-usa",
     image:
       "https://i.pinimg.com/1200x/b4/49/d4/b449d4c6a3f6c9fad6ff1160b625a5b0.jpg",
     description:
@@ -95,7 +103,7 @@ const TravelerChoice = () => {
       <Carousel
         opts={{
           align: "start",
-          // loop: true,
+          loop: true,
         }}
       >
         <CarouselContent>
