@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useDebounce from "../../../../hooks/useDebounce";
 import { useQuery } from "@tanstack/react-query";
 import { ListPierQueryOption } from "../../../../api/pier";
-import { Ship } from "lucide-react";
+import { Ship, X } from "lucide-react";
 
 const ToPier = ({ selectedToPierId, setSelectedToPierId }: { selectedToPierId: number | null; setSelectedToPierId: React.Dispatch<React.SetStateAction<number | null>> }) => {
   const [toPierShow, setToPierShow] = useState<boolean>(false);
@@ -38,9 +38,28 @@ const ToPier = ({ selectedToPierId, setSelectedToPierId }: { selectedToPierId: n
     setToPierShow(false);
   }, []);
 
+  const clearSelection = () => {
+    setToPierInput("");
+    setSelectedToPierId(null);
+  };
+
   return (
     <>
       <span className="absolute left-4 top-2 text-xs text-gray-500">To</span>
+
+      <div
+        className="absolute right-3 top-6.5 cursor-pointer"
+        onClick={clearSelection}
+      >
+        {toPierInput && (
+          <div className="bg-gray-200 rounded-full p-0.5 hover:bg-gray-300">
+            <X
+              strokeWidth={1.5}
+              className="h-4 w-4 text-gray-400 hover:text-gray-600"
+            />
+          </div>
+        )}
+      </div>
 
       <input
         type="text"
