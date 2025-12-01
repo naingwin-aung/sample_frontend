@@ -39,7 +39,7 @@ const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedSta
   }, []);
 
   return (
-    <>
+    <div className="relative">
       <span className="absolute left-4 top-2 text-xs text-gray-500">From</span>
 
       <input
@@ -51,7 +51,7 @@ const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedSta
       />
 
       <div
-        className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${
+        className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-50 absolute top-full mt-2 left-0 shadow-md border border-gray-200 ${
           startPierShow ? "block" : "hidden"
         }`}
       >
@@ -80,7 +80,7 @@ const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedSta
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

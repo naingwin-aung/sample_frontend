@@ -39,7 +39,7 @@ const ToPier = ({ selectedEndPierId, setSelectedEndPierId }: { selectedEndPierId
   }, []);
 
   return (
-    <>
+    <div className="relative">
       <span className="absolute left-4 top-2 text-xs text-gray-500">From</span>
 
       <input
@@ -51,7 +51,7 @@ const ToPier = ({ selectedEndPierId, setSelectedEndPierId }: { selectedEndPierId
       />
 
       <div
-        className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-10 absolute top-17 left-0 shadow-md border border-gray-200 ${
+        className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-20 absolute top-full mt-2 left-0 shadow-md border border-gray-200 ${
           endPierShow ? "block" : "hidden"
         }`}
       >
@@ -80,7 +80,7 @@ const ToPier = ({ selectedEndPierId, setSelectedEndPierId }: { selectedEndPierId
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
