@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { ListPierQueryOption } from "../../../../api/pier";
 import { Ship } from "lucide-react";
 
-const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedStartPierId: number | null; setSelectedStartPierId: React.Dispatch<React.SetStateAction<number | null>> }) => {
-  const [startPierShow, setStartPierShow] = useState<boolean>(false);
-  const [startPierInput, setStartPierInput] = useState<string>("");
+const FromPier = ({ selectedFromPierId, setSelectedFromPierId }: { selectedFromPierId: number | null; setSelectedFromPierId: React.Dispatch<React.SetStateAction<number | null>> }) => {
+  const [fromPierShow, setFromPierShow] = useState<boolean>(false);
+  const [fromPierInput, setFromPierInput] = useState<string>("");
 
-  const debouncedSearch = useDebounce(startPierInput, 500);
+  const debouncedSearch = useDebounce(fromPierInput, 500);
 
   const { data, isPending, error } = useQuery({
     ...ListPierQueryOption(debouncedSearch, 1, 8),
@@ -16,43 +16,43 @@ const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedSta
   });
 
   useEffect(() => {
-    if (startPierInput.length > 0 && selectedStartPierId === null) {
-      setStartPierShow(true);
+    if (fromPierInput.length > 0 && selectedFromPierId === null) {
+      setFromPierShow(true);
     } else {
-      setStartPierShow(false);
+      setFromPierShow(false);
     }
-  }, [startPierInput, selectedStartPierId]);
+  }, [fromPierInput, selectedFromPierId]);
 
-  const handleStartPierChange = useCallback(
+  const handleFromPierChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setStartPierInput(value);
-      setSelectedStartPierId(null);
+      setFromPierInput(value);
+      setSelectedFromPierId(null);
     },
     []
   );
 
-  const selectStartPier = useCallback((pier: any) => {
-    setStartPierInput(pier.name);
-    setSelectedStartPierId(pier.id);
-    setStartPierShow(false);
+  const selectFromPier = useCallback((pier: any) => {
+    setFromPierInput(pier.name);
+    setSelectedFromPierId(pier.id);
+    setFromPierShow(false);
   }, []);
 
   return (
-    <div className="relative">
+    <>
       <span className="absolute left-4 top-2 text-xs text-gray-500">From</span>
 
       <input
         type="text"
-        value={startPierInput}
+        value={fromPierInput}
         className="text-sm w-full bg-gray-100 px-4 pt-7 pb-3 focus:outline-none rounded-xl border focus:border-orange-500"
-        placeholder="Start pier"
-        onChange={handleStartPierChange}
+        placeholder="From pier"
+        onChange={handleFromPierChange}
       />
 
       <div
-        className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-50 absolute top-full mt-2 left-0 shadow-md border border-gray-200 ${
-          startPierShow ? "block" : "hidden"
+        className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-10 absolute top-full mt-2 left-0 shadow-md border border-gray-200 ${
+          fromPierShow ? "block" : "hidden"
         }`}
       >
         {isPending ? (
@@ -67,7 +67,7 @@ const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedSta
               <div
                 key={pier.id}
                 className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-lg p-[9px]"
-                onClick={() => selectStartPier(pier)}
+                onClick={() => selectFromPier(pier)}
               >
                 <div>
                   <Ship strokeWidth={1.5} />
@@ -80,7 +80,7 @@ const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedSta
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
