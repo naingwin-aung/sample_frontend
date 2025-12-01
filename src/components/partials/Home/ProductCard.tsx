@@ -1,19 +1,8 @@
 import { Link } from "react-router-dom";
 import Image from "../../global/Image";
+import type { ProductInterface } from "../../../lib/constants";
 
-const ProductCard = ({
-  title,
-  slug,
-  image,
-  description,
-  price,
-}: {
-  title: string;
-  slug: string;
-  image: string;
-  description: string;
-  price: number;
-}) => {
+const ProductCard = ({ title, slug, image, description, price }: ProductInterface) => {
   return (
     <Link to={`/products/${slug}`} target="_blank" rel="noopener noreferrer">
       <div className="w-full h-[390px] border border-gray-200 rounded-2xl cursor-pointer hover:shadow">
