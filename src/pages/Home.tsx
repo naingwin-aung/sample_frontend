@@ -8,8 +8,8 @@ const Home = () => {
     <section className="flex flex-col gap-12">
       <Banner />
 
-      <Offer />
-      <WhereNext />
+      {/* <Offer />
+      <WhereNext /> */}
       <TravelerChoice />
     </section>
   );
