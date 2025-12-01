@@ -56,11 +56,11 @@ const FromPier = ({ selectedStartPierId, setSelectedStartPierId }: { selectedSta
         }`}
       >
         {isPending ? (
-          <div>Loading...</div>
+          <div className="p-2 text-sm text-gray-600">Loading...</div>
         ) : error ? (
-          <div>Error loading piers.</div>
+          <div className="p-2 text-sm text-gray-600">Error loading piers.</div>
         ) : data?.data.length === 0 ? (
-          <div>No piers found.</div>
+          <div className="p-2 text-sm text-gray-600">No piers found.</div>
         ) : (
           <div className="flex flex-col">
             {data?.data?.map((pier: any) => (
