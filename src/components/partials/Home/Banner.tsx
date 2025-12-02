@@ -14,6 +14,8 @@ const Banner = () => {
   );
   const [passengerCount, setPassengerCount] = useState<number>(2);
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [fromPierShow, setFromPierShow] = useState<boolean>(false);
+  const [toPierShow, setToPierShow] = useState<boolean>(false);
 
   return (
     <div
@@ -30,11 +32,23 @@ const Banner = () => {
       <div className="w-[calc(100%-3rem)] mx-auto p-5 xl:w-[1180px] h-auto bg-white absolute bottom-[-180px] lg:bottom-[-50px] left-1/2 transform -translate-x-1/2 shadow-lg rounded-2xl flex flex-col justify-center z-10">
         <div className="flex flex-col lg:flex-row items-center gap-3">
           <div className="w-full lg:w-2/8 relative">
-            <FromPier selectedFromPierId={selectedFromPierId} setSelectedFromPierId={setSelectedFromPierId} />
+            <FromPier 
+              selectedFromPierId={selectedFromPierId} 
+              setSelectedFromPierId={setSelectedFromPierId}
+              fromPierShow={fromPierShow}
+              setFromPierShow={setFromPierShow}
+              onFocus={() => setToPierShow(false)}
+            />
           </div>
 
           <div className="w-full lg:w-2/8 relative">
-            <ToPier selectedToPierId={selectedToPierId} setSelectedToPierId={setSelectedToPierId} />
+            <ToPier 
+              selectedToPierId={selectedToPierId} 
+              setSelectedToPierId={setSelectedToPierId}
+              toPierShow={toPierShow}
+              setToPierShow={setToPierShow}
+              onFocus={() => setFromPierShow(false)}
+            />
           </div>
 
           <div className="w-full lg:w-2/8 relative">

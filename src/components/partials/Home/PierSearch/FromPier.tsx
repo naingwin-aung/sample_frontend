@@ -7,11 +7,16 @@ import { Ship, X } from "lucide-react";
 const FromPier = ({
   selectedFromPierId,
   setSelectedFromPierId,
+  fromPierShow,
+  setFromPierShow,
+  onFocus,
 }: {
   selectedFromPierId: number | null;
   setSelectedFromPierId: React.Dispatch<React.SetStateAction<number | null>>;
+  fromPierShow: boolean;
+  setFromPierShow: React.Dispatch<React.SetStateAction<boolean>>;
+  onFocus: () => void;
 }) => {
-  const [fromPierShow, setFromPierShow] = useState<boolean>(false);
   const [fromPierInput, setFromPierInput] = useState<string>("");
 
   const debouncedSearch = useDebounce(fromPierInput, 500);
@@ -72,6 +77,7 @@ const FromPier = ({
         className="text-sm w-full bg-gray-100 px-4 pt-7 pb-3 focus:outline-none rounded-xl border focus:border-orange-500"
         placeholder="From pier"
         onChange={handleFromPierChange}
+        onFocus={onFocus}
       />
 
       <div

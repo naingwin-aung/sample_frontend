@@ -4,8 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import { ListPierQueryOption } from "../../../../api/pier";
 import { Ship, X } from "lucide-react";
 
-const ToPier = ({ selectedToPierId, setSelectedToPierId }: { selectedToPierId: number | null; setSelectedToPierId: React.Dispatch<React.SetStateAction<number | null>> }) => {
-  const [toPierShow, setToPierShow] = useState<boolean>(false);
+const ToPier = ({
+  selectedToPierId,
+  setSelectedToPierId,
+  toPierShow,
+  setToPierShow,
+  onFocus,
+}: {
+  selectedToPierId: number | null;
+  setSelectedToPierId: React.Dispatch<React.SetStateAction<number | null>>;
+  toPierShow: boolean;
+  setToPierShow: React.Dispatch<React.SetStateAction<boolean>>;
+  onFocus: () => void;
+}) => {
   const [toPierInput, setToPierInput] = useState<string>("");
 
   const debouncedSearch = useDebounce(toPierInput, 500);
@@ -67,6 +78,7 @@ const ToPier = ({ selectedToPierId, setSelectedToPierId }: { selectedToPierId: n
         className="text-sm w-full bg-gray-100 px-4 pt-7 pb-3 focus:outline-none rounded-xl border focus:border-orange-500"
         placeholder="To pier"
         onChange={handleToPierChange}
+        onFocus={onFocus}
       />
 
       <div
