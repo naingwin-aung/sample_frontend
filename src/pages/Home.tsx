@@ -6,7 +6,9 @@ import WhereNext from "../components/partials/Home/WhereNext";
 const Home = () => {
   return (
     <section className="flex flex-col gap-12">
-      <Banner />
+      <div className="mb-10 md:mb-3">
+        <Banner />
+      </div>
 
       {/* <Offer />
       <WhereNext /> */}
