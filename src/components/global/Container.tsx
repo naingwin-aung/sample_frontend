@@ -1,6 +1,6 @@
 const Container = ({children, className} : {children: React.ReactNode, className?: string}) => {
   return (
-    <section className={`px-4 md:px-8 lg:px-16 xl:px-34 2xl:px-90 max-2xl:px-102 ${className}`}>
+    <section className={`w-full max-w-[1180px] mx-auto px-4 md:px-6 lg:px-8 ${className}`}>
       {children}
     </section>
   )
