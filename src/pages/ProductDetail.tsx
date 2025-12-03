@@ -89,12 +89,20 @@ const ProductDetail = () => {
 
       {/* description */}
       <div className="flex gap-4 mb-6">
-        <div className="w-2/3 h-[170px] border border-gray-200 rounded-2xl"></div>
-        <div className="w-1/3 h-[120px] border border-gray-200 rounded-2xl"></div>
+        <div className="w-3/4 h-[170px] border border-gray-200 rounded-2xl">
+        </div>
+        <div className="w-1/4 h-[120px] border border-gray-200 rounded-2xl p-5">
+            <div className="text-xl font-medium">
+              THB 18,99
+            </div>
+            <div className="w-full rounded-2xl bg-primary py-3 text-white text-center mt-2 cursor-pointer text-sm hover:bg-orange-600 transition">
+              Select Options
+            </div>
+        </div>
       </div>
 
       {/* select option */}
-      <div>
+      <div id="select_option">
         <h3 className="text-2xl font-medium mb-4">Select options</h3>
         <div className="flex flex-col gap-4">
           <div className="w-full h-[190px] border border-gray-200 rounded-2xl"></div>
