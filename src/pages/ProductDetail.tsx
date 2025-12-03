@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import Container from "../components/global/Container";
 import { products, type ProductInterface } from "../lib/constants";
 import { useEffect, useState } from "react";
+import { BookImage } from "lucide-react";
 
 const product = {
   gallery: [
@@ -51,17 +52,40 @@ const ProductDetail = () => {
     <Container className="mt-6">
       <h2 className="text-3xl font-medium mb-6">{detail?.title}</h2>
       {/* gallery here */}
-      <div className="w-full h-[362px] mb-6">
-        <div className="w-full h-full grid grid-cols-5 gap-2 overflow-hidden">
-          {product.gallery.map((img, index) => (
+      <div className="w-full h-[400px] mb-6">
+        <div className="w-full h-full flex gap-2 rounded-xl overflow-hidden relative">
+          <div className="w-1/2 h-full relative overflow-hidden">
             <div
-              key={index}
-              className="w-full h-full rounded-2xl bg-cover bg-center"
-              style={{ backgroundImage: `url(${img.url})` }}
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${product.gallery[0]?.url})` }}
             ></div>
-          ))}
+          </div>
+
+          <div className="w-1/2 h-full relative overflow-hidden">
+            <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
+              {product.gallery.slice(1, 5).map((img, index) => (
+                <div
+                  key={index}
+                  className="w-full h-full bg-cover bg-center overflow-hidden"
+                  style={{ backgroundImage: `url(${img.url})` }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* Gallery button overlay */}
+            <button className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              Gallery
+            </button>
+          </div>
         </div>
       </div>
+      {/* end gallery */}
 
       {/* description */}
       <div className="flex gap-4 mb-6">
