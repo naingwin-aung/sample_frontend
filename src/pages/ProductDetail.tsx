@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import Container from "../components/global/Container";
 import { products, type ProductInterface } from "../lib/constants";
 import { useEffect, useState } from "react";
-import { BookImage } from "lucide-react";
 
 const product = {
   gallery: [
@@ -48,6 +47,27 @@ const ProductDetail = () => {
     setDetail((prev) => product || prev);
   }, [param.slug]);
 
+  const scrollToSelectOptions = () => {
+    const targetElement = document.getElementById("select_option");
+    const navBarElement = document.getElementById("nav-bar-id");
+
+    if (targetElement && navBarElement) {
+      const navBarHeight = navBarElement.offsetHeight;
+      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+      const finalScrollPosition = targetPosition - (navBarHeight + 10);
+
+      window.scrollTo({
+        top: finalScrollPosition,
+        behavior: "smooth",
+      });
+    } else if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      console.warn(
+        "Could not find the navigation bar element. Scrolling to start without offset."
+      );
+    }
+  };
+
   return (
     <Container className="mt-6">
       <h2 className="text-3xl font-medium mb-6">{detail?.title}</h2>
@@ -71,10 +91,20 @@ const ProductDetail = () => {
                 ></div>
               ))}
             </div>
-            
+
             {/* Gallery button overlay */}
             <button className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <rect x="3" y="3" width="7" height="7"></rect>
                 <rect x="14" y="3" width="7" height="7"></rect>
                 <rect x="14" y="14" width="7" height="7"></rect>
@@ -89,15 +119,15 @@ const ProductDetail = () => {
 
       {/* description */}
       <div className="flex gap-4 mb-6">
-        <div className="w-3/4 h-[170px] border border-gray-200 rounded-2xl">
-        </div>
+        <div className="w-3/4 h-[170px] border border-gray-200 rounded-2xl"></div>
         <div className="w-1/4 h-[120px] border border-gray-200 rounded-2xl p-5">
-            <div className="text-xl font-medium">
-              THB 18,99
-            </div>
-            <div className="w-full rounded-2xl bg-primary py-3 text-white text-center mt-2 cursor-pointer text-sm hover:bg-orange-600 transition">
-              Select Options
-            </div>
+          <div className="text-xl font-medium">THB 18,99</div>
+          <div
+            onClick={scrollToSelectOptions}
+            className="w-full rounded-2xl bg-primary py-3 text-white text-center mt-2 cursor-pointer text-sm hover:bg-orange-600 transition"
+          >
+            Select Options
+          </div>
         </div>
       </div>
 

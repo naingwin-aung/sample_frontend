@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <header className="glass sticky top-0 z-50 rounded-none">
-      <nav className="w-full h-14 md:h-18">
+      <nav id="nav-bar-id" className="w-full h-14 md:h-18">
         <Container className="flex items-center justify-between h-full">
           {/* Logo */}
           <Link to="/" className="">
