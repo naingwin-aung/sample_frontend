@@ -9,10 +9,12 @@ const GalleryModal = ({
   isGalleryOpen,
   setIsGalleryOpen,
   galleries,
+  initialSlide = 0,
 }: {
   isGalleryOpen: boolean,
   setIsGalleryOpen: React.Dispatch<React.SetStateAction<boolean>>,
   galleries: { url: string }[],
+  initialSlide?: number,
 }) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -42,11 +44,19 @@ const GalleryModal = ({
 
   const handleSwiperInit = (swiper: SwiperType) => {
     setSwiperInstance(swiper);
+    swiper.slideTo(initialSlide, 0);
   };
 
   const handleSlideChange = (swiper: SwiperType) => {
     setActiveIndex(swiper.activeIndex);
   };
+
+  useEffect(() => {
+    if (isGalleryOpen && swiperInstance) {
+      swiperInstance.slideTo(initialSlide, 0);
+      setActiveIndex(initialSlide);
+    }
+  }, [isGalleryOpen, initialSlide]);
 
   if (!isGalleryOpen) return null;
 

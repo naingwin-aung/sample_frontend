@@ -3,14 +3,14 @@ const Gallery = ({
   openGallery,
 }: {
   product: any;
-  openGallery: () => void;
+  openGallery: (index: number) => void;
 }) => {
   return (
     <div className="w-full h-[400px] mb-6">
       <div className="w-full h-full flex gap-2 rounded-xl overflow-hidden relative">
         <div
           className="w-1/2 h-full relative overflow-hidden cursor-pointer"
-          onClick={openGallery}
+          onClick={() => openGallery(0)}
         >
           <div
             className="w-full h-full bg-cover bg-center"
@@ -18,16 +18,14 @@ const Gallery = ({
           ></div>
         </div>
 
-        <div
-          className="w-1/2 h-full relative overflow-hidden cursor-pointer"
-          onClick={openGallery}
-        >
+        <div className="w-1/2 h-full relative overflow-hidden">
           <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
             {product.gallery.slice(1, 5).map((img: any, index: number) => (
               <div
                 key={index}
-                className="w-full h-full bg-cover bg-center overflow-hidden"
+                className="w-full h-full bg-cover bg-center overflow-hidden cursor-pointer"
                 style={{ backgroundImage: `url(${img.url})` }}
+                onClick={() => openGallery(index + 1)}
               ></div>
             ))}
           </div>
@@ -40,7 +38,10 @@ const Gallery = ({
           {/* Gallery button overlay */}
           <button
             className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer"
-            onClick={openGallery}
+            onClick={(e) => {
+              e.stopPropagation();
+              openGallery(0);
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

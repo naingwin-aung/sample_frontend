@@ -56,6 +56,7 @@ const ProductDetail = () => {
   const param = useParams<{ slug: string }>();
   const [detail, setDetail] = useState<ProductInterface | undefined>();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [initialSlide, setInitialSlide] = useState(0);
 
   useEffect(() => {
     const product = products.find((p) => p.slug === param.slug);
@@ -84,7 +85,8 @@ const ProductDetail = () => {
     }
   };
 
-  const openGallery = () => {
+  const openGallery = (index: number = 0) => {
+    setInitialSlide(index);
     setIsGalleryOpen(true);
   };
 
@@ -101,6 +103,7 @@ const ProductDetail = () => {
         galleries={product.gallery}
         isGalleryOpen={isGalleryOpen}
         setIsGalleryOpen={setIsGalleryOpen}
+        initialSlide={initialSlide}
       />
 
       {/* description */}
