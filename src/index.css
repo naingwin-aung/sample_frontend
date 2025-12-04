@@ -199,5 +199,5 @@
 
 .gallery-swiper-button-prev-custom.swiper-button-disabled,
 .gallery-swiper-button-next-custom.swiper-button-disabled {
-  opacity: 0;
+  opacity: 0.4;
 }

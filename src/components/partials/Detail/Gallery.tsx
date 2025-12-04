@@ -37,7 +37,7 @@ const Gallery = ({
 
           {/* Gallery button overlay */}
           <button
-            className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer"
+            className="absolute bottom-4 right-4 bg-white/85 px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               openGallery(0);
