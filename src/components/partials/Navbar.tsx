@@ -71,7 +71,7 @@ const Navbar = () => {
                     Log in
                   </button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md rounded-2xl">
+                <DialogContent className="sm:max-w-md rounded-2xl" showCloseButton={false}>
                   <DialogHeader>
                     <DialogTitle>
                       <div className="flex items-center gap-4 mb-5">
