@@ -26,7 +26,7 @@ const SelectOptionItem = ({ option }: { option: any }) => {
     <Accordion
       type="single"
       collapsible
-      className="w-full border border-gray-300 rounded-2xl overflow-hidden cursor-pointer"
+      className={`w-full border rounded-2xl overflow-hidden cursor-pointer ${isExpanded ? "border-primary" : "border-gray-300"}`}
       onValueChange={(value) => setIsExpanded(value === "item-1")}
     >
       <AccordionItem value="item-1" className="border-b-0">
