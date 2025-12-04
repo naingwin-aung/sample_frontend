@@ -71,7 +71,7 @@ const Navbar = () => {
                     Log in
                   </button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="sm:max-w-md rounded-2xl">
                   <DialogHeader>
                     <DialogTitle>
                       <div className="flex items-center gap-4 mb-5">
@@ -80,11 +80,11 @@ const Navbar = () => {
                           alt="Logo"
                           className="w-10 h-10 rounded-full"
                         />
-                        <div className="font-medium">Welcome back!</div>
+                        <div className="text-2xl font-medium">Welcome back!</div>
                       </div>
                     </DialogTitle>
                     <DialogDescription>
-                      <span className="text-md font-medium">
+                      <span className="text-lg font-medium">
                         Login or sign up
                       </span>
                     </DialogDescription>
