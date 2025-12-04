@@ -65,7 +65,7 @@ const FromPier = ({
           <div className="bg-gray-200 rounded-full p-0.5 hover:bg-gray-300">
             <X
               strokeWidth={1.5}
-              className="h-4 w-4 text-gray-400 hover:text-gray-600"
+              className="h-4 w-4 text-gray-500 hover:text-gray-600"
             />
           </div>
         )}
