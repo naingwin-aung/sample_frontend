@@ -7,10 +7,10 @@ import GalleryModal from "../components/partials/Detail/GalleryModal";
 const product = {
   gallery: [
     {
-      url: "https://i.pinimg.com/1200x/40/32/90/403290a0edcee398d314a1e84ae9cb5d.jpg",
+      url: "https://i.pinimg.com/1200x/bd/90/a6/bd90a6c8ea07dc7390e461b655a8b1c6.jpg",
     },
     {
-      url: "https://i.pinimg.com/1200x/cf/0c/5c/cf0c5c640e60f1b3ca5d204530f37d85.jpg",
+      url: "https://i.pinimg.com/1200x/67/7e/7f/677e7f6240a74891acae4e5df14d5bd1.jpg",
     },
     {
       url: "https://i.pinimg.com/736x/5f/f2/ad/5ff2ada1b287dedb7984510e04ef958d.jpg",
@@ -28,7 +28,7 @@ const product = {
       url: "https://i.pinimg.com/736x/3c/61/23/3c6123aa04908249698efc04b6af04aa.jpg",
     },
     {
-      url: "https://i.pinimg.com/736x/e6/a9/3c/e6a93caa62c7e2965faf2999cff6255b.jpg",
+      url: "https://i.pinimg.com/736x/e6/b9/c1/e6b9c1decfae8e63c78edf62d1328f3f.jpg",
     },
     {
       url: "https://i.pinimg.com/736x/bd/e0/2e/bde02e31309fa9e3538a4452dabcc2d5.jpg",
