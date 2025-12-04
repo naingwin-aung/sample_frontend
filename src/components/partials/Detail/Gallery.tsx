@@ -32,6 +32,11 @@ const Gallery = ({
             ))}
           </div>
 
+          {/* Image counter overlay */}
+          <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-xs px-3 py-1.5 rounded-lg text-white text-sm font-medium">
+            {product.gallery.length}
+          </div>
+
           {/* Gallery button overlay */}
           <button
             className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer"
