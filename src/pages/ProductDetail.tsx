@@ -123,7 +123,7 @@ const ProductDetail = () => {
       {/* select option */}
       <div id="select_option">
         <h3 className="text-2xl font-medium mb-4">Select options</h3>
-        <div className="w-3/4 mb-6">
+        <div className="w-full mb-6">
           <div className="flex flex-col gap-7">
             {select_options.map((option, index) => (
               <SelectOptionItem key={index} option={option} />
