@@ -52,9 +52,11 @@ const SelectOptionItem = ({ option }: { option: any }) => {
               <div className="flex justify-end items-center gap-2">
                 <span className="text-lg text-gray-600">From</span>
                 <span className="text-xl font-medium">THB 21,00</span>
-                <button className="rounded-lg bg-primary py-3 px-5 text-white font-medium text-center cursor-pointer text-sm hover:bg-orange-600 transition">
+                <div 
+                  className="rounded-lg bg-primary py-3 px-5 text-white font-medium text-center cursor-pointer text-sm hover:bg-orange-600 transition"
+                >
                   Select
-                </button>
+                </div>
               </div>
             </div>
           </div>
