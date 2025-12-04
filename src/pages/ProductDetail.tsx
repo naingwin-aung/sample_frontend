@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import Container from "../components/global/Container";
 import { products, type ProductInterface } from "../lib/constants";
 import { useEffect, useState } from "react";
+import GalleryModal from "../components/partials/Detail/GalleryModal";
 
 const product = {
   gallery: [
@@ -41,6 +42,7 @@ const product = {
 const ProductDetail = () => {
   const param = useParams<{ slug: string }>();
   const [detail, setDetail] = useState<ProductInterface | undefined>();
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   useEffect(() => {
     const product = products.find((p) => p.slug === param.slug);
@@ -68,20 +70,25 @@ const ProductDetail = () => {
     }
   };
 
+  const openGallery = () => {
+    setIsGalleryOpen(true);
+  }
+
   return (
     <Container className="mt-6">
       <h2 className="text-3xl font-medium mb-6">{detail?.title}</h2>
+
       {/* gallery here */}
       <div className="w-full h-[400px] mb-6">
         <div className="w-full h-full flex gap-2 rounded-xl overflow-hidden relative">
-          <div className="w-1/2 h-full relative overflow-hidden">
+          <div className="w-1/2 h-full relative overflow-hidden cursor-pointer" onClick={openGallery}>
             <div
               className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${product.gallery[0]?.url})` }}
             ></div>
           </div>
 
-          <div className="w-1/2 h-full relative overflow-hidden">
+          <div className="w-1/2 h-full relative overflow-hidden cursor-pointer" onClick={openGallery}>
             <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
               {product.gallery.slice(1, 5).map((img, index) => (
                 <div
@@ -93,7 +100,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Gallery button overlay */}
-            <button className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer">
+            <button className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-medium text-sm cursor-pointer" onClick={openGallery}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -116,6 +123,9 @@ const ProductDetail = () => {
         </div>
       </div>
       {/* end gallery */}
+
+      {/* gallery modal */}
+      <GalleryModal galleries={product.gallery} isGalleryOpen={isGalleryOpen} setIsGalleryOpen={setIsGalleryOpen} />
 
       {/* description */}
       <div className="flex gap-4 mb-6">

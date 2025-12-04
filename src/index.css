@@ -163,3 +163,41 @@
 .swiper-button-next-custom.swiper-button-disabled {
   opacity: 0;
 }
+
+
+.gallery-swiper-button-prev-custom,
+.gallery-swiper-button-next-custom {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(130, 130, 130);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: rgb(100, 100, 100);
+  }
+}
+
+.gallery-swiper-button-prev-custom {
+  left: -40px; 
+}
+
+.gallery-swiper-button-next-custom {
+  right: -40px;
+}
+
+.gallery-swiper-button-prev-custom.swiper-button-disabled,
+.gallery-swiper-button-next-custom.swiper-button-disabled {
+  opacity: 0;
+}
