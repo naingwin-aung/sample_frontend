@@ -107,20 +107,23 @@ const ProductDetail = () => {
       <div className="flex gap-4 mb-6">
         <div className="w-3/4 h-[170px] border border-gray-200 rounded-2xl"></div>
         <div className="w-1/4 h-[120px] border border-gray-200 rounded-2xl p-5">
-          <div className="text-xl font-medium">THB 18,99</div>
-          <div
+          <div className="text-xl font-medium">
+            <span className="text-sm text-gray-600 mr-2">From</span>
+            THB 18,99
+          </div>
+          <button
             onClick={scrollToSelectOptions}
             className="w-full rounded-2xl bg-primary py-3 text-white text-center mt-2 cursor-pointer text-sm hover:bg-orange-600 transition"
           >
             Select Options
-          </div>
+          </button>
         </div>
       </div>
 
       {/* select option */}
       <div id="select_option">
         <h3 className="text-2xl font-medium mb-4">Select options</h3>
-        <div className="w-3/4 flex gap-4 mb-6">
+        <div className="w-3/4 mb-6">
           <div className="flex flex-col gap-7">
             {select_options.map((option, index) => (
               <SelectOptionItem key={index} option={option} />

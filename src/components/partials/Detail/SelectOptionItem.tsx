@@ -12,20 +12,26 @@ const galleries = [
 
 const SelectOptionItem = ({ option }: { option: any }) => {
   return (
-    <div className="w-full h-[200px] border border-gray-300 rounded-2xl flex cursor-pointer">
+    <div className="w-full h-[220px] border border-gray-300 rounded-2xl flex cursor-pointer">
       <div
         className="w-1/4 h-full bg-cover bg-center rounded-l-2xl"
         style={{ backgroundImage: `url(${galleries[0].url})` }}
       ></div>
       <div className="w-3/4 h-full py-4 px-5">
         <h3 className="text-xl font-medium line-clamp-1 mb-3">{option.name}</h3>
-        <div className="w-full h-[85px] mb-2 text-gray-600">
+        <div className="w-full h-[90px] mb-2 text-gray-600">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum non odit
           voluptatem repellendus, optio nihil. Accusantium autem distinctio,
           minus expedita qui, vitae dignissimos in
         </div>
-        <div className="flex justify-end items-center">
-          <span className="text-2xl font-medium">THB 21,00</span>
+        <div className="flex justify-end items-center gap-2">
+          <span className="text-lg text-gray-600 mt-2.5">From</span>
+          <span className="text-xl font-medium mt-2.5">THB 21,00</span>
+          <button
+            className="rounded-lg bg-primary py-3 px-5 text-white font-medium text-center mt-2 cursor-pointer text-sm hover:bg-orange-600 transition"
+          >
+            Select
+          </button>
         </div>
       </div>
     </div>
