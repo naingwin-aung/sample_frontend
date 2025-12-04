@@ -8,6 +8,9 @@ import {
   CarouselPrevious,
 } from "../../../components/ui/carousel";
 import { products } from "../../../lib/constants";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const TravelerChoice = () => {
   return (
@@ -26,7 +29,7 @@ const TravelerChoice = () => {
             }
         </div> */}
 
-      <Carousel
+      {/* <Carousel
         opts={{
           align: "start",
           loop: true,
@@ -41,7 +44,24 @@ const TravelerChoice = () => {
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-      </Carousel>
+      </Carousel> */}
+
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={13}
+        slidesPerView={4}
+        navigation
+        // pagination={{ clickable: true }}
+        // scrollbar={{ draggable: true }}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
+      >
+        {products.map((product, index) => (
+          <SwiperSlide key={index}>
+            <ProductCard {...product} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Container>
   );
 };
