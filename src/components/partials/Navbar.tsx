@@ -1,41 +1,25 @@
 import { Link } from "react-router-dom";
 import Image from "../global/Image";
 import Container from "../global/Container";
-import { loginWithProvider, logout } from "../../api/auth";
-import useAuthStore from "../../stores/useAuthStore";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import SocialSignIn from "./Auth/SocialSignIn";
-import { useGoogleLogin } from "@react-oauth/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import NavbarUser from "./Auth/NavbarUser";
 
 const Navbar = () => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleGoogleSuccess = async (tokenResponse : any) => {
-    try {
-      await loginWithProvider("google", tokenResponse.access_token);
-      setIsDialogOpen(false);
-    } catch (error) {
-      console.error("Google login error:", error);
+  // Disable background scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
     }
-  };
 
-  const handleGoogleError = () => {
-    console.log("Google Sign-In failed. Please try again.");
-  };
-
-  const signInWithGoogle = useGoogleLogin({
-    onSuccess: handleGoogleSuccess,
-    onError: handleGoogleError,
-  });
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [open]);
 
   return (
     <header className="glass sticky top-0 z-50 rounded-none">
@@ -50,6 +34,34 @@ const Navbar = () => {
             />
           </Link>
 
+          {/* Mobile menu */}
+          <div className="md:hidden z-50">
+            <div
+              className={`cursor-pointer transition duration-300 ease-in-out ${
+                open ? "rotate-90" : "rotate-0"
+              }`}
+              onClick={() => setOpen((prev) => !prev)}
+            >
+              {open ? <X /> : <Menu />}
+            </div>
+
+            {/* Mobile link list */}
+            <div
+              className={`w-full h-screen flex flex-col gap-10 items-center pt-25 fixed top-14 right-0 bg-white/90 backdrop-filter backdrop-blur-3xl transition-all ease-in-out duration-200 select-none font-medium
+            ${open ? "translate-x-0" : "translate-x-full"}
+          `}
+            >
+              <Link to="/" className="text-gray-600">
+                Help
+              </Link>
+              <Link to="/" className="text-gray-600">
+                Recently Viewed
+              </Link>
+
+              <NavbarUser loginSuccess={() => setOpen(false)} />
+            </div>
+          </div>
+
           <div className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 font-medium text-xs">
             <Link to="/" className="text-gray-600">
               Help
@@ -57,45 +69,7 @@ const Navbar = () => {
             <Link to="/" className="text-gray-600">
               Recently Viewed
             </Link>
-            {isAuthenticated ? (
-              <button
-                onClick={logout}
-                className="px-4 py-2 rounded-4xl bg-linear-to-r from-red-400 to-red-600 text-white cursor-pointer text-sm hover:from-red-500 hover:to-red-700 transition"
-              >
-                Log out
-              </button>
-            ) : (
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <button className="px-4 py-2 rounded-4xl bg-linear-to-r from-orange-400 to-orange-600 text-white cursor-pointer text-sm hover:from-orange-500 hover:to-orange-700 transition">
-                    Log in
-                  </button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md rounded-2xl" showCloseButton={false}>
-                  <DialogHeader>
-                    <DialogTitle>
-                      <div className="flex items-center gap-4 mb-5">
-                        <Image
-                          src="https://i.pinimg.com/736x/1b/aa/51/1baa516470fc278145718dd2048bdf6d.jpg"
-                          alt="Logo"
-                          className="w-10 h-10 rounded-full"
-                        />
-                        <div className="text-2xl font-medium">Welcome back!</div>
-                      </div>
-                    </DialogTitle>
-                    <DialogDescription>
-                      <span className="text-lg font-medium">
-                        Login or sign up
-                      </span>
-                    </DialogDescription>
-                  </DialogHeader>
-                  <SocialSignIn
-                    signInWithGoogle={signInWithGoogle}
-                    text="Sign In with Google"
-                  />
-                </DialogContent>
-              </Dialog>
-            )}
+            <NavbarUser loginSuccess={() => setOpen(false)} />
           </div>
         </Container>
       </nav>
