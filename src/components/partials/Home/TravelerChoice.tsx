@@ -52,7 +52,7 @@ const TravelerChoice = () => {
       <div className="custom-swiper-container relative">
         <button 
           ref={prevRef} 
-          className="swiper-button-prev-custom hidden md:block absolute top-1/2 left-0 z-10 -translate-y-1/2 p-2 bg-white rounded-full shadow"
+          className="swiper-button-prev-custom hidden md:block absolute top-1/2 left-0 z-10 -translate-y-1/2 p-1 bg-white rounded-full shadow"
         >
           <ChevronLeft size={17} strokeWidth={1.5} />
         </button>
@@ -72,7 +72,7 @@ const TravelerChoice = () => {
 
         <button 
           ref={nextRef} 
-          className="swiper-button-next-custom hidden md:block absolute top-1/2 right-0 z-10 -translate-y-1/2 p-2 bg-white rounded-full shadow"
+          className="swiper-button-next-custom hidden md:block absolute top-1/2 right-0 z-10 -translate-y-1/2 p-1 bg-white rounded-full shadow"
         >
           <ChevronRight size={17} strokeWidth={1.5} />
         </button>

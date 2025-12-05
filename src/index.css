@@ -148,7 +148,6 @@
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .swiper-button-prev-custom {
@@ -182,7 +181,6 @@
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
     background-color: rgb(100, 100, 100);
