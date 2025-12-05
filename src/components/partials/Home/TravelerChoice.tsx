@@ -1,45 +1,67 @@
 import Container from "../../global/Container";
 import ProductCard from "./ProductCard";
-import { products } from "../../../lib/constants";
+import { products } from "../../../lib/constants"; 
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const TravelerChoice = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-  const [swiperInstance, setSwiperInstance] = useState(null); // To store the Swiper object
+  const [swiperInstance, setSwiperInstance] = useState(null);
 
   const handleSwiperInit = (swiper) => {
     setSwiperInstance(swiper);
   };
-
+  
   useEffect(() => {
     if (swiperInstance && prevRef.current && nextRef.current) {
       swiperInstance.params.navigation.prevEl = prevRef.current;
       swiperInstance.params.navigation.nextEl = nextRef.current;
+      
       swiperInstance.navigation.init();
       swiperInstance.navigation.update();
     }
   }, [swiperInstance]);
+  
+  const breakpoints = {
+    769: {
+      slidesPerView: 4,
+      spaceBetween: 13,
+      pagination: false,
+    },
+    0: {
+      slidesPerView: 1.2,
+      spaceBetween: 10,
+      pagination: {
+        clickable: true,
+      },
+      navigation: {
+        enabled: false, 
+      },
+    },
+  };
 
   return (
     <Container>
-      <h2 className="text-3xl font-semibold mb-8">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-8">
         Travelers' favorite choices
       </h2>
 
-      <div className="custom-swiper-container">
-        <button ref={prevRef} className="swiper-button-prev-custom">
+      <div className="custom-swiper-container relative">
+        <button 
+          ref={prevRef} 
+          className="swiper-button-prev-custom hidden md:block absolute top-1/2 left-0 z-10 -translate-y-1/2 p-2 bg-white rounded-full shadow"
+        >
           <ChevronLeft size={17} strokeWidth={1.5} />
         </button>
 
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
-          spaceBetween={13}
-          slidesPerView={4}
-          onSwiper={handleSwiperInit}
+          breakpoints={breakpoints}
+          pagination={{ clickable: true }}
+          onSwiper={handleSwiperInit} 
         >
           {products.map((product, index) => (
             <SwiperSlide key={index}>
@@ -48,7 +70,10 @@ const TravelerChoice = () => {
           ))}
         </Swiper>
 
-        <button ref={nextRef} className="swiper-button-next-custom">
+        <button 
+          ref={nextRef} 
+          className="swiper-button-next-custom hidden md:block absolute top-1/2 right-0 z-10 -translate-y-1/2 p-2 bg-white rounded-full shadow"
+        >
           <ChevronRight size={17} strokeWidth={1.5} />
         </button>
       </div>
