@@ -201,3 +201,11 @@
 .gallery-swiper-button-next-custom.swiper-button-disabled {
   opacity: 0.4;
 }
+
+.swiper-pagination {
+  bottom: -1px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--color-primary);
+}
