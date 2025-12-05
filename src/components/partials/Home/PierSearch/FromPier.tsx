@@ -81,7 +81,7 @@ const FromPier = ({
       />
 
       <div
-        className={`w-auto lg:w-[340px] p-3 rounded-xl bg-white z-10 absolute top-full mt-2 left-0 shadow-md border border-gray-200 ${
+        className={`w-full lg:w-[340px] p-3 rounded-xl bg-white z-10 absolute top-full mt-2 left-0 shadow-md border border-gray-200 ${
           fromPierShow ? "block" : "hidden"
         }`}
       >
