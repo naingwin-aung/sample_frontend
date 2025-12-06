@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "../../ui/accordion";
 import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
+import OptionDetail from "./OptionDetail";
 
 const galleries = [
   {
@@ -86,14 +87,7 @@ const SelectOptionItem = ({ option }: { option: any }) => {
         </AccordionTrigger>
 
         <AccordionContent className="p-6 border-t border-gray-100">
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Details</h4>
-            <p className="text-gray-700">
-              Here are more details about the selected option. Lorem ipsum dolor
-              sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
+          <OptionDetail />
         </AccordionContent>
       </AccordionItem>
     </Accordion>
