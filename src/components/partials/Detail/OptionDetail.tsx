@@ -3,44 +3,44 @@ import { useEffect, useState } from "react";
 
 const zones = [
   { 
-    name: "Zone A",
+    name: "Rooftop Area - middle zone",
     images: [
       {
-        url: "https://i.pinimg.com/1200x/bd/90/a6/bd90a6c8ea07dc7390e461b655a8b1c6.jpg",
+        url: "https://i.pinimg.com/736x/db/b8/11/dbb81102a793c857fac3c093aa6e1769.jpg",
       },
       {
-        url: "https://i.pinimg.com/1200x/67/7e/7f/677e7f6240a74891acae4e5df14d5bd1.jpg",
+        url: "https://i.pinimg.com/1200x/1f/9f/aa/1f9faaa7fe3968c385f11c83aed8c347.jpg",
       },
       {
-        url: "https://i.pinimg.com/736x/5f/f2/ad/5ff2ada1b287dedb7984510e04ef958d.jpg",
+        url: "https://i.pinimg.com/736x/58/6a/4c/586a4ce92dd4c633544be30584d40dc3.jpg",
       },
     ]
   }, 
   { 
-    name: "Zone B",
+    name: "Front Area - near the stage",
     images: [
       {
-        url: "https://i.pinimg.com/1200x/67/7e/7f/677e7f6240a74891acae4e5df14d5bd1.jpg",
+        url: "https://i.pinimg.com/1200x/21/93/4b/21934b0b34b3b55ab21c683a3677faf1.jpg",
       },
       {
-        url: "https://i.pinimg.com/736x/5f/f2/ad/5ff2ada1b287dedb7984510e04ef958d.jpg",
+        url: "https://i.pinimg.com/1200x/96/81/79/9681794f4393110f73f0c8e12edd621a.jpg",
       },
       {
-        url: "https://i.pinimg.com/1200x/bd/90/a6/bd90a6c8ea07dc7390e461b655a8b1c6.jpg",
+        url: "https://i.pinimg.com/736x/ff/10/60/ff1060939b9bc96f5be5cb21bd85bbe7.jpg",
       },
     ]
   }, 
   { 
-    name: "Zone C",
+    name: "Lower Deck Area - near the bar",
     images: [
       {
-        url: "https://i.pinimg.com/736x/5f/f2/ad/5ff2ada1b287dedb7984510e04ef958d.jpg",
+        url: "https://i.pinimg.com/736x/bc/66/86/bc668682736908b0b8323bd52d818a3d.jpg",
       },
       {
-        url: "https://i.pinimg.com/1200x/bd/90/a6/bd90a6c8ea07dc7390e461b655a8b1c6.jpg",
+        url: "https://i.pinimg.com/736x/4b/d1/56/4bd156c28ef580d3e45be71b53a7a830.jpg",
       },
       {
-        url: "https://i.pinimg.com/1200x/67/7e/7f/677e7f6240a74891acae4e5df14d5bd1.jpg",
+        url: "https://i.pinimg.com/736x/a9/3c/2b/a93c2b2b4142f19e791d7f341eda0197.jpg",
       },
     ]
   }
@@ -99,7 +99,7 @@ const OptionDetail = () => {
       </div>
 
       <div className="flex gap-4 mt-5">
-        <div className="w-1/3 rounded-lg h-[230px]">
+        <div className="w-1/3 rounded-lg h-[300px] mt-8">
           {activeZone ? (
             <img
               src={
@@ -143,7 +143,7 @@ const OptionDetail = () => {
             </div>
           </div>
 
-          <div className="mb-5">
+          <div className="mb-7">
             <h4 className="text-md font-medium text-gray-500 mb-3">Quantity</h4>
 
             <div className="flex flex-col gap-3">
@@ -169,8 +169,8 @@ const OptionDetail = () => {
             </div>
           </div>
 
-          <div className="mb-5 flex justify-between items-center">
-            <div className="text-xl font-semibold">THB 0</div>
+          <div className="flex justify-between items-center">
+            <div className="text-xl font-semibold">THB 12,00</div>
             <div>
               <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
                 Book Now
