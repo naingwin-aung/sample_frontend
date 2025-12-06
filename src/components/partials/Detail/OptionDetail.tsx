@@ -143,7 +143,7 @@ const OptionDetail = () => {
             </div>
           </div>
 
-          <div>
+          <div className="mb-5">
             <h4 className="text-md font-medium text-gray-500 mb-3">Quantity</h4>
 
             <div className="flex flex-col gap-3">
@@ -166,6 +166,15 @@ const OptionDetail = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="mb-5 flex justify-between items-center">
+            <div className="text-xl font-semibold">THB 0</div>
+            <div>
+              <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
+                Book Now
+              </button>
             </div>
           </div>
         </div>
