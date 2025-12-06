@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -44,7 +43,7 @@ const SelectOptionItem = ({
           <div className="w-full flex h-[220px]">
             <div
               className="w-1/4 h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${galleries[0].url})` }}
+              style={{ backgroundImage: `url(${galleries[index + 1].url})` }}
             ></div>
             <div className="w-3/4 h-full py-4 px-5">
               <div className="flex items-center justify-between mb-3">
