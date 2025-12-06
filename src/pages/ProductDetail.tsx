@@ -80,6 +80,10 @@ const select_options = [
     name: "Meal Plan",
     values: ["Breakfast Only", "Half Board", "Full Board"],
   },
+  {
+    name: "Seating Area",
+    values: ["Indoor", "Outdoor", "Window Seat"],
+  },
 ];
 
 const ProductDetail = () => {
