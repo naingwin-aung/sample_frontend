@@ -20,15 +20,24 @@ const galleries = [
   },
 ];
 
-const SelectOptionItem = ({ option }: { option: any }) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
-
+const SelectOptionItem = ({
+  option,
+  index,
+  isExpanded,
+  onToggle,
+}: {
+  option: any;
+  index: number;
+  isExpanded: boolean;
+  onToggle: (index: number) => void;
+}) => {
   return (
     <Accordion
       type="single"
       collapsible
+      value={isExpanded ? "item-1" : ""}
       className={`w-full border rounded-2xl overflow-hidden cursor-pointer ${isExpanded ? "border-primary" : "border-gray-300"}`}
-      onValueChange={(value) => setIsExpanded(value === "item-1")}
+      onValueChange={() => onToggle(index)}
     >
       <AccordionItem value="item-1" className="border-b-0">
         <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:rounded-b-none [&>svg]:hidden">

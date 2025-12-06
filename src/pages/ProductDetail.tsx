@@ -87,6 +87,7 @@ const ProductDetail = () => {
   const [detail, setDetail] = useState<ProductInterface | undefined>();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
+  const [expandedOption, setExpandedOption] = useState<number | null>(null);
 
   useEffect(() => {
     const product = products.find((p) => p.slug === param.slug);
@@ -159,7 +160,13 @@ const ProductDetail = () => {
         <div className="w-full mb-6">
           <div className="flex flex-col gap-7">
             {select_options.map((option, index) => (
-              <SelectOptionItem key={index} option={option} />
+              <SelectOptionItem
+                key={index}
+                option={option}
+                index={index}
+                isExpanded={expandedOption === index}
+                onToggle={(idx) => setExpandedOption(expandedOption === idx ? null : idx)}
+              />
             ))}
           </div>
         </div>
