@@ -1,8 +1,9 @@
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import ChooseDate from "../Home/PierSearch/ChooseDate";
 
 const zones = [
-  { 
+  {
     name: "Rooftop Area - middle zone",
     images: [
       {
@@ -14,9 +15,9 @@ const zones = [
       {
         url: "https://i.pinimg.com/736x/58/6a/4c/586a4ce92dd4c633544be30584d40dc3.jpg",
       },
-    ]
-  }, 
-  { 
+    ],
+  },
+  {
     name: "Front Area - near the stage",
     images: [
       {
@@ -28,9 +29,9 @@ const zones = [
       {
         url: "https://i.pinimg.com/736x/ff/10/60/ff1060939b9bc96f5be5cb21bd85bbe7.jpg",
       },
-    ]
-  }, 
-  { 
+    ],
+  },
+  {
     name: "Lower Deck Area - near the bar",
     images: [
       {
@@ -42,8 +43,8 @@ const zones = [
       {
         url: "https://i.pinimg.com/736x/a9/3c/2b/a93c2b2b4142f19e791d7f341eda0197.jpg",
       },
-    ]
-  }
+    ],
+  },
 ];
 
 const tickets = [
@@ -52,6 +53,15 @@ const tickets = [
   },
   {
     name: "Inter & Thai Dinner Buffet Cruise (Thai)",
+  },
+];
+
+const times = [
+  {
+    name: "18:30 - 21:30",
+  },
+  {
+    name: "19:00 - 22:00",
   },
 ];
 
@@ -69,9 +79,13 @@ const quantities = [
 const OptionDetail = () => {
   const [activeZone, setActiveZone] = useState<any | null>(null);
   const [activeTicket, setActiveTicket] = useState<any | null>(null);
+  const [activeTime, setActiveTime] = useState<any | null>(null);
+  const [date, setDate] = useState<Date | undefined>(undefined);
 
   useEffect(() => {
     setActiveZone(zones[0].name);
+    setActiveTime(times[0].name);
+    setActiveTicket(tickets[0].name);
   }, []);
 
   return (
@@ -114,11 +128,44 @@ const OptionDetail = () => {
             </div>
           )}
         </div>
-        <div className="w-2/3">
+        <div className="w-2/3 mt-4">
           <div className="mb-5">
-            <h4 className="text-md font-medium text-gray-500 mb-3">
-              Select Ticket
+            <h4 className="text-md text-gray-500 mb-3">
+              Please select a participation date
             </h4>
+            <div className="relative w-1/4">
+              <ChooseDate date={date} setDate={setDate} text="Check availability" />
+            </div>
+          </div>
+
+          <div className="mb-5">
+            <h4 className="text-md text-gray-500 mb-3">Select Time</h4>
+            <div className="flex items-center gap-4">
+              {times.map((time) => (
+                <label
+                  key={time.name}
+                  htmlFor={time.name}
+                  className={`text-md font-medium border border-gray-400 rounded-md px-5 py-2.5 cursor-pointer ${
+                    activeTime === time.name
+                      ? "border-primary text-primary"
+                      : ""
+                  }`}
+                >
+                  {time.name}
+                  <input
+                    id={time.name}
+                    type="radio"
+                    checked={activeTime === time.name}
+                    onChange={() => setActiveTime(time.name)}
+                    className="appearance-none"
+                  />
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-5">
+            <h4 className="text-md text-gray-500 mb-3">Select Ticket</h4>
             <div className="flex items-center gap-4">
               {tickets.map((ticket) => (
                 <label
@@ -144,7 +191,7 @@ const OptionDetail = () => {
           </div>
 
           <div className="mb-7">
-            <h4 className="text-md font-medium text-gray-500 mb-3">Quantity</h4>
+            <h4 className="text-md text-gray-500 mb-3">Quantity</h4>
 
             <div className="flex flex-col gap-3">
               {quantities.map((quantity) => (

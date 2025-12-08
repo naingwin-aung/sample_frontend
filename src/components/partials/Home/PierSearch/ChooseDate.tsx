@@ -1,11 +1,11 @@
 import { Popover, PopoverContent, PopoverTrigger } from "../../../ui/popover";
 import { Calendar } from "../../../ui/calendar";
 
-const ChooseDate = ({ date, setDate }: { date: Date | undefined; setDate: React.Dispatch<React.SetStateAction<Date | undefined>> }) => {
+const ChooseDate = ({ date, setDate, text }: { date: Date | undefined; setDate: React.Dispatch<React.SetStateAction<Date | undefined>>; text?: string }) => {
   return (
     <>
       <span className="absolute left-4 top-2 text-xs text-gray-500">
-        Date & time
+        {text || "Choose Date"}
       </span>
       <Popover>
         <PopoverTrigger asChild>
