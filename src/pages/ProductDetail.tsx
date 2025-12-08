@@ -73,15 +73,15 @@ const product = {
 
 const select_options = [
   {
-    name: "River Cruise",
+    name: "River Cruise Boat",
     values: ["Standard", "Premium", "Deluxe"],
   },
   {
-    name: "Meal Plan",
+    name: "Luxury Boat",
     values: ["Breakfast Only", "Half Board", "Full Board"],
   },
   {
-    name: "Seating Area",
+    name: "EV Boat",
     values: ["Indoor", "Outdoor", "Window Seat"],
   },
 ];

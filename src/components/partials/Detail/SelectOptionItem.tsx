@@ -42,7 +42,7 @@ const SelectOptionItem = ({
         <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:rounded-b-none [&>svg]:hidden">
           <div className="w-full flex h-[220px]">
             <div
-              className="w-1/4 h-full bg-cover bg-center"
+              className="w-1/4 h-full bg-cover bg-center rounded"
               style={{ backgroundImage: `url(${galleries[index].url})` }}
             ></div>
             <div className="w-3/4 h-full py-4 px-5">
