@@ -1,6 +1,7 @@
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import ChooseDate from "../Home/PierSearch/ChooseDate";
+import CheckAvailability from "./CheckAvailability";
 
 const zones = [
   {
@@ -95,6 +96,8 @@ const OptionDetail = () => {
   const updateQuantity = (index: number, delta: 1 | -1) => {
     setActiveQuantities((prevQuantities) =>
       prevQuantities.map((item, i) => {
+        if(item.count == 10 && delta === 1) return item; // max 10
+
         if (i === index) {
           const newCount = Math.max(0, item.count + delta);
           return { ...item, count: newCount };
@@ -161,7 +164,7 @@ const OptionDetail = () => {
               Please select a participation date
             </h4>
             <div className="relative w-1/4">
-              <ChooseDate date={date} setDate={setDate} text="Check availability" />
+              <CheckAvailability date={date} setDate={setDate} />
             </div>
           </div>
 
