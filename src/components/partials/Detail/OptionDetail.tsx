@@ -60,9 +60,19 @@ const tickets = [
 const times = [
   {
     name: "18:30 - 21:30",
+  }
+];
+
+const additionalOptions = [
+  {
+    name: "Beer Buffet",
+    price: 2999,
+    count: 0,
   },
   {
-    name: "19:00 - 22:00",
+    name: "BBQ Buffet",
+    price: 999,
+    count: 0,
   },
 ];
 
@@ -237,6 +247,32 @@ const OptionDetail = () => {
                       </button>
                       <span>{quantity.count}</span>
                       <button onClick={() => quantityPlus(index)} className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">
+                        <Plus size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-7">
+            <h4 className="text-md text-gray-500 mb-3">Additional options (optional)</h4>
+
+            <div className="flex flex-col gap-3">
+              {additionalOptions.map((option, index) => (
+                <div
+                  key={option.name}
+                  className="px-4 py-5 rounded-md border border-gray-200 hover:shadow transition-shadow duration-200"
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="text-md font-medium">{option.name}</div>
+                    <div className="flex items-center gap-3 text-md font-medium">
+                      <button className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">
+                        <Minus size={16} />
+                      </button>
+                      <span>{option.count}</span>
+                      <button className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">
                         <Plus size={16} />
                       </button>
                     </div>
