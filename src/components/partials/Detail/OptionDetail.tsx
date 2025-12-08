@@ -1,5 +1,5 @@
 import { Minus, Plus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ChooseDate from "../Home/PierSearch/ChooseDate";
 
 const zones = [
@@ -65,14 +65,16 @@ const times = [
   },
 ];
 
-const quantities = [
+const initialQuantities = [
   {
     name: "Adult",
     price: 1999,
+    count: 0, 
   },
   {
     name: "Child",
     price: 999,
+    count: 0,
   },
 ];
 
@@ -82,11 +84,36 @@ const OptionDetail = () => {
   const [activeTime, setActiveTime] = useState<any | null>(null);
   const [date, setDate] = useState<Date | undefined>(undefined);
 
+  const [activeQuantities, setActiveQuantities] = useState(initialQuantities);
+
   useEffect(() => {
     setActiveZone(zones[0].name);
     setActiveTime(times[0].name);
     setActiveTicket(tickets[0].name);
   }, []);
+
+  const updateQuantity = (index: number, delta: 1 | -1) => {
+    setActiveQuantities((prevQuantities) =>
+      prevQuantities.map((item, i) => {
+        if (i === index) {
+          const newCount = Math.max(0, item.count + delta);
+          return { ...item, count: newCount };
+        }
+        return item;
+      })
+    );
+  };
+
+  const quantityPlus = (index: number) => updateQuantity(index, 1);
+  const quantityMinus = (index: number) => updateQuantity(index, -1);
+
+  const { totalPrice } = useMemo(() => {
+    const totalP = activeQuantities.reduce(
+      (sum, item) => sum + item.price * item.count,
+      0
+    );
+    return { totalPrice: totalP };
+  }, [activeQuantities]);
 
   return (
     <div>
@@ -194,7 +221,7 @@ const OptionDetail = () => {
             <h4 className="text-md text-gray-500 mb-3">Quantity</h4>
 
             <div className="flex flex-col gap-3">
-              {quantities.map((quantity) => (
+              {activeQuantities.map((quantity, index) => (
                 <div
                   key={quantity.name}
                   className="px-4 py-5 rounded-md border border-gray-200 hover:shadow transition-shadow duration-200"
@@ -202,11 +229,11 @@ const OptionDetail = () => {
                   <div className="flex justify-between items-center">
                     <div className="text-md font-medium">{quantity.name}</div>
                     <div className="flex items-center gap-3 text-md font-medium">
-                      <button className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">
+                      <button onClick={() => quantityMinus(index)} className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">
                         <Minus size={16} />
                       </button>
-                      <span>0</span>
-                      <button className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">
+                      <span>{quantity.count}</span>
+                      <button onClick={() => quantityPlus(index)} className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">
                         <Plus size={16} />
                       </button>
                     </div>
@@ -217,7 +244,10 @@ const OptionDetail = () => {
           </div>
 
           <div className="flex justify-between items-center">
-            <div className="text-xl font-semibold">THB 12,00</div>
+            <div className="text-2xl font-medium">
+              THB {totalPrice ? totalPrice.toLocaleString("en-US") : "-"}
+              <div className="text-xs text-gray-400 font-normal mt-1.5">Complete all required fields to continue</div>
+            </div>
             <div>
               <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
                 Book Now
