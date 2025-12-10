@@ -1,15 +1,22 @@
 import Container from "../../global/Container";
 import ProductCard from "./ProductCard";
-import { products } from "../../../lib/constants"; 
+// import { products } from "../../../lib/constants"; 
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useQuery } from '@tanstack/react-query';
+import { ListProductQueryOption } from "../../../api/Product/products";
+import type { ProductType } from "../../../types/ProductType";
 
 const TravelerChoice = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
+
+  const {data, isPending, error} = useQuery({
+    ...ListProductQueryOption(1, 10),
+  })
 
   const handleSwiperInit = (swiper) => {
     setSwiperInstance(swiper);
@@ -63,9 +70,9 @@ const TravelerChoice = () => {
           pagination={{ clickable: true }}
           onSwiper={handleSwiperInit} 
         >
-          {products.map((product, index) => (
-            <SwiperSlide key={index}>
-              <ProductCard {...product} />
+          {data?.data.map((product : ProductType) => (
+            <SwiperSlide key={product.id}>
+              <ProductCard product={product} />
             </SwiperSlide>
           ))}
         </Swiper>
