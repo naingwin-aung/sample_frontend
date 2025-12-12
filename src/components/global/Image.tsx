@@ -4,4 +4,4 @@ const Image = ({ src, alt, className } : { src: string, alt: string, className?:
   )
 }
 
-export default Image
+export default Image 

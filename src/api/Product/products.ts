@@ -1,5 +1,4 @@
 import api from "../../axios"
-import type { ProductType } from "../../types/ProductType";
 
 export const ListProductQueryOption = (page: number, limit: number) => {
     return {
