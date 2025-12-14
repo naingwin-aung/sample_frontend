@@ -37,12 +37,14 @@ const SelectOptionItem = ({
           <div className="w-full flex h-[220px]">
             <div
               className="w-1/4 h-full bg-cover bg-center rounded"
-              style={{ backgroundImage: `url(${galleries[0].url})` }}
+              style={{ backgroundImage: `url(${option.boat?.images[0].url})` }}
             ></div>
             <div className="w-3/4 h-full py-4 px-5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-xl font-medium line-clamp-1 text-left">
-                  River Cruise Boat
+                  {
+                    option.boat?.name
+                  }
                 </h3>
                 <div className="p-1 rounded-full hover:bg-gray-100 transition cursor-pointer">
                   {isExpanded ? (
