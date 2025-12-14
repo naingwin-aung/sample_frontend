@@ -129,6 +129,14 @@ const ProductDetail = () => {
     setIsGalleryOpen(true);
   };
 
+  if (isPending) {
+    return <Container className="mt-6">Loading...</Container>;
+  }
+
+  if (error || !detail) {
+    return <Container className="mt-6">Error loading product details.</Container>;
+  }
+
   return (
     <Container className="mt-6">
       <h2 className="text-3xl font-medium mb-6">{detail?.name}</h2>
