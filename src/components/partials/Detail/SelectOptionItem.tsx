@@ -11,12 +11,6 @@ const galleries = [
   {
     url: "https://i.pinimg.com/1200x/bd/90/a6/bd90a6c8ea07dc7390e461b655a8b1c6.jpg",
   },
-  {
-    url: "https://i.pinimg.com/1200x/67/7e/7f/677e7f6240a74891acae4e5df14d5bd1.jpg",
-  },
-  {
-    url: "https://i.pinimg.com/736x/5f/f2/ad/5ff2ada1b287dedb7984510e04ef958d.jpg",
-  },
 ];
 
 const SelectOptionItem = ({
@@ -43,12 +37,12 @@ const SelectOptionItem = ({
           <div className="w-full flex h-[220px]">
             <div
               className="w-1/4 h-full bg-cover bg-center rounded"
-              style={{ backgroundImage: `url(${galleries[index].url})` }}
+              style={{ backgroundImage: `url(${galleries[0].url})` }}
             ></div>
             <div className="w-3/4 h-full py-4 px-5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-xl font-medium line-clamp-1 text-left">
-                  {option.name}
+                  River Cruise Boat
                 </h3>
                 <div className="p-1 rounded-full hover:bg-gray-100 transition cursor-pointer">
                   {isExpanded ? (
