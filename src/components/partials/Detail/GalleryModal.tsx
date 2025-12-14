@@ -1,5 +1,11 @@
 import { X } from "lucide-react";
-import { Navigation, Pagination, Scrollbar, A11y, Thumbs } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Thumbs,
+} from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -11,10 +17,10 @@ const GalleryModal = ({
   galleries,
   initialSlide = 0,
 }: {
-  isGalleryOpen: boolean,
-  setIsGalleryOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  galleries: { url: string }[],
-  initialSlide?: number,
+  isGalleryOpen: boolean;
+  setIsGalleryOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  galleries: { url: string }[];
+  initialSlide?: number;
 }) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -61,9 +67,7 @@ const GalleryModal = ({
   if (!isGalleryOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs"
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs">
       <button
         onClick={() => setIsGalleryOpen(false)}
         className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 rounded-full p-2 transition cursor-pointer"
@@ -77,9 +81,11 @@ const GalleryModal = ({
       >
         {/* Main Swiper */}
         <div className="custom-swiper-container">
-          <button ref={prevRef} className="gallery-swiper-button-prev-custom">
-            <ChevronLeft size={22} strokeWidth={1.5} />
-          </button>
+          {galleries.length > 1 && (
+            <button ref={prevRef} className="gallery-swiper-button-prev-custom">
+              <ChevronLeft size={22} strokeWidth={1.5} />
+            </button>
+          )}
 
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y, Thumbs]}
@@ -87,7 +93,10 @@ const GalleryModal = ({
             slidesPerView={1}
             onSwiper={handleSwiperInit}
             onSlideChange={handleSlideChange}
-            thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+            thumbs={{
+              swiper:
+                thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+            }}
           >
             {galleries.map((gallery, index) => (
               <SwiperSlide key={index}>
@@ -102,9 +111,11 @@ const GalleryModal = ({
             ))}
           </Swiper>
 
-          <button ref={nextRef} className="gallery-swiper-button-next-custom">
-            <ChevronRight size={22} strokeWidth={1.5} />
-          </button>
+          {galleries.length > 1 && (
+            <button ref={nextRef} className="gallery-swiper-button-next-custom">
+              <ChevronRight size={22} strokeWidth={1.5} />
+            </button>
+          )}
         </div>
 
         {/* Thumbnail Gallery */}
@@ -118,7 +129,7 @@ const GalleryModal = ({
             className="thumbnail-swiper"
           >
             {galleries.map((gallery, index) => (
-              <SwiperSlide key={index} style={{ width: 'auto' }}>
+              <SwiperSlide key={index} style={{ width: "auto" }}>
                 <div
                   className={`cursor-pointer transition-all duration-200 rounded-lg overflow-hidden ${
                     activeIndex === index
