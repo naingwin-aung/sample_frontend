@@ -7,21 +7,6 @@ import Gallery from "../components/partials/Detail/Gallery";
 import { useQuery } from "@tanstack/react-query";
 import { GetProductBySlugQueryOption } from "../api/Product/products";
 
-const select_options = [
-  {
-    name: "River Cruise Boat",
-    values: ["Standard", "Premium", "Deluxe"],
-  },
-  {
-    name: "Luxury Boat",
-    values: ["Breakfast Only", "Half Board", "Full Board"],
-  },
-  {
-    name: "EV Boat",
-    values: ["Indoor", "Outdoor", "Window Seat"],
-  },
-];
-
 type ParamTypes = {
   slug: string;
 };

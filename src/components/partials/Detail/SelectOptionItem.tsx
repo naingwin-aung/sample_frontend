@@ -7,12 +7,6 @@ import {
 import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
 import OptionDetail from "./OptionDetail";
 
-const galleries = [
-  {
-    url: "https://i.pinimg.com/1200x/bd/90/a6/bd90a6c8ea07dc7390e461b655a8b1c6.jpg",
-  },
-];
-
 const SelectOptionItem = ({
   option,
   index,
