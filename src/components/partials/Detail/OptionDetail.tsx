@@ -281,12 +281,12 @@ const OptionDetail = () => {
             </div>
           </div>
 
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
             <div className="text-2xl font-medium">
               THB {totalPrice ? totalPrice.toLocaleString("en-US") : "-"}
               <div className="text-xs text-gray-400 font-normal mt-1.5">Complete all required fields to continue</div>
             </div>
-            <div>
+            <div className="text-end mt-2 md:mt-0">
               <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
                 Book Now
               </button>
