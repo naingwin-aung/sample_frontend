@@ -17,3 +17,15 @@ const fetchProducts = async (page: number, limit: number) => {
 
     return response.data.data;
 }
+
+export const GetProductBySlugQueryOption = (slug?: string) => {
+    return {
+        queryKey: ['product', slug],
+        queryFn: () => fetchProductBySlug(slug),
+    }
+}
+
+const fetchProductBySlug = async (slug?: string) => {
+    const response = await api.get(`/products/${slug}`);
+    return response.data.data.product;
+}

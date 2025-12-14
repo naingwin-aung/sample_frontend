@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import GalleryModal from "../components/partials/Detail/GalleryModal";
 import SelectOptionItem from "../components/partials/Detail/SelectOptionItem";
 import Gallery from "../components/partials/Detail/Gallery";
+import { useQuery } from "@tanstack/react-query";
+import { GetProductBySlugQueryOption } from "../api/Product/products";
 
 const product = {
   gallery: [
@@ -86,17 +88,19 @@ const select_options = [
   },
 ];
 
+type ParamTypes = {
+  slug: string;
+};
+
 const ProductDetail = () => {
-  const param = useParams<{ slug: string }>();
-  const [detail, setDetail] = useState<ProductInterface | undefined>();
+  const { slug } = useParams<ParamTypes>();
+  const {data: detail, isPending, error} = useQuery({
+    ...GetProductBySlugQueryOption(slug)
+  })
+
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const [expandedOption, setExpandedOption] = useState<number | null>(null);
-
-  useEffect(() => {
-    const product = products.find((p) => p.slug === param.slug);
-    setDetail((prev) => product || prev);
-  }, [param.slug]);
 
   const scrollToSelectOptions = () => {
     const targetElement = document.getElementById("select_option");
@@ -127,7 +131,7 @@ const ProductDetail = () => {
 
   return (
     <Container className="mt-6">
-      <h2 className="text-3xl font-medium mb-6">{detail?.title}</h2>
+      <h2 className="text-3xl font-medium mb-6">{detail?.name}</h2>
 
       {/* gallery here */}
       <Gallery product={product} openGallery={openGallery} />
@@ -169,7 +173,9 @@ const ProductDetail = () => {
                 option={option}
                 index={index}
                 isExpanded={expandedOption === index}
-                onToggle={(idx) => setExpandedOption(expandedOption === idx ? null : idx)}
+                onToggle={(idx) =>
+                  setExpandedOption(expandedOption === idx ? null : idx)
+                }
               />
             ))}
           </div>

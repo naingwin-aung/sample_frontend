@@ -32,7 +32,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           <div className="text-[11px] line-clamp-4">
             {product.piers.length > 0 &&
               product.piers.slice(0, 2).map((pier) => (
-                <span key={pier.id} className="mr-1 text-primary bg-orange-100 p-1 rounded-md">
+                <span key={pier.id} className="mr-1 text-primary bg-orange-100 px-1.5 py-1 rounded-md">
                   {pier.name}
                 </span>
               ))}
