@@ -28,12 +28,12 @@ const SelectOptionItem = ({
     >
       <AccordionItem value="item-1" className="border-b-0">
         <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:rounded-b-none [&>svg]:hidden">
-          <div className="w-full flex h-[220px]">
+          <div className="flex flex-col md:flex-row w-full h-auto md:h-[220px]">
             <div
-              className="w-1/4 h-full bg-cover bg-center rounded"
+              className="w-full md:w-1/4 h-full bg-cover bg-center rounded"
               style={{ backgroundImage: `url(${option.boat?.images[0].url})` }}
             ></div>
-            <div className="w-3/4 h-full py-4 px-5">
+            <div className="w-full md:w-3/4 h-full py-4 px-5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-xl font-medium line-clamp-1 text-left">
                   {
@@ -52,19 +52,17 @@ const SelectOptionItem = ({
               <div className="w-full text-gray-600 mb-4 text-left overflow-hidden font-normal">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
                 non odit voluptatem repellendus, optio nihil. Accusantium autem
-                distinctio, minus expedita qui, vitae dignissimos in Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Dolor excepturi
-                possimus corrupti, earum ea, iste dignissimos
+                distinctio, minus expedita qui,
               </div>
 
               <div
                 className={`${
                   isExpanded
                     ? "mt-[26.5px]"
-                    : "mt-auto flex justify-between items-center"
+                    : "mt-auto flex flex-col md:flex-row md:justify-between md:items-center"
                 }`}
               >
-                <div className="font-normal underline text-gray-600 cursor-pointer flex items-center">
+                <div className="font-normal underline text-gray-600 cursor-pointer flex  items-center">
                   <div>Package details</div>
                   <div>
                     <ChevronRight strokeWidth={1.5} size={23} />
