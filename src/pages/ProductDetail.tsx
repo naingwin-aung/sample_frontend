@@ -64,7 +64,7 @@ const ProductDetail = () => {
 
   return (
     <Container className="mt-6">
-      <h2 className="text-3xl font-medium mb-6">{detail?.name}</h2>
+      <h2 className="text-2xl md:text-3xl font-medium mb-6">{detail?.name}</h2>
 
       {/* gallery here */}
       <Gallery gallery={detail.images} openGallery={openGallery} />

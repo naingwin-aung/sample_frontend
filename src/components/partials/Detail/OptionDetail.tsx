@@ -130,12 +130,12 @@ const OptionDetail = () => {
   return (
     <div>
       <h4 className="text-lg font-semibold mb-4">Select Zone(s)</h4>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         {zones.map((zone) => (
           <label
             key={zone.name}
             htmlFor={zone.name}
-            className={`text-md font-medium border border-gray-400 rounded-md px-5 py-2.5 cursor-pointer ${
+            className={`w-max text-md font-medium border border-gray-400 rounded-md px-5 py-2.5 cursor-pointer ${
               activeZone === zone.name ? "border-primary text-primary" : ""
             }`}
           >
@@ -151,8 +151,8 @@ const OptionDetail = () => {
         ))}
       </div>
 
-      <div className="flex gap-4 mt-5">
-        <div className="w-1/3 rounded-lg h-[300px] mt-8">
+      <div className="flex flex-col md:flex-row gap-4 mt-5">
+        <div className="w-full md:w-1/3 rounded-lg h-[300px] mt-8">
           {activeZone ? (
             <img
               src={
@@ -167,7 +167,7 @@ const OptionDetail = () => {
             </div>
           )}
         </div>
-        <div className="w-2/3 mt-4">
+        <div className="w-full md:w-2/3 mt-4">
           <div className="mb-5">
             <h4 className="text-md text-gray-500 mb-3">
               Please select a participation date
@@ -179,7 +179,7 @@ const OptionDetail = () => {
 
           <div className="mb-5">
             <h4 className="text-md text-gray-500 mb-3">Select Time</h4>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col w-max md:flex-row md:items-center gap-4">
               {times.map((time) => (
                 <label
                   key={time.name}
@@ -205,12 +205,12 @@ const OptionDetail = () => {
 
           <div className="mb-5">
             <h4 className="text-md text-gray-500 mb-3">Select Ticket</h4>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
               {tickets.map((ticket) => (
                 <label
                   key={ticket.name}
                   htmlFor={ticket.name}
-                  className={`text-md font-medium border border-gray-400 rounded-md px-5 py-2.5 cursor-pointer ${
+                  className={`text-md font-medium border border-gray-400 rounded-md px-5 py-2.5 cursor-pointer w-max ${
                     activeTicket === ticket.name
                       ? "border-primary text-primary"
                       : ""

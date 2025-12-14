@@ -30,7 +30,7 @@ const SelectOptionItem = ({
         <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:rounded-b-none [&>svg]:hidden">
           <div className="flex flex-col md:flex-row w-full h-auto md:h-[220px]">
             <div
-              className="w-full md:w-1/4 h-full bg-cover bg-center rounded"
+              className="w-full md:w-1/4 h-[250px] md:h-full bg-cover bg-center rounded"
               style={{ backgroundImage: `url(${option.boat?.images[0].url})` }}
             ></div>
             <div className="w-full md:w-3/4 h-full py-4 px-5">
