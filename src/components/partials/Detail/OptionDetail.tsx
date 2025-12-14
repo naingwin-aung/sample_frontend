@@ -1,6 +1,5 @@
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import ChooseDate from "../Home/PierSearch/ChooseDate";
 import CheckAvailability from "./CheckAvailability";
 
 const zones = [
@@ -262,7 +261,7 @@ const OptionDetail = () => {
             <div className="flex flex-col gap-3">
               {additionalOptions.map((option, index) => (
                 <div
-                  key={option.name}
+                  key={index}
                   className="px-4 py-5 rounded-md border border-gray-200 hover:shadow transition-shadow duration-200"
                 >
                   <div className="flex justify-between items-center">

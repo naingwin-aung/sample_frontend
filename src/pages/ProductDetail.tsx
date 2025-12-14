@@ -117,7 +117,7 @@ const ProductDetail = () => {
         <h3 className="text-2xl font-medium mb-4">Select options</h3>
         <div className="w-full mb-6">
           <div className="flex flex-col gap-7">
-            {detail.options.map(({option, index} : {option: any; index: number}) => (
+            {detail.options.map((option: any, index: number) => (
               <SelectOptionItem
                 key={index}
                 option={option}
