@@ -27,6 +27,7 @@ const ChooseDate = ({ date, setDate, text }: { date: Date | undefined; setDate: 
             onSelect={setDate}
             className="rounded-lg border [--cell-size:--spacing(8)] md:[--cell-size:--spacing(9)]"
             buttonVariant="ghost"
+            startMonth={new Date()}
             disabled={{ before: new Date() }}
           />
         </PopoverContent>
