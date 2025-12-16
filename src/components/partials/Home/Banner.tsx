@@ -19,7 +19,7 @@ const Banner = () => {
 
   return (
     <div
-      className="h-[345px] w-full relative mb-40 lg:mb-15"
+      className="h-[345px] w-full relative"
       style={{
         backgroundImage: `url('${backgroundImageUrl}')`,
         backgroundSize: "cover",
@@ -29,7 +29,7 @@ const Banner = () => {
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="w-[calc(100%-3rem)] mx-auto p-5 xl:w-[1130px] h-auto bg-white absolute bottom-[-180px] lg:bottom-[-50px] left-1/2 transform -translate-x-1/2 shadow-lg rounded-2xl flex flex-col justify-center z-10">
+      {/* <div className="w-[calc(100%-3rem)] mx-auto p-5 xl:w-[1130px] h-auto bg-white absolute bottom-[-180px] lg:bottom-[-50px] left-1/2 transform -translate-x-1/2 shadow-lg rounded-2xl flex flex-col justify-center z-10">
         <div className="flex flex-col lg:flex-row items-center gap-3">
           <div className="w-full lg:w-2/8 relative">
             <FromPier 
@@ -65,7 +65,7 @@ const Banner = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
