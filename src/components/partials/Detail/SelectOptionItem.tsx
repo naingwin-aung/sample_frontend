@@ -23,12 +23,14 @@ const SelectOptionItem = ({
       type="single"
       collapsible
       value={isExpanded ? "item-1" : ""}
-      className={`w-full border rounded-2xl overflow-hidden cursor-pointer ${isExpanded ? "border-primary" : "border-gray-300"}`}
+      className={`w-full border rounded-2xl overflow-hidden cursor-pointer ${
+        isExpanded ? "border-primary" : "border-gray-300"
+      }`}
       onValueChange={() => onToggle(index)}
     >
       <AccordionItem value="item-1" className="border-b-0">
         <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:rounded-b-none [&>svg]:hidden">
-          <div className="flex flex-col md:flex-row w-full h-auto md:h-[220px]">
+          <div className="flex flex-col md:flex-row w-full h-auto md:h-[195px]">
             <div
               className="w-full md:w-1/4 h-[250px] md:h-full bg-cover bg-center rounded"
               style={{ backgroundImage: `url(${option.boat?.images[0].url})` }}
@@ -36,9 +38,7 @@ const SelectOptionItem = ({
             <div className="w-full md:w-3/4 h-full py-4 px-5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-xl font-medium line-clamp-1 text-left">
-                  {
-                    option.boat?.name
-                  }
+                  {option.boat?.name}
                 </h3>
                 <div className="p-1 rounded-full hover:bg-gray-100 transition cursor-pointer">
                   {isExpanded ? (
@@ -49,10 +49,8 @@ const SelectOptionItem = ({
                 </div>
               </div>
 
-              <div className="w-full text-gray-600 mb-4 text-left overflow-hidden font-normal">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
-                non odit voluptatem repellendus, optio nihil. Accusantium autem
-                distinctio, minus expedita qui,
+              <div className="w-full text-gray-600 mb-4 text-left overflow-hidden font-normal line-clamp-3">
+                {option.boat?.description}
               </div>
 
               <div
@@ -62,16 +60,14 @@ const SelectOptionItem = ({
                     : "mt-auto flex flex-col md:flex-row md:justify-between md:items-center"
                 }`}
               >
-                <div className="font-normal underline text-gray-600 cursor-pointer flex  items-center">
-                  <div>Package details</div>
-                  <div>
-                    <ChevronRight strokeWidth={1.5} size={23} />
-                  </div>
+                <div className="font-normal text-gray-600 cursor-pointer flex  items-center">
+                  <span className="text-lg text-gray-600 me-2">From</span>
+                  <span className="text-xl font-medium">
+                    THB {option?.min_price.toLocaleString()}
+                  </span>
                 </div>
                 {!isExpanded ? (
                   <div className="flex justify-end items-center gap-2">
-                    <span className="text-lg text-gray-600 mt-1">From</span>
-                    <span className="text-xl font-medium mt-1">THB 21,00</span>
                     <div className="rounded-lg bg-primary py-3 px-5 text-white font-medium text-center cursor-pointer text-sm hover:bg-orange-600 transition">
                       Select
                     </div>

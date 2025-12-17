@@ -80,7 +80,7 @@ const ProductDetail = () => {
 
       {/* description */}
       <div className="flex gap-4 mb-7">
-        <div className="w-full md:w-3/4 h-max border border-gray-200 rounded-2xl p-4">
+        <div className="w-full md:w-3/4 h-max border border-gray-200 rounded-2xl p-4 leading-6.5">
           <div dangerouslySetInnerHTML={{ __html: detail.description }} />
         </div>
         <div className="hidden md:block w-1/4 h-[120px] border border-gray-200 rounded-2xl p-5">
