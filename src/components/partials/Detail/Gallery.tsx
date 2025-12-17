@@ -6,9 +6,10 @@ const Gallery = ({
   openGallery: (index: number) => void;
 }) => {
   const leftLayoutClass = gallery.length === 1 ? "w-full" : "w-1/2";
-
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  
   const rightLayoutClass = () => {
-    if(window.innerWidth < 768) {
+    if(isMobile) {
       return "grid-rows-2";
     }
 
@@ -39,7 +40,7 @@ const Gallery = ({
         {gallery.length > 1 && (
           <div className="w-1/2 h-full relative overflow-hidden">
             <div className={`w-full h-full grid ${rightLayoutClass()} gap-2`}>
-                {gallery.slice(1, typeof window !== 'undefined' && window.innerWidth < 768 ? 3 : 5).map((img: any, index: number) => (
+                {gallery.slice(1, isMobile ? 3 : 5).map((img: any, index: number) => (
                 <div
                   key={index}
                   className={`w-full h-full bg-cover bg-center overflow-hidden cursor-pointer ${index === 0 && gallery.length === 4 ? 'col-span-2' : ''}`}

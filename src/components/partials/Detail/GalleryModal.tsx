@@ -27,6 +27,7 @@ const GalleryModal = ({
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   useEffect(() => {
     if (isGalleryOpen) {
@@ -66,6 +67,20 @@ const GalleryModal = ({
 
   if (!isGalleryOpen) return null;
 
+  const breakpoints = {
+    769: {
+      pagination: false,
+    },
+    0: {
+      pagination: {
+        clickable: true,
+      },
+      navigation: {
+        enabled: false,
+      },
+    },
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs">
       <button
@@ -76,12 +91,12 @@ const GalleryModal = ({
       </button>
 
       <div
-        className="w-full max-w-7xl px-4 flex flex-col gap-4"
+        className="w-full max-w-6xl px-4 flex flex-col gap-4"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Main Swiper */}
         <div className="custom-swiper-container">
-          {galleries.length > 1 && (
+          {galleries.length > 1 && !isMobile && (
             <button ref={prevRef} className="gallery-swiper-button-prev-custom">
               <ChevronLeft size={22} strokeWidth={1.5} />
             </button>
@@ -89,10 +104,12 @@ const GalleryModal = ({
 
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y, Thumbs]}
+            breakpoints={breakpoints}
             spaceBetween={10}
             slidesPerView={1}
             onSwiper={handleSwiperInit}
             onSlideChange={handleSlideChange}
+            pagination={{ clickable: true }}
             thumbs={{
               swiper:
                 thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
@@ -111,7 +128,7 @@ const GalleryModal = ({
             ))}
           </Swiper>
 
-          {galleries.length > 1 && (
+          {galleries.length > 1 && !isMobile && (
             <button ref={nextRef} className="gallery-swiper-button-next-custom">
               <ChevronRight size={22} strokeWidth={1.5} />
             </button>
