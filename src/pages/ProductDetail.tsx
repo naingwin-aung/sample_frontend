@@ -66,6 +66,19 @@ const ProductDetail = () => {
     <Container className="mt-6">
       <h2 className="text-2xl md:text-3xl font-medium mb-6">{detail?.name}</h2>
 
+      <div className="mb-5 text-gray-600 flex items-center gap-2">
+        <div>Departure piers</div>
+        {detail.piers.length > 0 &&
+          detail.piers.slice(0, 2).map((pier: any) => (
+            <span
+              key={pier.id}
+              className="mr-1 text-primary text-sm bg-orange-100 px-1.5 py-1 rounded-md"
+            >
+              {pier.name}
+            </span>
+          ))}
+      </div>
+
       {/* gallery here */}
       <Gallery gallery={detail.images} openGallery={openGallery} />
       {/* end gallery */}
