@@ -79,14 +79,14 @@ const ProductDetail = () => {
       />
 
       {/* description */}
-      <div className="flex gap-4 mb-6">
+      <div className="flex gap-4 mb-7">
         <div className="w-full md:w-3/4 h-max border border-gray-200 rounded-2xl p-4">
           <div dangerouslySetInnerHTML={{ __html: detail.description }} />
         </div>
         <div className="hidden md:block w-1/4 h-[120px] border border-gray-200 rounded-2xl p-5">
           <div className="text-xl font-medium">
             <span className="text-sm text-gray-600 mr-2">From</span>
-            THB 18,99
+            THB {detail.min_price.toLocaleString()}
           </div>
           <button
             onClick={scrollToSelectOptions}
@@ -99,7 +99,7 @@ const ProductDetail = () => {
 
       {/* select option */}
       <div id="select_option">
-        <h3 className="text-2xl font-medium mb-4">Select options</h3>
+        <h3 className="text-2xl font-medium mb-5">Select options</h3>
         <div className="w-full mb-6">
           <div className="flex flex-col gap-7">
             {detail.options.map((option: any, index: number) => (

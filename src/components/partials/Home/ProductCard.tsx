@@ -42,7 +42,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         <div className="flex justify-between items-center px-4">
           <span className="text-sm text-gray-500"></span>
           <span className="text-md font-medium">
-            From THB {product.min_price}
+            From THB {product.min_price.toLocaleString()}
           </span>
         </div>
       </div>
