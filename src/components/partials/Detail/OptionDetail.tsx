@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import CheckAvailability from "./CheckAvailability";
 import { useQuery } from "@tanstack/react-query";
 import { ListOptionQueryOption } from "../../../api/Option/options";
+import moment from "moment";
 
 interface PriceWithCount {
   name: string;
@@ -25,7 +26,9 @@ const OptionDetail = ({
   const [activeTicket, setActiveTicket] = useState<any | null>(null);
   const [activeTime, setActiveTime] = useState<any | null>(null);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [activeQuantities, setActiveQuantities] = useState<PriceWithCount[]>([]);
+  const [activeQuantities, setActiveQuantities] = useState<PriceWithCount[]>(
+    []
+  );
 
   useEffect(() => {
     if (option?.zones && option.zones.length > 0 && !activeZone) {
@@ -87,13 +90,16 @@ const OptionDetail = ({
     setActiveTime(null);
     setDate(undefined);
     setActiveQuantities([]);
-  }
+  };
 
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
         <h4 className="text-lg font-semibold">Select Zone(s)</h4>
-        <button onClick={() => resetSelect()} className="text-[15px] font-medium underline text-gray-800 cursor-pointer">
+        <button
+          onClick={() => resetSelect()}
+          className="text-[15px] font-medium underline text-gray-800 cursor-pointer"
+        >
           Clear all
         </button>
       </div>
@@ -159,7 +165,8 @@ const OptionDetail = ({
                     activeTime === time.id ? "border-primary text-primary" : ""
                   }`}
                 >
-                  {time.start_time} - {time.end_time}
+                  {moment(time.start_time, "HH:mm:ss").format("HH:mm")} -{" "}
+                  {moment(time.end_time, "HH:mm:ss").format("HH:mm")}
                   <input
                     id={time.start_time}
                     type="radio"
