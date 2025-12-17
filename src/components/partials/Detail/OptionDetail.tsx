@@ -24,6 +24,14 @@ const OptionDetail = ({
   useEffect(() => {
     if (option?.zones && option.zones.length > 0 && !activeZone) {
       setActiveZone(option.zones[0].name);
+      setActiveTicket(option.tickets[0].id);
+      setActiveTime(option.schedule_times[0].id);
+      setActiveQuantities(
+        option.tickets[0].prices.map((price: any) => ({
+          ...price,
+          count: 0,
+        }))
+      );
     }
   }, [option]);
 
