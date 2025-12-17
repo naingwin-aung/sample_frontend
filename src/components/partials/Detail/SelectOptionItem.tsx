@@ -14,7 +14,7 @@ const SelectOptionItem = ({
   isExpanded,
   onToggle,
 }: {
-  slug: string;
+  slug: string | undefined;
   option: any;
   index: number;
   isExpanded: boolean;

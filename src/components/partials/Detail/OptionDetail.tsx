@@ -14,7 +14,7 @@ const OptionDetail = ({
   slug,
   optionId,
 }: {
-  slug: string;
+  slug: string | undefined;
   optionId: number;
 }) => {
   const { data: option } = useQuery({
