@@ -26,7 +26,7 @@ const SelectOptionItem = ({
       type="single"
       collapsible
       value={isExpanded ? "item-1" : ""}
-      className={`w-full border rounded-2xl overflow-hidden cursor-pointer ${
+      className={`w-full border rounded-2xl overflow-hidden cursor-pointer hover:shadow-md transition-shadow duration-300 ${
         isExpanded ? "border-primary" : "border-gray-300"
       }`}
       onValueChange={() => onToggle(index)}
