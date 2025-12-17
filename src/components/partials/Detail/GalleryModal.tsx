@@ -81,10 +81,15 @@ const GalleryModal = ({
     },
   };
 
+  const closeDialog = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setIsGalleryOpen(false);
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs">
       <button
-        onClick={() => setIsGalleryOpen(false)}
+        onClick={(e) => closeDialog(e)}
         className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 rounded-full p-2 transition cursor-pointer"
       >
         <X className="w-6 h-6 text-white" />
