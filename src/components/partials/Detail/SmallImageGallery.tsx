@@ -11,15 +11,21 @@ const SmallImageGallery = ({ images }: { images: any }) => {
     setIsGalleryOpen(true);
   }
 
+  const imageClass = () => {
+    if (images.length === 1) return "grid-cols-1 col-span-2";
+    if (images.length === 2) return "grid-rows-2";
+    return "grid-cols-2 grid-rows-2";
+  }
+
   return (
     <>
-      <div className="grid grid-cols-2 grid-rows-2 gap-1 w-full h-full rounded overflow-hidden relative">
+      <div className={`grid ${imageClass()} gap-1 w-full h-full rounded overflow-hidden relative`}>
         {images.slice(0, 3).map((img: any, index: number) => (
           <div
             onClick={(e) => openGallery(index, e)}
             key={index}
             className={`w-full h-full bg-cover bg-center ${
-              index === 0 ? "col-span-2" : "col-span-1"
+              index === 0 && images.length >= 3 ? "col-span-2" : "col-span-1"
             }`}
             style={{ backgroundImage: `url(${img.url})` }}
           />
