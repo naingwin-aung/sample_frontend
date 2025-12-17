@@ -1,10 +1,11 @@
 import api from "../../axios";
 
-export const fetchProducts = async (page: number, limit: number) => {
+export const fetchProducts = async (page: number, limit: number, except_ids?: number[]) => {
     const response = await api.get(`/products`, {
         params: {
             page,
             limit,
+            except_ids,
         }
     });
 

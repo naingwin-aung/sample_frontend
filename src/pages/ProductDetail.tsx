@@ -6,6 +6,7 @@ import SelectOptionItem from "../components/partials/Detail/SelectOptionItem";
 import Gallery from "../components/partials/Detail/Gallery";
 import { useQuery } from "@tanstack/react-query";
 import { GetProductBySlugQueryOption } from "../api/Product/products";
+import RelatedProducts from "../components/partials/Detail/RelatedProducts";
 
 type ParamTypes = {
   slug: string;
@@ -111,7 +112,7 @@ const ProductDetail = () => {
       </div>
 
       {/* select option */}
-      <div id="select_option">
+      <div id="select_option" className="mb-13">
         <h3 className="text-2xl font-medium mb-5">Select options</h3>
         <div className="w-full mb-6">
           <div className="flex flex-col gap-7">
@@ -129,6 +130,11 @@ const ProductDetail = () => {
             ))}
           </div>
         </div>
+      </div>
+
+      <div>
+          <h2 className="text-2xl font-medium mb-6">You might also like...</h2>
+          <RelatedProducts except_ids={[detail.id]} />
       </div>
     </Container>
   );
