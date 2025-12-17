@@ -104,6 +104,7 @@ const ProductDetail = () => {
           <div className="flex flex-col gap-7">
             {detail.options.map((option: any, index: number) => (
               <SelectOptionItem
+                slug={slug}
                 key={index}
                 option={option}
                 index={index}

@@ -4,15 +4,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../../ui/accordion";
-import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import OptionDetail from "./OptionDetail";
 
 const SelectOptionItem = ({
+  slug,
   option,
   index,
   isExpanded,
   onToggle,
 }: {
+  slug: string;
   option: any;
   index: number;
   isExpanded: boolean;
@@ -79,7 +81,7 @@ const SelectOptionItem = ({
         </AccordionTrigger>
 
         <AccordionContent className="p-6 border-t border-gray-100">
-          <OptionDetail />
+          <OptionDetail slug={slug} optionId={option.id} />
         </AccordionContent>
       </AccordionItem>
     </Accordion>
