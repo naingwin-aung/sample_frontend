@@ -75,9 +75,25 @@ const OptionDetail = ({
     return { totalPrice: totalP };
   }, [activeQuantities]);
 
+  const resetSelect = () => {
+    setActiveZone(null);
+    setActiveTicket(null);
+    setActiveTime(null);
+    setDate(undefined);
+    setActiveQuantities([]);
+  }
+
   return (
     <div>
-      <h4 className="text-lg font-semibold mb-4">Select Zone(s)</h4>
+      <div className="flex items-center justify-between mb-4">
+        <h4 className="text-lg font-semibold">Select Zone(s)</h4>
+        <button onClick={() => resetSelect()} className="text-[15px] font-medium underline text-gray-800 cursor-pointer">
+          Clear all
+        </button>
+      </div>
+      <h5 className="text-md text-gray-500 mb-3">
+        Please select your preferred zone
+      </h5>
       <div className="flex flex-col md:flex-row gap-4">
         {option?.zones.map((zone: any) => (
           <label
@@ -99,7 +115,7 @@ const OptionDetail = ({
         ))}
       </div>
 
-      <div className="flex flex-col md:flex-row gap-4 mt-5">
+      <div className="flex flex-col md:flex-row gap-4">
         <div className="w-full md:w-1/3 rounded-lg h-[300px] mt-8">
           {activeZone ? (
             <img
