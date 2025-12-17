@@ -8,6 +8,10 @@ const Gallery = ({
   const leftLayoutClass = gallery.length === 1 ? "w-full" : "w-1/2";
 
   const rightLayoutClass = () => {
+    if(window.innerWidth < 768) {
+      return "grid-rows-2";
+    }
+
     if(gallery.length === 2 || gallery.length === 3) {
       return "grid-cols-1";
     }
@@ -35,14 +39,14 @@ const Gallery = ({
         {gallery.length > 1 && (
           <div className="w-1/2 h-full relative overflow-hidden">
             <div className={`w-full h-full grid ${rightLayoutClass()} gap-2`}>
-              {gallery.slice(1, 5).map((img: any, index: number) => (
+                {gallery.slice(1, typeof window !== 'undefined' && window.innerWidth < 768 ? 3 : 5).map((img: any, index: number) => (
                 <div
                   key={index}
                   className={`w-full h-full bg-cover bg-center overflow-hidden cursor-pointer ${index === 0 && gallery.length === 4 ? 'col-span-2' : ''}`}
                   style={{ backgroundImage: `url(${img.url})` }}
                   onClick={() => openGallery(index + 1)}
                 ></div>
-              ))}
+                ))}
             </div>
 
             {/* Image counter overlay */}
