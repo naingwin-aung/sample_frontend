@@ -6,7 +6,7 @@ import {
 } from "../../ui/accordion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import OptionDetail from "./OptionDetail";
-import BoatImageGallery from "./BoatImageGallery";
+import SmallImageGallery from "./SmallImageGallery";
 
 const SelectOptionItem = ({
   slug,
@@ -33,9 +33,9 @@ const SelectOptionItem = ({
     >
       <AccordionItem value="item-1" className="border-b-0">
         <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:rounded-b-none [&>svg]:hidden">
-          <div className="flex flex-col md:flex-row w-full h-auto md:h-[195px]">
+          <div className="flex flex-col md:flex-row w-full h-auto md:h-[210px]">
             <div className="w-full md:w-1/4 h-[250px] md:h-full">
-              <BoatImageGallery images={option?.boat?.images} />        
+              <SmallImageGallery images={option?.boat?.images} />        
             </div>
             <div className="w-full md:w-3/4 h-full py-4 px-5">
               <div className="flex items-center justify-between mb-3">
@@ -51,14 +51,14 @@ const SelectOptionItem = ({
                 </div>
               </div>
 
-              <div className="w-full text-gray-600 mb-4 text-left overflow-hidden font-normal line-clamp-3">
+              <div className="w-full text-gray-600 mb-6 text-left overflow-hidden font-normal line-clamp-3">
                 {option.boat?.description}
               </div>
 
               <div
                 className={`${
                   isExpanded
-                    ? "mt-[26.5px]"
+                    ? "mt-[31.5px]"
                     : "mt-auto flex flex-col md:flex-row md:justify-between md:items-center"
                 }`}
               >

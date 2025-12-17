@@ -1,7 +1,7 @@
 import { useState } from "react";
 import GalleryModal from "./GalleryModal";
 
-const BoatImageGallery = ({ images }: { images: any }) => {
+const SmallImageGallery = ({ images }: { images: any }) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
 
@@ -25,7 +25,7 @@ const BoatImageGallery = ({ images }: { images: any }) => {
           />
         ))}
         <div className="absolute bottom-2 right-2 bg-black/45 rounded">
-          <span className="text-white text-xs p-1 py-2">More</span>
+          <span className="text-white text-xs p-1 py-2">more</span>
         </div>
       </div>
 
@@ -39,4 +39,4 @@ const BoatImageGallery = ({ images }: { images: any }) => {
   );
 };
 
-export default BoatImageGallery;
+export default SmallImageGallery;

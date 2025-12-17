@@ -4,6 +4,7 @@ import CheckAvailability from "./CheckAvailability";
 import { useQuery } from "@tanstack/react-query";
 import { ListOptionQueryOption } from "../../../api/Option/options";
 import moment from "moment";
+import SmallImageGallery from "./SmallImageGallery";
 
 interface PriceWithCount {
   name: string;
@@ -128,15 +129,13 @@ const OptionDetail = ({
       </div>
 
       <div className="flex flex-col md:flex-row gap-4">
-        <div className="w-full md:w-1/3 rounded-lg h-[300px] mt-8">
+        <div className="w-full md:w-1/3 rounded-xl h-[380px] mt-8 overflow-hidden shadow-xl border border-gray-200">
           {activeZone ? (
-            <img
-              src={
+            <SmallImageGallery
+              images={
                 option?.zones.find((zone: any) => zone.name === activeZone)
-                  ?.images[0].url
+                  ?.images
               }
-              alt={activeZone}
-              className="w-full h-full object-cover rounded-lg"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-400">
