@@ -4,19 +4,6 @@ import CheckAvailability from "./CheckAvailability";
 import { useQuery } from "@tanstack/react-query";
 import { ListOptionQueryOption } from "../../../api/Option/options";
 
-const initialQuantities = [
-  {
-    name: "Adult",
-    price: 1999,
-    count: 0,
-  },
-  {
-    name: "Child",
-    price: 999,
-    count: 0,
-  },
-];
-
 const OptionDetail = ({
   slug,
   optionId,
@@ -32,7 +19,53 @@ const OptionDetail = ({
   const [activeTicket, setActiveTicket] = useState<any | null>(null);
   const [activeTime, setActiveTime] = useState<any | null>(null);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [activeQuantities, setActiveQuantities] = useState(initialQuantities);
+  const [activeQuantities, setActiveQuantities] = useState([]);
+
+  useEffect(() => {
+    if (option?.zones && option.zones.length > 0 && !activeZone) {
+      setActiveZone(option.zones[0].name);
+    }
+  }, [option]);
+
+  const selectTicket = (ticket: any) => {
+    setActiveTicket(ticket.id);
+    const quantitiesWithCount = ticket.prices.map((price: any) => ({
+      ...price,
+      count: 0,
+    }));
+
+    setActiveQuantities(quantitiesWithCount);
+  };
+
+  const updateQuantity = (index: number, delta: 1 | -1) => {
+    setActiveQuantities((prevQuantities: any) =>
+      prevQuantities.map((item: any, i: number) => {
+        if (item.count == 10 && delta === 1) return item; // max 10
+
+        if (i === index) {
+          const newCount = Math.max(0, item.count + delta);
+          return { ...item, count: newCount };
+        }
+        return item;
+      })
+    );
+  };
+
+  const quantityPlus = (index: number) => {
+    updateQuantity(index, 1);
+  };
+
+  const quantityMinus = (index: number) => {
+    updateQuantity(index, -1);
+  };
+
+  const { totalPrice } = useMemo(() => {
+    const totalP = activeQuantities.reduce(
+      (sum, item) => sum + item?.net_price * item?.count,
+      0
+    );
+    return { totalPrice: totalP };
+  }, [activeQuantities]);
 
   return (
     <div>
@@ -91,14 +124,14 @@ const OptionDetail = ({
               {option?.schedule_times.map((time: any) => (
                 <label
                   key={time.id}
-                  htmlFor={time.id}
+                  htmlFor={time.start_time}
                   className={`text-md font-medium border border-gray-400 rounded-md px-5 py-2.5 cursor-pointer ${
                     activeTime === time.id ? "border-primary text-primary" : ""
                   }`}
                 >
                   {time.start_time} - {time.end_time}
                   <input
-                    id={time.id}
+                    id={time.start_time}
                     type="radio"
                     checked={activeTime === time.id}
                     onChange={() => setActiveTime(time.id)}
@@ -127,7 +160,7 @@ const OptionDetail = ({
                     id={ticket.id}
                     type="radio"
                     checked={activeTicket === ticket.id}
-                    onChange={() => setActiveTicket(ticket.id)}
+                    onChange={() => selectTicket(ticket)}
                     className="appearance-none"
                   />
                 </label>
@@ -135,44 +168,46 @@ const OptionDetail = ({
             </div>
           </div>
 
-          <div className="mb-7">
-            <h4 className="text-md text-gray-500 mb-3">Quantity</h4>
+          {activeQuantities.length > 0 && (
+            <div className="mb-7">
+              <h4 className="text-md text-gray-500 mb-3">Quantity</h4>
 
-            <div className="flex flex-col gap-3">
-              {activeQuantities.map((quantity, index) => (
-                <div
-                  key={quantity.name}
-                  className="px-4 py-5 rounded-md border border-gray-200 hover:shadow transition-shadow duration-200"
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="text-md font-medium">{quantity.name}</div>
-                    <div className="flex items-center gap-3 text-md font-medium">
-                      <button
-                        // onClick={() => quantityMinus(index)}
-                        className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
-                      >
-                        <Minus size={16} />
-                      </button>
-                      <span>{quantity.count}</span>
-                      <button
-                        // onClick={() => quantityPlus(index)}
-                        className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
-                      >
-                        <Plus size={16} />
-                      </button>
+              <div className="flex flex-col gap-3">
+                {activeQuantities?.map((quantity: any, index: number) => (
+                  <div
+                    key={quantity.name}
+                    className="px-4 py-5 rounded-md border border-gray-200 hover:shadow transition-shadow duration-200"
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="text-md font-medium">{quantity.name}</div>
+                      <div className="flex items-center gap-3 text-md font-medium">
+                        <button
+                          onClick={() => quantityMinus(index)}
+                          className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
+                        >
+                          <Minus size={16} />
+                        </button>
+                        <span>{quantity.count}</span>
+                        <button
+                          onClick={() => quantityPlus(index)}
+                          className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
+                        >
+                          <Plus size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="flex flex-col md:flex-row md:justify-between md:items-center">
             <div className="text-2xl font-medium">
-              {/* THB {totalPrice ? totalPrice.toLocaleString("en-US") : "-"}
+              THB {totalPrice ? totalPrice.toLocaleString("en-US") : "-"}
               <div className="text-xs text-gray-400 font-normal mt-1.5">
                 Complete all required fields to continue
-              </div> */}
+              </div>
             </div>
             <div className="text-end mt-2 md:mt-0">
               <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
