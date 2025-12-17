@@ -4,6 +4,12 @@ import CheckAvailability from "./CheckAvailability";
 import { useQuery } from "@tanstack/react-query";
 import { ListOptionQueryOption } from "../../../api/Option/options";
 
+interface PriceWithCount {
+  name: string;
+  net_price: number;
+  count: number;
+}
+
 const OptionDetail = ({
   slug,
   optionId,
@@ -19,7 +25,7 @@ const OptionDetail = ({
   const [activeTicket, setActiveTicket] = useState<any | null>(null);
   const [activeTime, setActiveTime] = useState<any | null>(null);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [activeQuantities, setActiveQuantities] = useState([]);
+  const [activeQuantities, setActiveQuantities] = useState<PriceWithCount[]>([]);
 
   useEffect(() => {
     if (option?.zones && option.zones.length > 0 && !activeZone) {
