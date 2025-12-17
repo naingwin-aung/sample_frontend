@@ -1,54 +1,12 @@
 import Container from "../../global/Container";
-import ProductCard from "./ProductCard";
-// import { products } from "../../../lib/constants"; 
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef, useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 import { ListProductQueryOption } from "../../../api/Product/products";
-import type { ProductType } from "../../../types/ProductType";
+import CarouselSlide from "../../global/CarouselSlide";
 
 const TravelerChoice = () => {
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const [swiperInstance, setSwiperInstance] = useState(null);
-
-  const {data, isPending, error} = useQuery({
+  const { data } = useQuery({
     ...ListProductQueryOption(1, 10),
-  })
-
-  const handleSwiperInit = (swiper) => {
-    setSwiperInstance(swiper);
-  };
-  
-  useEffect(() => {
-    if (swiperInstance && prevRef.current && nextRef.current) {
-      swiperInstance.params.navigation.prevEl = prevRef.current;
-      swiperInstance.params.navigation.nextEl = nextRef.current;
-      
-      swiperInstance.navigation.init();
-      swiperInstance.navigation.update();
-    }
-  }, [swiperInstance]);
-  
-  const breakpoints = {
-    769: {
-      slidesPerView: 4,
-      spaceBetween: 13,
-      pagination: false,
-    },
-    0: {
-      slidesPerView: 1.2,
-      spaceBetween: 10,
-      pagination: {
-        clickable: true,
-      },
-      navigation: {
-        enabled: false, 
-      },
-    },
-  };
+  });
 
   return (
     <Container>
@@ -56,34 +14,7 @@ const TravelerChoice = () => {
         Travelers' favorite choices
       </h2>
 
-      <div className="custom-swiper-container relative">
-        <button 
-          ref={prevRef} 
-          className="swiper-button-prev-custom hidden md:block absolute top-1/2 left-0 z-10 -translate-y-1/2 p-1 bg-white rounded-full shadow"
-        >
-          <ChevronLeft size={17} strokeWidth={1.5} />
-        </button>
-
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          breakpoints={breakpoints}
-          pagination={{ clickable: true }}
-          onSwiper={handleSwiperInit} 
-        >
-          {data?.data.map((product : ProductType) => (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        <button 
-          ref={nextRef} 
-          className="swiper-button-next-custom hidden md:block absolute top-1/2 right-0 z-10 -translate-y-1/2 p-1 bg-white rounded-full shadow"
-        >
-          <ChevronRight size={17} strokeWidth={1.5} />
-        </button>
-      </div>
+      <CarouselSlide products={data?.data || []} />
     </Container>
   );
 };
