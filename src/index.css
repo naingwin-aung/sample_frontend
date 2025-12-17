@@ -115,7 +115,7 @@
 }
 
 @utility glass {
-  @apply bg-gray-50/50 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl;
+  @apply bg-gray-50/50 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg;
 }
 
 @layer base {

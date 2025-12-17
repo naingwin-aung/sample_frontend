@@ -87,7 +87,7 @@ const GalleryModal = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs" onClick={(e) => e.stopPropagation()}>
       <button
         onClick={(e) => closeDialog(e)}
         className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 rounded-full p-2 transition cursor-pointer"
