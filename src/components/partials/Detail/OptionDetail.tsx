@@ -7,11 +7,11 @@ import moment from "moment";
 import SmallImageGallery from "./SmallImageGallery";
 import { checkoutQueryOption } from "../../../api/checkout/checkout";
 
-interface PriceWithCount {
+interface PriceWithQuantity {
   id: number;
   name: string;
   net_price: number;
-  count: number;
+  quantity: number;
 }
 
 const OptionDetail = ({
@@ -29,7 +29,7 @@ const OptionDetail = ({
   const [activeTicket, setActiveTicket] = useState<any | null>(null);
   const [activeTime, setActiveTime] = useState<any | null>(null);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [activeQuantities, setActiveQuantities] = useState<PriceWithCount[]>(
+  const [activeQuantities, setActiveQuantities] = useState<PriceWithQuantity[]>(
     []
   );
 
@@ -41,7 +41,7 @@ const OptionDetail = ({
       setActiveQuantities(
         option.tickets[0].prices.map((price: any) => ({
           ...price,
-          count: 0,
+          quantity: 0,
         }))
       );
     }
@@ -49,22 +49,22 @@ const OptionDetail = ({
 
   const selectTicket = (ticket: any) => {
     setActiveTicket(ticket.id);
-    const quantitiesWithCount = ticket.prices.map((price: any) => ({
+    const quantitiesWithQuantity = ticket.prices.map((price: any) => ({
       ...price,
-      count: 0,
+      quantity: 0,
     }));
 
-    setActiveQuantities(quantitiesWithCount);
+    setActiveQuantities(quantitiesWithQuantity);
   };
 
   const updateQuantity = (index: number, delta: 1 | -1) => {
     setActiveQuantities((prevQuantities: any) =>
       prevQuantities.map((item: any, i: number) => {
-        if (item.count == 10 && delta === 1) return item; // max 10
+        if (item.quantity == 10 && delta === 1) return item; // max 10
 
         if (i === index) {
-          const newCount = Math.max(0, item.count + delta);
-          return { ...item, count: newCount };
+          const newQuantity = Math.max(0, item.quantity + delta);
+          return { ...item, quantity: newQuantity };
         }
         return item;
       })
@@ -81,7 +81,7 @@ const OptionDetail = ({
 
   const { totalPrice } = useMemo(() => {
     const totalP = activeQuantities.reduce(
-      (sum, item) => sum + item?.net_price * item?.count,
+      (sum, item) => sum + item?.net_price * item?.quantity,
       0
     );
     return { totalPrice: totalP };
@@ -103,9 +103,9 @@ const OptionDetail = ({
   });
 
   const checkoutHandler = () => {
-    const quantities = activeQuantities.filter((item) => item.count > 0).map((item) => ({
+    const quantities = activeQuantities.filter((item) => item.quantity > 0).map((item) => ({
       id: item.id,
-      count: item.count,
+      quantity: item.quantity,
     }));
 
     console.log({
@@ -261,7 +261,7 @@ const OptionDetail = ({
                         >
                           <Minus size={16} />
                         </button>
-                        <span>{quantity.count}</span>
+                        <span>{quantity.quantity}</span>
                         <button
                           onClick={() => quantityPlus(index)}
                           className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
