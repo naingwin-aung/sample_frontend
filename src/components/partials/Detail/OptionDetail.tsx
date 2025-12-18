@@ -101,7 +101,7 @@ const OptionDetail = ({
       'zone_id' : activeZone,
       'ticket_id' : activeTicket,
       'schedule_time_id' : activeTime,
-      'date' : date,
+      'date' : date ? moment(date).format("YYYY-MM-DD") : null,
       'quantities' : activeQuantities.filter((item) => item.count > 0),
     });
   }
