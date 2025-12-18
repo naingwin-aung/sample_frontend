@@ -1,6 +1,6 @@
 import Container from "../../global/Container";
 import { useQuery } from "@tanstack/react-query";
-import { ListProductQueryOption } from "../../../api/Product/products";
+import { ListProductQueryOption } from "../../../api/product/products";
 import CarouselSlide from "../../global/CarouselSlide";
 
 const TravelerChoice = () => {

@@ -1,10 +1,11 @@
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import CheckAvailability from "./CheckAvailability";
-import { useQuery } from "@tanstack/react-query";
-import { ListOptionQueryOption } from "../../../api/Option/options";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { ListOptionQueryOption } from "../../../api/option/options";
 import moment from "moment";
 import SmallImageGallery from "./SmallImageGallery";
+import { checkoutQueryOption } from "../../../api/checkout/checkout";
 
 interface PriceWithCount {
   id: number;
@@ -94,17 +95,41 @@ const OptionDetail = ({
     setActiveQuantities([]);
   };
 
+  const checkoutMutation = useMutation({
+    ...checkoutQueryOption(),
+    onSuccess: () => {
+      console.log("Checkout successful");
+    },
+  });
+
   const checkoutHandler = () => {
+    const quantities = activeQuantities.filter((item) => item.count > 0).map((item) => ({
+      id: item.id,
+      count: item.count,
+    }));
+
     console.log({
-      'product_id' : option.product_id,
-      'option_id' : option.id,
-      'zone_id' : activeZone,
-      'ticket_id' : activeTicket,
-      'schedule_time_id' : activeTime,
-      'date' : date ? moment(date).format("YYYY-MM-DD") : null,
-      'quantities' : activeQuantities.filter((item) => item.count > 0),
+      product_id: option.product_id,
+      option_id: option.id,
+      zone_id: activeZone,
+      ticket_id: activeTicket,
+      schedule_time_id: activeTime,
+      date: date ? moment(date).format("YYYY-MM-DD") : null,
+      quantities: quantities,
     });
-  }
+
+    const payload = {
+      product_id: option.product_id,
+      option_id: option.id,
+      zone_id: activeZone,
+      ticket_id: activeTicket,
+      schedule_time_id: activeTime,
+      date: date ? moment(date).format("YYYY-MM-DD") : null,
+      quantities: quantities,
+    };
+
+    checkoutMutation.mutate(payload);
+  };
 
   return (
     <div>
@@ -259,7 +284,10 @@ const OptionDetail = ({
               </div>
             </div>
             <div className="text-end mt-2 md:mt-0">
-              <button onClick={() => checkoutHandler()} className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
+              <button
+                onClick={() => checkoutHandler()}
+                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer"
+              >
                 Book Now
               </button>
             </div>

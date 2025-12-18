@@ -5,7 +5,7 @@ import GalleryModal from "../components/partials/Detail/GalleryModal";
 import SelectOptionItem from "../components/partials/Detail/SelectOptionItem";
 import Gallery from "../components/partials/Detail/Gallery";
 import { useQuery } from "@tanstack/react-query";
-import { GetProductBySlugQueryOption } from "../api/Product/products";
+import { GetProductBySlugQueryOption } from "../api/product/products";
 import RelatedProducts from "../components/partials/Detail/RelatedProducts";
 
 type ParamTypes = {

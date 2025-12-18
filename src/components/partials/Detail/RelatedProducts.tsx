@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ListProductQueryOption } from "../../../api/Product/products";
+import { ListProductQueryOption } from "../../../api/product/products";
 import type { ProductType } from "../../../types/ProductType";
 import ProductCard from "../Home/ProductCard";
 

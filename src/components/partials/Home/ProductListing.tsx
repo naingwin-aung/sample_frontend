@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ProductType } from "../../../types/ProductType";
 import ProductCard from "./ProductCard";
-import { ListProductQueryOption } from "../../../api/Product/products";
+import { ListProductQueryOption } from "../../../api/product/products";
 
 const ProductListing = () => {
   const { data } = useQuery({
