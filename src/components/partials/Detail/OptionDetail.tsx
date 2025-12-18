@@ -7,6 +7,7 @@ import moment from "moment";
 import SmallImageGallery from "./SmallImageGallery";
 
 interface PriceWithCount {
+  id: number;
   name: string;
   net_price: number;
   count: number;
@@ -33,7 +34,7 @@ const OptionDetail = ({
 
   useEffect(() => {
     if (option?.zones && option.zones.length > 0 && !activeZone) {
-      setActiveZone(option.zones[0].name);
+      setActiveZone(option.zones[0].id);
       setActiveTicket(option.tickets[0].id);
       setActiveTime(option.schedule_times[0].id);
       setActiveQuantities(
@@ -93,6 +94,18 @@ const OptionDetail = ({
     setActiveQuantities([]);
   };
 
+  const checkoutHandler = () => {
+    console.log({
+      'product_id' : option.product_id,
+      'option_id' : option.id,
+      'zone_id' : activeZone,
+      'ticket_id' : activeTicket,
+      'schedule_time_id' : activeTime,
+      'date' : date,
+      'quantities' : activeQuantities.filter((item) => item.count > 0),
+    });
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -113,15 +126,15 @@ const OptionDetail = ({
             key={zone.name}
             htmlFor={zone.name}
             className={`w-max text-md font-medium border border-gray-400 rounded-md px-5 py-2.5 cursor-pointer ${
-              activeZone === zone.name ? "border-primary text-primary" : ""
+              activeZone === zone.id ? "border-primary text-primary" : ""
             }`}
           >
             {zone.name}
             <input
               id={zone.name}
               type="radio"
-              checked={activeZone === zone.name}
-              onChange={() => setActiveZone(zone.name)}
+              checked={activeZone === zone.id}
+              onChange={() => setActiveZone(zone.id)}
               className="appearance-none"
             />
           </label>
@@ -133,7 +146,7 @@ const OptionDetail = ({
           {activeZone ? (
             <SmallImageGallery
               images={
-                option?.zones.find((zone: any) => zone.name === activeZone)
+                option?.zones.find((zone: any) => zone.id === activeZone)
                   ?.images
               }
             />
@@ -211,7 +224,7 @@ const OptionDetail = ({
               <div className="flex flex-col gap-3">
                 {activeQuantities?.map((quantity: any, index: number) => (
                   <div
-                    key={quantity.name}
+                    key={quantity.id}
                     className="px-4 py-5 rounded-md border border-gray-200 hover:shadow transition-shadow duration-200"
                   >
                     <div className="flex justify-between items-center">
@@ -246,7 +259,7 @@ const OptionDetail = ({
               </div>
             </div>
             <div className="text-end mt-2 md:mt-0">
-              <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
+              <button onClick={() => checkoutHandler()} className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer">
                 Book Now
               </button>
             </div>
