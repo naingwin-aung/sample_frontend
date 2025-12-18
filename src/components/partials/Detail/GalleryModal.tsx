@@ -96,7 +96,7 @@ const GalleryModal = ({
       </button>
 
       <div
-        className="w-full max-w-6xl px-4 flex flex-col gap-4"
+        className="w-full max-w-4xl px-4 flex flex-col gap-4"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Main Swiper */}
@@ -153,9 +153,9 @@ const GalleryModal = ({
             {galleries.map((gallery, index) => (
               <SwiperSlide key={index} style={{ width: "auto" }}>
                 <div
-                  className={`cursor-pointer transition-all duration-200 rounded-lg overflow-hidden ${
+                  className={`cursor-pointer transition-all duration-200 rounded-lg overflow-hidden border-[1.5px] border-transparent ${
                     activeIndex === index
-                      ? "ring-2 ring-white opacity-100"
+                      ? "border-white opacity-100"
                       : "opacity-60 hover:opacity-80"
                   }`}
                   onClick={() => swiperInstance?.slideTo(index)}
