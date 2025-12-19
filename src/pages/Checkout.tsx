@@ -34,11 +34,12 @@ const Checkout = () => {
   };
 
   if (cartQuery.isLoading || checkoutQuery.isLoading)
-    return <div>Validating booking...</div>;
+    return <Container>Validating booking...</Container>;
 
-  if (cartQuery.error) return <div>Error loading cart.</div>;
+  if (cartQuery.error) return <Container>Error loading cart.</Container>;
 
-  if (checkoutQuery.error) return <div>Error loading checkout.</div>;
+  if (checkoutQuery.error)
+    return <Container>Error loading checkout.</Container>;
 
   return (
     <section className="bg-gray-100 pt-1 pb-12">
