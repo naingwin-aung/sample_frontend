@@ -6,7 +6,7 @@ import Container from "../components/global/Container";
 import Image from "../components/global/Image";
 import { useEffect } from "react";
 import moment from "moment";
-import { Armchair, Clock, Ticket } from "lucide-react";
+import { Armchair, Clock, TicketCheck } from "lucide-react";
 
 const Checkout = () => {
   useEffect(() => {
@@ -94,7 +94,7 @@ const Checkout = () => {
                             <Armchair /> {checkout.product.zone.name}
                           </p>
                           <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
-                            <Ticket /> {checkout.product.ticket.name}
+                            <TicketCheck /> {checkout.product.ticket.name}
                           </p>
                           <p className="text-gray-500 text-sm flex items-center gap-4">
                             <Clock />
