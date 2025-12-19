@@ -38,7 +38,7 @@ const Checkout = () => {
       if (checkout.product_type === "boat") {
         products.push({
           product_type: checkout.product_type,
-          product_id: checkout.product.id,
+          product_id: checkout.product.product.id,
           option_id: checkout.product.option_id,
           zone_id: checkout.product.zone.id,
           ticket_id: checkout.product.ticket.id,
