@@ -44,7 +44,7 @@ const Checkout = () => {
     <Container>
       <section className="flex gap-6 mt-5">
         <div className="w-2/3">
-          <div className="border border-gray-200 rounded-xl h-fit p-4">
+          <div className="border border-gray-100 rounded-xl h-fit p-4">
             <div className="mb-6">
               <h4 className="text-[18px] font-medium mb-2">Contact info</h4>
               <p className="text-gray-500 mb-3 text-sm">
@@ -127,7 +127,7 @@ const Checkout = () => {
           {checkout_data?.data.map((checkout: any, index: number) => (
             <div key={index}>
               {checkout?.product_type === "boat" && (
-                <div className="border border-gray-200 rounded-xl h-fit p-4 mb-4">
+                <div className="border border-gray-100 rounded-xl h-fit p-4 mb-4">
                   <h4 className="text-[17px] font-medium mb-2">
                     {checkout.product.product?.name}
                   </h4>
@@ -161,7 +161,7 @@ const Checkout = () => {
             </div>
           ))}
 
-          <div className="sticky top-22 border border-gray-200 rounded-xl h-fit p-4">
+          <div className="sticky top-22 border border-gray-100 rounded-xl h-fit p-4">
             <div className="flex items-center justify-between mb-4">
               <div className="text-gray-500">Subtotal</div>
               <div className="text-gray-800">THB {checkout_data?.total_price.toLocaleString('en-US')}</div>
