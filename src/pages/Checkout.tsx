@@ -5,6 +5,8 @@ import { checkoutQueryOptionQuery } from "../api/checkout/checkout";
 import Container from "../components/global/Container";
 import Image from "../components/global/Image";
 import { useEffect } from "react";
+import moment from "moment";
+import { Armchair, Clock, Ticket } from "lucide-react";
 
 const Checkout = () => {
   useEffect(() => {
@@ -25,12 +27,12 @@ const Checkout = () => {
     enabled: !!cartQuery.data,
   });
 
-  const checkoutData = checkoutQuery.data;
-  console.log("Checkout Data:", checkoutData);
+  const checkout_data = checkoutQuery.data;
+  console.log("Checkout Data:", checkout_data);
 
   const checkoutConfirmHandler = () => {
-    console.log("Checkout confirmed:", checkoutData);
-  }
+    console.log("Checkout confirmed:", checkout_data);
+  };
 
   if (cartQuery.isLoading || checkoutQuery.isLoading)
     return <div>Validating booking...</div>;
@@ -71,19 +73,45 @@ const Checkout = () => {
 
             <div className="mb-6">
               <h4 className="text-[18px] font-medium mb-4">Product info</h4>
-              <div className="border border-gray-200 rounded-lg p-4 flex gap-4">
-                <Image
-                  src="https://i.pinimg.com/1200x/7b/38/f1/7b38f1022730431e6b14622b6972a88d.jpg"
-                  alt="Product Image"
-                  className="w-24 h-24 rounded-md object-cover"
-                />
-                <div>
-                  <h5 className="text-lg font-medium mb-2">
-                    Ayutthaya Temples One Day Tour from Bangkok
-                  </h5>
-                  <p className="text-gray-500">India Buffet cruise</p>
+              {checkout_data?.data.map((checkout: any, index: number) => (
+                <div key={index}>
+                  {checkout?.product_type === "boat" && (
+                    <div className="border border-gray-200 rounded-lg p-4 flex gap-4 mb-4">
+                      <Image
+                        src="https://i.pinimg.com/1200x/7b/38/f1/7b38f1022730431e6b14622b6972a88d.jpg"
+                        alt="Product Image"
+                        className="w-24 h-24 rounded-md object-cover"
+                      />
+                      <div>
+                        <h5 className="font-medium mb-1">
+                          {checkout.product.product.name}
+                        </h5>
+                        <p className="text-gray-500 text-sm mb-3">
+                          {checkout.product.boat.name}
+                        </p>
+                        <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
+                          <Armchair /> {checkout.product.zone.name}
+                        </p>
+                        <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
+                          <Ticket /> {checkout.product.ticket.name}
+                        </p>
+                        <p className="text-gray-500 text-sm flex items-center gap-4">
+                          <Clock />
+                          {moment(
+                            checkout.product.schedule_time?.start_time,
+                            "HH:mm:ss"
+                          ).format("HH:mm")}{" "}
+                          -{" "}
+                          {moment(
+                            checkout.product.schedule_time?.end_time,
+                            "HH:mm:ss"
+                          ).format("HH:mm")}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
+              ))}
             </div>
 
             <div className="flex justify-end">
