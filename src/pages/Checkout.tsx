@@ -4,8 +4,13 @@ import { listShoppingCartGuidOptionQuery } from "../api/shopping-cart-guid/shopp
 import { checkoutQueryOptionQuery } from "../api/checkout/checkout";
 import Container from "../components/global/Container";
 import Image from "../components/global/Image";
+import { useEffect } from "react";
 
 const Checkout = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [searchParams] = useSearchParams();
   const guid = searchParams.get("shoppingcart_guid");
   const cartQuery = useQuery({
