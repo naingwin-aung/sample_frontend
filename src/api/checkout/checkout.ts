@@ -1,7 +1,7 @@
-import { index } from "./checkout.fetch"
+import { create } from "./checkout.fetch";
 
 export const checkoutQueryOption = () => {
-    return {
-        mutationFn: (checkout : any) => index(checkout),
-    }
-}
+  return {
+    mutationFn: (checkout: any) => create(checkout),
+  };
+};

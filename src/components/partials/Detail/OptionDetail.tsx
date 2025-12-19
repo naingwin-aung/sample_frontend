@@ -8,6 +8,7 @@ import SmallImageGallery from "./SmallImageGallery";
 import { checkoutQueryOption } from "../../../api/checkout/checkout";
 import { products } from "../../../lib/constants";
 import { useNavigate } from "react-router-dom";
+import { shoppingCartGuidOptionQuery } from "../../../api/shopping-cart-guid/shoppingcart_guid";
 
 interface PriceWithQuantity {
   id: number;
@@ -100,7 +101,7 @@ const OptionDetail = ({
   const navigate = useNavigate();
 
   const checkoutMutation = useMutation({
-    ...checkoutQueryOption(),
+    ...shoppingCartGuidOptionQuery(),
     onSuccess: () => {
       navigate(`/boats/checkout`);
     },
@@ -129,9 +130,9 @@ const OptionDetail = ({
       products: [payload],
     };
 
-    console.log("checkoutData", checkoutData);
-
-    checkoutMutation.mutate(checkoutData);
+    checkoutMutation.mutate({
+      cart_data: checkoutData,
+    });
   };
 
   return (
