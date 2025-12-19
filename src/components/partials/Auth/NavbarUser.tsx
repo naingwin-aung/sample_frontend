@@ -1,28 +1,19 @@
 import Image from "../../global/Image";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../../ui/dialog";
 import SocialSignIn from "../Auth/SocialSignIn";
 import { useGoogleLogin } from "@react-oauth/google";
-import { loginWithProvider, logout } from "../../../api/auth";
-import useAuthStore from "../../../stores/useAuthStore";
-import { useState } from "react";
+import { loginWithProvider } from "../../../api/auth";
 
-const NavbarUser = ({loginSuccess}: {loginSuccess: () => void}) => {
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
+const AuthenticationModal = ({
+  isModalOpen,
+  setIsModalOpen,
+}: {
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const handleGoogleSuccess = async (tokenResponse: any) => {
     try {
       await loginWithProvider("google", tokenResponse.access_token);
-      setIsDialogOpen(false);
-      loginSuccess();
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Google login error:", error);
     }
@@ -39,48 +30,35 @@ const NavbarUser = ({loginSuccess}: {loginSuccess: () => void}) => {
 
   return (
     <>
-      {isAuthenticated ? (
-        <button
-          onClick={logout}
-          className="px-4 py-2 rounded-4xl bg-linear-to-r from-red-400 to-red-600 text-white cursor-pointer text-sm hover:from-red-500 hover:to-red-700 transition"
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          onClick={() => setIsModalOpen(false)}
         >
-          Log out
-        </button>
-      ) : (
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <button className="px-4 py-2 rounded-4xl bg-linear-to-r from-orange-400 to-orange-600 text-white cursor-pointer text-sm hover:from-orange-500 hover:to-orange-700 transition">
-              Log in
-            </button>
-          </DialogTrigger>
-          <DialogContent
-            className="sm:max-w-md rounded-2xl"
-            showCloseButton={false}
+          <div
+            className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 shadow-lg"
+            onClick={(e) => e.stopPropagation()}
           >
-            <DialogHeader>
-              <DialogTitle>
-                <div className="flex items-center gap-4 mb-5">
-                  <Image
-                    src="https://i.pinimg.com/736x/1b/aa/51/1baa516470fc278145718dd2048bdf6d.jpg"
-                    alt="Logo"
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div className="text-2xl font-medium">Welcome back!</div>
-                </div>
-              </DialogTitle>
-              <DialogDescription>
-                <span className="text-lg font-medium">Login or sign up</span>
-              </DialogDescription>
-            </DialogHeader>
+            <div className="flex items-center gap-4 mb-5">
+              <Image
+                src="https://i.pinimg.com/736x/1b/aa/51/1baa516470fc278145718dd2048bdf6d.jpg"
+                alt="Logo"
+                className="w-10 h-10 rounded-full"
+              />
+              <div className="text-2xl font-medium">Welcome back!</div>
+            </div>
+            <p className="text-lg font-medium text-gray-500 mb-4">
+              Login or sign up
+            </p>
             <SocialSignIn
               signInWithGoogle={signInWithGoogle}
               text="Sign In with Google"
             />
-          </DialogContent>
-        </Dialog>
+          </div>
+        </div>
       )}
     </>
   );
 };
 
-export default NavbarUser;
+export default AuthenticationModal;
