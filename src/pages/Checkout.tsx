@@ -157,7 +157,7 @@ const Checkout = () => {
                       </div>
                     </div>
                     <hr className="my-4" />
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between">
                       <div className="text-gray-500">Total</div>
                       <div className="text-gray-800 font-medium">
                         THB {checkout?.total_price.toLocaleString("en-US")}
