@@ -107,6 +107,11 @@ const OptionDetail = ({
   });
 
   const checkoutHandler = () => {
+    if(!activeZone || !activeTicket || !activeTime || !date || activeQuantities.every((item) => item.quantity === 0)) {
+      alert("Please complete all required fields.");
+      return;
+    }
+
     const quantities = activeQuantities
       .filter((item) => item.quantity > 0)
       .map((item) => ({
