@@ -41,7 +41,7 @@ const Checkout = () => {
   if (checkoutQuery.error) return <div>Error loading checkout.</div>;
 
   return (
-    <section className="bg-gray-50 pt-1 pb-12">
+    <section className="bg-gray-100 pt-1 pb-12">
       <Container>
         <section className="flex gap-6 mt-5">
           <div className="w-2/3 bg-white overflow-hidden rounded-xl">
