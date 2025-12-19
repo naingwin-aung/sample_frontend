@@ -13,6 +13,7 @@ const Checkout = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const [searchParams] = useSearchParams();
   const guid = searchParams.get("shoppingcart_guid");
   const cartQuery = useQuery({
@@ -44,8 +45,8 @@ const Checkout = () => {
   return (
     <section className="bg-gray-100 pt-1 pb-12">
       <Container>
-        <section className="flex gap-6 mt-5">
-          <div className="w-2/3 bg-white overflow-hidden rounded-xl">
+        <section className="block md:flex gap-6 mt-5">
+          <div className="w-full md:w-2/3 mb-5 md:mb-0 bg-white overflow-hidden rounded-xl">
             <div className="border border-gray-100 rounded-xl h-fit p-4">
               <div className="mb-6">
                 <h4 className="text-[18px] font-medium mb-2">Contact info</h4>
@@ -115,18 +116,20 @@ const Checkout = () => {
                 ))}
               </div>
 
-              <div className="flex justify-end">
-                <button
-                  onClick={() => checkoutConfirmHandler()}
-                  className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
-                >
-                  Pay Now
-                </button>
-              </div>
+              {!isMobile && (
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => checkoutConfirmHandler()}
+                    className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
+                  >
+                    Pay Now
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="w-1/3 text-sm">
+          <div className="w-full md:w-1/3 text-sm">
             {checkout_data?.data.map((checkout: any, index: number) => (
               <div key={index}>
                 {checkout?.product_type === "boat" && (
@@ -183,6 +186,17 @@ const Checkout = () => {
               </div>
             </div>
           </div>
+
+          {isMobile && (
+            <div className="flex justify-end mt-7">
+              <button
+                onClick={() => checkoutConfirmHandler()}
+                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
+              >
+                Pay Now
+              </button>
+            </div>
+          )}
         </section>
       </Container>
     </section>
