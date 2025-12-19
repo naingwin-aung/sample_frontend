@@ -35,18 +35,45 @@ const Checkout = () => {
       <section className="flex gap-6 mt-5">
         <div className="w-2/3">
           <div className="border border-gray-200 rounded-xl h-[900px] p-4">
-            <h4 className="text-[17px] font-medium mb-4">Product info</h4>
-            <div className="border border-gray-200 rounded p-4 flex gap-4">
-              <Image
-                src="https://i.pinimg.com/1200x/7b/38/f1/7b38f1022730431e6b14622b6972a88d.jpg"
-                alt="Product Image"
-                className="w-24 h-24 rounded-md object-cover"
-              />
-              <div>
-                <h5 className="text-lg font-medium mb-2">
-                  Ayutthaya Temples One Day Tour from Bangkok
-                </h5>
-                <p className="text-gray-500">India Buffet cruise</p>
+            <div className="mb-6">
+              <h4 className="text-[18px] font-medium mb-2">Contact info</h4>
+              <p className="text-gray-500 mb-3 text-sm">
+                We'll contact you only if there's any updates to your booking
+              </p>
+              <div className="border border-gray-200 rounded-lg p-4 flex gap-4 text-sm">
+                <div className="w-full flex items-center">
+                  <div className="w-1/4 text-gray-500 flex flex-col gap-3 font-normal">
+                    <div>First name</div>
+                    <div>Last name</div>
+                    <div>Country/region</div>
+                    <div>Phone number</div>
+                    <div>Email address</div>
+                  </div>
+                  <div className="w-/4 text-gray-800 flex flex-col gap-3">
+                    <div>Naing</div>
+                    <div>Win Aung</div>
+                    <div>Thailand</div>
+                    <div>+66 1234 5678</div>
+                    <div>naingwinaung1710@gmail.com</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h4 className="text-[18px] font-medium mb-4">Product info</h4>
+              <div className="border border-gray-200 rounded-lg p-4 flex gap-4">
+                <Image
+                  src="https://i.pinimg.com/1200x/7b/38/f1/7b38f1022730431e6b14622b6972a88d.jpg"
+                  alt="Product Image"
+                  className="w-24 h-24 rounded-md object-cover"
+                />
+                <div>
+                  <h5 className="text-lg font-medium mb-2">
+                    Ayutthaya Temples One Day Tour from Bangkok
+                  </h5>
+                  <p className="text-gray-500">India Buffet cruise</p>
+                </div>
               </div>
             </div>
           </div>
