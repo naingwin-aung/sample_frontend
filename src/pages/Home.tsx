@@ -4,7 +4,7 @@ import ProductListing from "../components/partials/Home/ProductListing";
 
 const Home = () => {
   return (
-    <section className="flex flex-col gap-12">
+    <section className="flex flex-col gap-12 pb-12">
       {/* <div className="mb-40 md:mb-15">
         <Banner />
       </div> */}

@@ -64,7 +64,7 @@ const ProductDetail = () => {
   }
 
   return (
-    <Container className="mt-6">
+    <Container className="mt-6 pb-12">
       <h2 className="text-2xl md:text-3xl font-medium mb-6">{detail?.name}</h2>
 
       <div className="mb-5 text-gray-600 flex items-center gap-2">
