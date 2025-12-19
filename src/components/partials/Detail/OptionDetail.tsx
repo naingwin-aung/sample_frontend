@@ -6,6 +6,8 @@ import { ListOptionQueryOption } from "../../../api/option/options";
 import moment from "moment";
 import SmallImageGallery from "./SmallImageGallery";
 import { checkoutQueryOption } from "../../../api/checkout/checkout";
+import { products } from "../../../lib/constants";
+import { useNavigate } from "react-router-dom";
 
 interface PriceWithQuantity {
   id: number;
@@ -95,30 +97,25 @@ const OptionDetail = ({
     setActiveQuantities([]);
   };
 
+  const navigate = useNavigate();
+
   const checkoutMutation = useMutation({
     ...checkoutQueryOption(),
     onSuccess: () => {
-      console.log("Checkout successful");
+      navigate(`/boats/checkout`);
     },
   });
 
   const checkoutHandler = () => {
-    const quantities = activeQuantities.filter((item) => item.quantity > 0).map((item) => ({
-      id: item.id,
-      quantity: item.quantity,
-    }));
-
-    console.log({
-      product_id: option.product_id,
-      option_id: option.id,
-      zone_id: activeZone,
-      ticket_id: activeTicket,
-      schedule_time_id: activeTime,
-      date: date ? moment(date).format("YYYY-MM-DD") : null,
-      quantities: quantities,
-    });
+    const quantities = activeQuantities
+      .filter((item) => item.quantity > 0)
+      .map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+      }));
 
     const payload = {
+      product_type: "boat",
       product_id: option.product_id,
       option_id: option.id,
       zone_id: activeZone,
@@ -128,7 +125,13 @@ const OptionDetail = ({
       quantities: quantities,
     };
 
-    checkoutMutation.mutate(payload);
+    const checkoutData = {
+      products: [payload],
+    };
+
+    console.log("checkoutData", checkoutData);
+
+    checkoutMutation.mutate(checkoutData);
   };
 
   return (
