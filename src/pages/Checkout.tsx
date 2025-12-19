@@ -1,7 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { listShoppingCartGuidOptionQuery } from "../api/shopping-cart-guid/shoppingcart_guid";
-import { checkoutQueryOptionQuery } from "../api/checkout/checkout";
+import {
+  checkoutConfirmMutationOption,
+  checkoutQueryOptionQuery,
+} from "../api/checkout/checkout";
 import Container from "../components/global/Container";
 import Image from "../components/global/Image";
 import { useEffect } from "react";
@@ -13,6 +16,7 @@ const Checkout = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate = useNavigate();
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const [searchParams] = useSearchParams();
   const guid = searchParams.get("shoppingcart_guid");
@@ -28,10 +32,16 @@ const Checkout = () => {
     enabled: !!cartQuery.data,
   });
 
+  const confirmCheckout = useMutation({
+    ...checkoutConfirmMutationOption(),
+    onSuccess: () => {
+      navigate("/"); // temporary navigate
+    },
+  });
+
   const checkout_data = checkoutQuery.data;
 
   const checkoutConfirmHandler = () => {
-    console.log("Checkout confirmed:", checkout_data);
     const products: any[] = [];
 
     checkout_data?.data.forEach((checkout: any) => {
@@ -54,9 +64,9 @@ const Checkout = () => {
 
     const confirmData = {
       products: products,
-    }
+    };
 
-    console.log("Proceeding to payment with products:", confirmData);
+    confirmCheckout.mutate(confirmData);
   };
 
   if (cartQuery.isLoading || checkoutQuery.isLoading)
