@@ -28,7 +28,6 @@ const Checkout = () => {
   });
 
   const checkout_data = checkoutQuery.data;
-  console.log("Checkout Data:", checkout_data);
 
   const checkoutConfirmHandler = () => {
     console.log("Checkout confirmed:", checkout_data);
@@ -125,35 +124,51 @@ const Checkout = () => {
           </div>
         </div>
         <div className="w-1/3 text-sm">
-          <div className="border border-gray-200 rounded-xl h-fit p-4">
-            <h4 className="text-[17px] font-medium mb-4">
-              Ayutthaya Temples One Day Tour from Bangkok
-            </h4>
-            <p className="text-gray-500">India Buffet cruise</p>
-            <hr className="my-4" />
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-gray-500">Date</div>
-              <div className="text-gray-800">27 Dec 2025</div>
+          {checkout_data?.data.map((checkout: any, index: number) => (
+            <div key={index}>
+              {checkout?.product_type === "boat" && (
+                <div className="border border-gray-200 rounded-xl h-fit p-4 mb-4">
+                  <h4 className="text-[17px] font-medium mb-2">
+                    {checkout.product.product?.name}
+                  </h4>
+                  <p className="text-gray-500">{checkout.product.boat?.name}</p>
+                  <hr className="my-4" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="text-gray-500">Date</div>
+                    <div className="text-gray-800">
+                      {moment(checkout.product.date).format("DD MMM YYYY")}
+                    </div>
+                  </div>
+                  <div className="flex justify-between mb-4">
+                    <div className="text-gray-500">Quantity</div>
+                    <div className="flex flex-col gap-1.5">
+                      {checkout.product.variations.map(
+                        (variation: any, vIndex: number) => (
+                          <div key={vIndex} className="text-gray-800">
+                            {variation.name} x {variation.quantity}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                  <hr className="my-4" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="text-gray-500">Total</div>
+                    <div className="text-gray-800 font-medium">THB {checkout?.total_price.toLocaleString('en-US')}</div>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-gray-500">Quantity</div>
-              <div className="text-gray-800">Adult x 1</div>
-            </div>
-            <hr className="my-4" />
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-gray-500">Total</div>
-              <div className="text-gray-800 font-medium">THB 3,200</div>
-            </div>
-          </div>
+          ))}
 
-          <div className="sticky top-22 mt-3 border border-gray-200 rounded-xl h-fit p-4">
+          <div className="sticky top-22 border border-gray-200 rounded-xl h-fit p-4">
             <div className="flex items-center justify-between mb-4">
               <div className="text-gray-500">Subtotal</div>
-              <div className="text-gray-800">THB 3,200</div>
+              <div className="text-gray-800">THB {checkout_data?.total_price.toLocaleString('en-US')}</div>
             </div>
             <div className="flex items-center justify-between">
               <div className="text-gray-500">Payment amount</div>
-              <div className="text-primary text-xl font-medium">THB 3,200</div>
+              <div className="text-primary text-xl font-medium">THB {checkout_data?.total_price.toLocaleString('en-US')}</div>
             </div>
           </div>
         </div>
