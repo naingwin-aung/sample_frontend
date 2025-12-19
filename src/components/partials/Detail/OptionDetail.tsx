@@ -102,8 +102,9 @@ const OptionDetail = ({
 
   const checkoutMutation = useMutation({
     ...shoppingCartGuidOptionQuery(),
-    onSuccess: () => {
-      navigate(`/boats/checkout`);
+    onSuccess: (data) => {
+      const guid = data.guid;
+      navigate(`/boats/checkout?shoppingcart_guid=${guid}`);
     },
   });
 
