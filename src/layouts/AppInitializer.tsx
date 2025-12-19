@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { checkAuth } from "../api/auth";
 
 export default function AppInitializer() {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -13,7 +13,7 @@ export default function AppInitializer() {
         console.error("No existing session found");
       }
 
-      setLoading(false);
+      // setLoading(false);
     };
 
     initializeAuth();

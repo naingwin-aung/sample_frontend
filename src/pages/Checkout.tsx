@@ -32,6 +32,31 @@ const Checkout = () => {
 
   const checkoutConfirmHandler = () => {
     console.log("Checkout confirmed:", checkout_data);
+    const products: any[] = [];
+
+    checkout_data?.data.forEach((checkout: any) => {
+      if (checkout.product_type === "boat") {
+        products.push({
+          product_type: checkout.product_type,
+          product_id: checkout.product.id,
+          option_id: checkout.product.option_id,
+          zone_id: checkout.product.zone.id,
+          ticket_id: checkout.product.ticket.id,
+          schedule_time_id: checkout.product.schedule_time.id,
+          date: checkout.product.date,
+          quantities: checkout.product.variations.map((variation: any) => ({
+            id: variation.id,
+            quantity: variation.quantity,
+          })),
+        });
+      }
+    });
+
+    const confirmData = {
+      products: products,
+    }
+
+    console.log("Proceeding to payment with products:", confirmData);
   };
 
   if (cartQuery.isLoading || checkoutQuery.isLoading)
