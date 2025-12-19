@@ -8,6 +8,7 @@ import SmallImageGallery from "./SmallImageGallery";
 import { useNavigate } from "react-router-dom";
 import { shoppingCartGuidOptionQuery } from "../../../api/shopping-cart-guid/shoppingcart_guid";
 import useAuthStore from "../../../stores/useAuthStore";
+import AuthenticationModal from "../Auth/AuthenticationModal";
 
 interface PriceWithQuantity {
   id: number;
@@ -34,7 +35,7 @@ const OptionDetail = ({
   const [activeQuantities, setActiveQuantities] = useState<PriceWithQuantity[]>(
     []
   );
-  const [openLogin, setOpenLogin] = useState<boolean>(false);
+  const [isOpenLogin, setIsOpenLogin] = useState<boolean>(false);
 
   useEffect(() => {
     if (option?.zones && option.zones.length > 0 && !activeZone) {
@@ -111,10 +112,10 @@ const OptionDetail = ({
 
   const checkoutHandler = () => {
     if (!isAuthenticated) {
-      setOpenLogin(true);
+      setIsOpenLogin(true);
       return;
     }
-
+    
     if (
       !activeZone ||
       !activeTicket ||
@@ -155,6 +156,13 @@ const OptionDetail = ({
 
   return (
     <div>
+      {isOpenLogin && (
+        <AuthenticationModal
+          isModalOpen={isOpenLogin}
+          setIsModalOpen={setIsOpenLogin}
+        />
+      )}
+
       <div className="flex items-center justify-between mb-4">
         <h4 className="text-lg font-semibold">Select Zone(s)</h4>
         <button
