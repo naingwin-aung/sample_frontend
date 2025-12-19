@@ -5,8 +5,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { ListOptionQueryOption } from "../../../api/option/options";
 import moment from "moment";
 import SmallImageGallery from "./SmallImageGallery";
-import { checkoutQueryOption } from "../../../api/checkout/checkout";
-import { products } from "../../../lib/constants";
 import { useNavigate } from "react-router-dom";
 import { shoppingCartGuidOptionQuery } from "../../../api/shopping-cart-guid/shoppingcart_guid";
 

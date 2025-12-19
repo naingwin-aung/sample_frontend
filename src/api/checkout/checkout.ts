@@ -1,7 +1,8 @@
 import { create } from "./checkout.fetch";
 
-export const checkoutQueryOption = () => {
+export const checkoutQueryOptionQuery = (cart_query: any) => {
   return {
-    mutationFn: (checkout: any) => create(checkout),
+    queryKey: ["checkout", cart_query?.cart_id ?? null],
+    queryFn: () => create(cart_query?.products),
   };
 };
