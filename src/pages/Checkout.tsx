@@ -41,139 +41,150 @@ const Checkout = () => {
   if (checkoutQuery.error) return <div>Error loading checkout.</div>;
 
   return (
-    <Container>
-      <section className="flex gap-6 mt-5">
-        <div className="w-2/3">
-          <div className="border border-gray-100 rounded-xl h-fit p-4">
-            <div className="mb-6">
-              <h4 className="text-[18px] font-medium mb-2">Contact info</h4>
-              <p className="text-gray-500 mb-3 text-sm">
-                We'll contact you only if there's any updates to your booking
-              </p>
-              <div className="border border-gray-200 rounded-lg p-4 flex gap-4 text-sm">
-                <div className="w-full flex items-center">
-                  <div className="w-1/4 text-gray-500 flex flex-col gap-3 font-normal">
-                    <div>First name</div>
-                    <div>Last name</div>
-                    <div>Country/region</div>
-                    <div>Phone number</div>
-                    <div>Email address</div>
-                  </div>
-                  <div className="w-/4 text-gray-800 flex flex-col gap-3">
-                    <div>Naing</div>
-                    <div>Win Aung</div>
-                    <div>Thailand</div>
-                    <div>+66 1234 5678</div>
-                    <div>naingwinaung1710@gmail.com</div>
+    <section className="bg-gray-50 pt-1 pb-12">
+      <Container>
+        <section className="flex gap-6 mt-5">
+          <div className="w-2/3 bg-white overflow-hidden rounded-xl">
+            <div className="border border-gray-100 rounded-xl h-fit p-4">
+              <div className="mb-6">
+                <h4 className="text-[18px] font-medium mb-2">Contact info</h4>
+                <p className="text-gray-500 mb-3 text-sm">
+                  We'll contact you only if there's any updates to your booking
+                </p>
+                <div className="border border-gray-200 rounded-lg p-4 flex gap-4 text-sm">
+                  <div className="w-full flex items-center">
+                    <div className="w-1/4 text-gray-500 flex flex-col gap-3 font-normal">
+                      <div>First name</div>
+                      <div>Last name</div>
+                      <div>Country/region</div>
+                      <div>Phone number</div>
+                      <div>Email address</div>
+                    </div>
+                    <div className="w-/4 text-gray-800 flex flex-col gap-3">
+                      <div>Naing</div>
+                      <div>Win Aung</div>
+                      <div>Thailand</div>
+                      <div>+66 1234 5678</div>
+                      <div>naingwinaung1710@gmail.com</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mb-6">
-              <h4 className="text-[18px] font-medium mb-4">Product info</h4>
-              {checkout_data?.data.map((checkout: any, index: number) => (
-                <div key={index}>
-                  {checkout?.product_type === "boat" && (
-                    <div className="border border-gray-200 rounded-lg p-4 flex gap-4 mb-4">
-                      <Image
-                        src="https://i.pinimg.com/1200x/7b/38/f1/7b38f1022730431e6b14622b6972a88d.jpg"
-                        alt="Product Image"
-                        className="w-24 h-24 rounded-md object-cover"
-                      />
-                      <div>
-                        <h5 className="font-medium mb-1">
-                          {checkout.product.product.name}
-                        </h5>
-                        <p className="text-gray-500 text-sm mb-3">
-                          {checkout.product.boat.name}
-                        </p>
-                        <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
-                          <Armchair /> {checkout.product.zone.name}
-                        </p>
-                        <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
-                          <Ticket /> {checkout.product.ticket.name}
-                        </p>
-                        <p className="text-gray-500 text-sm flex items-center gap-4">
-                          <Clock />
-                          {moment(
-                            checkout.product.schedule_time?.start_time,
-                            "HH:mm:ss"
-                          ).format("HH:mm")}{" "}
-                          -{" "}
-                          {moment(
-                            checkout.product.schedule_time?.end_time,
-                            "HH:mm:ss"
-                          ).format("HH:mm")}
-                        </p>
+              <div className="mb-6">
+                <h4 className="text-[18px] font-medium mb-4">Product info</h4>
+                {checkout_data?.data.map((checkout: any, index: number) => (
+                  <div key={index}>
+                    {checkout?.product_type === "boat" && (
+                      <div className="border border-gray-200 rounded-lg p-4 flex gap-4 mb-4">
+                        <Image
+                          src={checkout.product.product?.image}
+                          alt="Product Image"
+                          className="w-24 h-24 rounded-md object-cover"
+                        />
+                        <div>
+                          <h5 className="font-medium mb-1">
+                            {checkout.product.product.name}
+                          </h5>
+                          <p className="text-gray-500 text-sm mb-3">
+                            {checkout.product.boat.name}
+                          </p>
+                          <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
+                            <Armchair /> {checkout.product.zone.name}
+                          </p>
+                          <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
+                            <Ticket /> {checkout.product.ticket.name}
+                          </p>
+                          <p className="text-gray-500 text-sm flex items-center gap-4">
+                            <Clock />
+                            {moment(
+                              checkout.product.schedule_time?.start_time,
+                              "HH:mm:ss"
+                            ).format("HH:mm")}{" "}
+                            -{" "}
+                            {moment(
+                              checkout.product.schedule_time?.end_time,
+                              "HH:mm:ss"
+                            ).format("HH:mm")}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-end">
+                <button
+                  onClick={() => checkoutConfirmHandler()}
+                  className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
+                >
+                  Pay Now
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-1/3 text-sm">
+            {checkout_data?.data.map((checkout: any, index: number) => (
+              <div key={index}>
+                {checkout?.product_type === "boat" && (
+                  <div className="bg-white overflow-hidden border border-gray-100 rounded-xl h-fit p-4 mb-4">
+                    <h4 className="text-[17px] font-medium mb-2">
+                      {checkout.product.product?.name}
+                    </h4>
+                    <p className="text-gray-500">
+                      {checkout.product.boat?.name}
+                    </p>
+                    <hr className="my-4" />
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="text-gray-500">Date</div>
+                      <div className="text-gray-800">
+                        {moment(checkout.product.date).format("DD MMM YYYY")}
                       </div>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="flex justify-end">
-              <button
-                onClick={() => checkoutConfirmHandler()}
-                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
-              >
-                Pay Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="w-1/3 text-sm">
-          {checkout_data?.data.map((checkout: any, index: number) => (
-            <div key={index}>
-              {checkout?.product_type === "boat" && (
-                <div className="border border-gray-100 rounded-xl h-fit p-4 mb-4">
-                  <h4 className="text-[17px] font-medium mb-2">
-                    {checkout.product.product?.name}
-                  </h4>
-                  <p className="text-gray-500">{checkout.product.boat?.name}</p>
-                  <hr className="my-4" />
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-gray-500">Date</div>
-                    <div className="text-gray-800">
-                      {moment(checkout.product.date).format("DD MMM YYYY")}
+                    <div className="flex justify-between mb-4">
+                      <div className="text-gray-500">Quantity</div>
+                      <div className="flex flex-col gap-1.5">
+                        {checkout.product.variations.map(
+                          (variation: any, vIndex: number) => (
+                            <div key={vIndex} className="text-gray-800">
+                              {variation.name} x {variation.quantity}
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                    <hr className="my-4" />
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="text-gray-500">Total</div>
+                      <div className="text-gray-800 font-medium">
+                        THB {checkout?.total_price.toLocaleString("en-US")}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-between mb-4">
-                    <div className="text-gray-500">Quantity</div>
-                    <div className="flex flex-col gap-1.5">
-                      {checkout.product.variations.map(
-                        (variation: any, vIndex: number) => (
-                          <div key={vIndex} className="text-gray-800">
-                            {variation.name} x {variation.quantity}
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-                  <hr className="my-4" />
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-gray-500">Total</div>
-                    <div className="text-gray-800 font-medium">THB {checkout?.total_price.toLocaleString('en-US')}</div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
 
-          <div className="sticky top-22 border border-gray-100 rounded-xl h-fit p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-gray-500">Subtotal</div>
-              <div className="text-gray-800">THB {checkout_data?.total_price.toLocaleString('en-US')}</div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="text-gray-500">Payment amount</div>
-              <div className="text-primary text-xl font-medium">THB {checkout_data?.total_price.toLocaleString('en-US')}</div>
+            <div className="sticky top-22 border border-gray-100 bg-white overflow-hidden rounded-xl h-fit p-4">
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-gray-500">Subtotal</div>
+                <div className="text-gray-800">
+                  THB {checkout_data?.total_price.toLocaleString("en-US")}
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="text-gray-500">Payment amount</div>
+                <div className="text-primary text-xl font-medium">
+                  THB {checkout_data?.total_price.toLocaleString("en-US")}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </Container>
+        </section>
+      </Container>
+    </section>
   );
 };
 
