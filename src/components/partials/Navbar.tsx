@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "../global/Image";
 import Container from "../global/Container";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // Disable background scroll when mobile menu is open
   useEffect(() => {
@@ -24,6 +25,11 @@ const Navbar = () => {
       document.body.style.overflowY = "auto";
     };
   }, [open]);
+
+  const singOut = async () => {
+    await logout();
+    navigate("/");
+  }
 
   return (
     <>
@@ -72,7 +78,7 @@ const Navbar = () => {
 
                 {isAuthenticated ? (
                   <button
-                    onClick={logout}
+                    onClick={() => singOut()}
                     className="px-4 py-2 rounded-4xl bg-linear-to-r from-red-400 to-red-600 text-white cursor-pointer text-sm hover:from-red-500 hover:to-red-700 transition"
                   >
                     Log out
@@ -97,7 +103,7 @@ const Navbar = () => {
               </Link>
               {isAuthenticated ? (
                 <button
-                  onClick={logout}
+                  onClick={() => singOut()}
                   className="px-4 py-2 rounded-4xl bg-linear-to-r from-red-400 to-red-600 text-white cursor-pointer text-sm hover:from-red-500 hover:to-red-700 transition"
                 >
                   Log out
