@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import useAuthStore from "../../stores/useAuthStore";
 import { logout } from "../../api/auth";
-import AuthenticationModal from "./Auth/NavbarUser";
+import AuthenticationModal from "./Auth/AuthenticationModal";
 
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -95,7 +95,6 @@ const Navbar = () => {
               <Link to="/" className="text-gray-600">
                 Recently Viewed
               </Link>
-              {/* <NavbarUser loginSuccess={() => setOpen(false)} /> */}
               {isAuthenticated ? (
                 <button
                   onClick={logout}

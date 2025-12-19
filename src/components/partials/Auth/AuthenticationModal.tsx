@@ -1,5 +1,5 @@
 import Image from "../../global/Image";
-import SocialSignIn from "../Auth/SocialSignIn";
+import SocialSignIn from "./SocialSignIn";
 import { useGoogleLogin } from "@react-oauth/google";
 import { loginWithProvider } from "../../../api/auth";
 
@@ -47,7 +47,7 @@ const AuthenticationModal = ({
               />
               <div className="text-2xl font-medium">Welcome back!</div>
             </div>
-            <p className="text-lg font-medium text-gray-500 mb-4">
+            <p className="text-gray-500 mb-4">
               Login or sign up
             </p>
             <SocialSignIn
