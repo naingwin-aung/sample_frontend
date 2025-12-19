@@ -7,6 +7,7 @@ import moment from "moment";
 import SmallImageGallery from "./SmallImageGallery";
 import { useNavigate } from "react-router-dom";
 import { shoppingCartGuidOptionQuery } from "../../../api/shopping-cart-guid/shoppingcart_guid";
+import useAuthStore from "../../../stores/useAuthStore";
 
 interface PriceWithQuantity {
   id: number;
@@ -33,6 +34,7 @@ const OptionDetail = ({
   const [activeQuantities, setActiveQuantities] = useState<PriceWithQuantity[]>(
     []
   );
+  const [openLogin, setOpenLogin] = useState<boolean>(false);
 
   useEffect(() => {
     if (option?.zones && option.zones.length > 0 && !activeZone) {
@@ -97,6 +99,7 @@ const OptionDetail = ({
   };
 
   const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const checkoutMutation = useMutation({
     ...shoppingCartGuidOptionQuery(),
@@ -107,7 +110,18 @@ const OptionDetail = ({
   });
 
   const checkoutHandler = () => {
-    if(!activeZone || !activeTicket || !activeTime || !date || activeQuantities.every((item) => item.quantity === 0)) {
+    if (!isAuthenticated) {
+      setOpenLogin(true);
+      return;
+    }
+
+    if (
+      !activeZone ||
+      !activeTicket ||
+      !activeTime ||
+      !date ||
+      activeQuantities.every((item) => item.quantity === 0)
+    ) {
       alert("Please complete all required fields.");
       return;
     }
