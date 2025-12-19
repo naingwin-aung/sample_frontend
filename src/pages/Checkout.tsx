@@ -25,6 +25,13 @@ const Checkout = () => {
     enabled: !!cartQuery.data,
   });
 
+  const checkoutData = checkoutQuery.data;
+  console.log("Checkout Data:", checkoutData);
+
+  const checkoutConfirmHandler = () => {
+    console.log("Checkout confirmed:", checkoutData);
+  }
+
   if (cartQuery.isLoading || checkoutQuery.isLoading)
     return <div>Validating booking...</div>;
 
@@ -32,14 +39,11 @@ const Checkout = () => {
 
   if (checkoutQuery.error) return <div>Error loading checkout.</div>;
 
-  const checkoutData = checkoutQuery.data;
-  console.log("Checkout Data:", checkoutData);
-
   return (
     <Container>
       <section className="flex gap-6 mt-5">
         <div className="w-2/3">
-          <div className="border border-gray-200 rounded-xl h-[900px] p-4">
+          <div className="border border-gray-200 rounded-xl h-fit p-4">
             <div className="mb-6">
               <h4 className="text-[18px] font-medium mb-2">Contact info</h4>
               <p className="text-gray-500 mb-3 text-sm">
@@ -80,6 +84,15 @@ const Checkout = () => {
                   <p className="text-gray-500">India Buffet cruise</p>
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                onClick={() => checkoutConfirmHandler()}
+                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
+              >
+                Pay Now
+              </button>
             </div>
           </div>
         </div>
