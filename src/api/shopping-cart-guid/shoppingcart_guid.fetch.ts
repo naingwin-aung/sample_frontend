@@ -6,7 +6,7 @@ export const fetchPayloadData = async (guid: string) => {
       guid: guid,
     },
   });
-  return response.data.data.data;
+  return response.data.data;
 };
 
 export const create = async (checkout: any) => {

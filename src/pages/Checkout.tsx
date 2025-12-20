@@ -26,16 +26,14 @@ const Checkout = () => {
   });
 
   const checkoutQuery = useQuery({
-    ...checkoutQueryOptionQuery({
-      products: cartQuery.data,
-    }),
-    enabled: !!cartQuery.data,
+    ...checkoutQueryOptionQuery(cartQuery?.data),
+    enabled: !!cartQuery?.data?.data,
   });
 
   const confirmCheckout = useMutation({
     ...checkoutConfirmMutationOption(),
     onSuccess: () => {
-      navigate("/"); // temporary navigate
+      navigate("/");
     },
   });
 

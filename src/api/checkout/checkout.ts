@@ -1,9 +1,12 @@
 import { checkoutConfirm, create } from "./checkout.fetch";
 
-export const checkoutQueryOptionQuery = (cart_query: any) => {
+export const checkoutQueryOptionQuery = (checkout: any) => {
   return {
-    queryKey: ["checkout", cart_query?.cart_id ?? null],
-    queryFn: () => create(cart_query?.products),
+    queryKey: ["checkout", checkout?.guid ?? null],
+    queryFn: () =>
+      create({
+        products: checkout?.data?.products,
+      }),
   };
 };
 
@@ -12,4 +15,4 @@ export const checkoutConfirmMutationOption = () => {
     mutationKey: ["checkout_confirm"],
     mutationFn: (data: any) => checkoutConfirm(data),
   };
-}
+};
