@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Navbar from "../components/partials/Navbar";
+import Navbar from "../components/pages/Navbar";
 
 // error page
 const NotFound = () => {

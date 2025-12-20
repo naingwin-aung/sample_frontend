@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 import Container from "../components/global/Container";
 import { useState } from "react";
-import GalleryModal from "../components/partials/Detail/GalleryModal";
-import SelectOptionItem from "../components/partials/Detail/SelectOptionItem";
-import Gallery from "../components/partials/Detail/Gallery";
+import GalleryModal from "../components/pages/Detail/GalleryModal";
+import SelectOptionItem from "../components/pages/Detail/SelectOptionItem";
+import Gallery from "../components/pages/Detail/Gallery";
 import { useQuery } from "@tanstack/react-query";
 import { GetProductBySlugQueryOption } from "../api/product/products";
-import RelatedProducts from "../components/partials/Detail/RelatedProducts";
+import RelatedProducts from "../components/pages/Detail/RelatedProducts";
 
 type ParamTypes = {
   slug: string;

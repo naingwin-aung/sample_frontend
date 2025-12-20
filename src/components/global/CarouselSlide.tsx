@@ -2,7 +2,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import ProductCard from "../partials/Home/ProductCard";
+import ProductCard from "../pages/Home/ProductCard";
 import type { ProductType } from "../../types/ProductType";
 
 const CarouselSlide = ({products}: {products: ProductType[]}) => {

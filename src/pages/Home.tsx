@@ -1,6 +1,6 @@
 // import Banner from "../components/partials/Home/Banner";
 import Container from "../components/global/Container";
-import ProductListing from "../components/partials/Home/ProductListing";
+import ProductListing from "../components/pages/Home/ProductListing";
 
 const Home = () => {
   return (
