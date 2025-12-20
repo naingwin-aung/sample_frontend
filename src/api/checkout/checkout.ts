@@ -1,6 +1,14 @@
-import { checkoutConfirm, create } from "./checkout.fetch";
+import { checkoutConfirm, create, type Checkout, type Product } from "./checkout.fetch";
 
-export const checkoutQueryOptionQuery = (checkout: any) => {
+interface CheckoutQueryOption {
+  guid: string | null;
+  data: {
+    products: Product[];
+  };
+}
+
+export const checkoutQueryOptionQuery = (checkout: CheckoutQueryOption) => {
+  console.log("checkout", checkout);
   return {
     queryKey: ["checkout", checkout?.guid ?? null],
     queryFn: () =>
@@ -13,6 +21,6 @@ export const checkoutQueryOptionQuery = (checkout: any) => {
 export const checkoutConfirmMutationOption = () => {
   return {
     mutationKey: ["checkout_confirm"],
-    mutationFn: (data: any) => checkoutConfirm(data),
+    mutationFn: (data: Checkout) => checkoutConfirm(data),
   };
 };

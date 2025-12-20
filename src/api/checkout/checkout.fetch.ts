@@ -5,7 +5,7 @@ interface Quantity {
   quantity: number
 }
 
-interface Product {
+export interface Product {
   product_type: string;
   product_id: number;
   option_id: number;
