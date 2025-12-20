@@ -42,7 +42,7 @@ const Gallery = ({
         {gallery.length > 1 && (
           <div className="w-1/2 h-full relative overflow-hidden">
             <div className={`w-full h-full grid ${rightLayoutClass()} gap-2`}>
-                {gallery.slice(1, isMobile ? 3 : 5).map((img: any, index: number) => (
+                {gallery.slice(1, isMobile ? 3 : 5).map((img: { url: string }, index: number) => (
                 <div
                   key={index}
                   className={`w-full h-full bg-cover bg-center overflow-hidden cursor-pointer ${index === 0 && gallery.length === 4 ? 'col-span-2' : ''}`}

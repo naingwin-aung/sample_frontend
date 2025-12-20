@@ -20,7 +20,7 @@ const SmallImageGallery = ({ images }: { images: any }) => {
   return (
     <>
       <div className={`grid ${imageClass()} gap-1 w-full h-full rounded overflow-hidden relative`}>
-        {images.slice(0, 3).map((img: any, index: number) => (
+        {images.slice(0, 3).map((img: {url: string}, index: number) => (
           <div
             onClick={(e) => openGallery(index, e)}
             key={index}

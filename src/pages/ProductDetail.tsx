@@ -70,7 +70,7 @@ const ProductDetail = () => {
       <div className="mb-5 text-gray-600 flex items-center gap-2">
         <div>Departure piers</div>
         {detail.piers.length > 0 &&
-          detail.piers.slice(0, 2).map((pier: any) => (
+          detail.piers.slice(0, 2).map((pier: {id: number, name: string}) => (
             <span
               key={pier.id}
               className="mr-1 text-primary text-sm bg-orange-100 px-1.5 py-1 rounded-md"
