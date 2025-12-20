@@ -1,10 +1,12 @@
+interface GalleryProps {
+  gallery: { url: string }[];
+  openGallery: (index: number) => void;
+}
+
 const Gallery = ({
   gallery,
   openGallery,
-}: {
-  gallery: any;
-  openGallery: (index: number) => void;
-}) => {
+}: GalleryProps) => {
   const leftLayoutClass = gallery.length === 1 ? "w-full" : "w-1/2";
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   

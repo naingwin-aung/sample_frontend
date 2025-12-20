@@ -8,7 +8,6 @@ interface CheckoutQueryOption {
 }
 
 export const checkoutQueryOptionQuery = (checkout: CheckoutQueryOption) => {
-  console.log("checkout", checkout);
   return {
     queryKey: ["checkout", checkout?.guid ?? null],
     queryFn: () =>

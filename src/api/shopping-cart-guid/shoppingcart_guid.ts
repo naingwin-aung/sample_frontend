@@ -1,4 +1,4 @@
-import { create, fetchPayloadData } from "./shoppingcart_guid.fetch"
+import { create, fetchPayloadData, type createShoppingCartPayload } from "./shoppingcart_guid.fetch"
 
 export const listShoppingCartGuidOptionQuery = (guid: string) => {
     return {
@@ -9,6 +9,6 @@ export const listShoppingCartGuidOptionQuery = (guid: string) => {
 
 export const shoppingCartGuidOptionQuery = () => {
     return {
-        mutationFn: (checkout : any) => create(checkout),
+        mutationFn: (checkout : createShoppingCartPayload) => create(checkout),
     }
 }
