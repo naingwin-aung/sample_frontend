@@ -4,28 +4,41 @@ import MainLayout from "./layouts/MainLayout.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Checkout from "./pages/Checkout.tsx";
+import AppInitializer from "./layouts/AppInitializer.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: MainLayout,
+    Component: AppInitializer,
     children: [
       {
-        index: true,
-        Component: Home,
+        path: "/",
+        Component: MainLayout,
+        children: [
+          {
+            index: true,
+            Component: Home,
+          },
+          {
+            path: "/products/:slug",
+            Component: ProductDetail,
+          },
+          {
+            Component: ProtectedRoute,
+            children: [
+              {
+                path: ":type/checkout",
+                Component: Checkout,
+              }
+            ]
+          }
+        ],
       },
-      {
-        path: "/products/:slug",
-        Component: ProductDetail,
-      },
-      {
-        path: ":type/checkout",
-        Component: Checkout
-      }
     ],
   },
   {
     path: "*",
     Component: NotFound,
-  }
+  },
 ]);
