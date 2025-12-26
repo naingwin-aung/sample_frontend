@@ -1,18 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { ListProductQueryOption } from "../../../api/product/products";
-import type { ProductType } from "../../../types/ProductType";
-import ProductCard from "../Home/ProductCard";
+import { GetRelatedProductsQueryOption } from "../../../api/product/products";
+import CarouselSlide from "../../global/CarouselSlide";
 
-const RelatedProducts = ({ except_ids }: { except_ids?: number[] }) => {
+const RelatedProducts = ({ except_id }: { except_id?: number }) => {
   const { data } = useQuery({
-    ...ListProductQueryOption(1, 4, except_ids),
+    ...GetRelatedProductsQueryOption(except_id),
   });
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
-      {data?.data.map((product: ProductType) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div>
+      <CarouselSlide products={data?.data || []} />
     </div>
   );
 };

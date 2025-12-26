@@ -10,7 +10,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <div className="w-full h-[393px] border border-gray-200 rounded-2xl cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+      <div className="w-full h-[393px] border border-gray-200 rounded-2xl cursor-pointer hover:shadow hover:-translate-y-1 transition-all duration-300">
         <div className="w-full h-[200px]">
           <Image
             src={product?.images[0]?.url}

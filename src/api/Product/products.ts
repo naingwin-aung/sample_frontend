@@ -1,4 +1,4 @@
-import { fetchProductBySlug, fetchProducts } from "./product.fetch"
+import { fetchProductBySlug, fetchProducts, fetchRelatedProducts } from "./product.fetch"
 
 export const ListProductQueryOption = (page: number, limit: number, except_ids?: number[]) => {
     return {
@@ -11,5 +11,12 @@ export const GetProductBySlugQueryOption = (slug?: string) => {
     return {
         queryKey: ['product', slug],
         queryFn: () => fetchProductBySlug(slug),
+    }
+}
+
+export const GetRelatedProductsQueryOption = (except_id?: number) => {
+    return {
+        queryKey: ['related_products', except_id],
+        queryFn: () => fetchRelatedProducts(except_id),
     }
 }

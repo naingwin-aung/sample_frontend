@@ -134,7 +134,7 @@ const ProductDetail = () => {
 
       <div>
           <h2 className="text-2xl font-medium mb-6">You might also like...</h2>
-          <RelatedProducts except_ids={[detail.id]} />
+          <RelatedProducts except_id={detail.id} />
       </div>
     </Container>
   );
