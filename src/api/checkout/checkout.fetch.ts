@@ -7,12 +7,12 @@ interface Quantity {
 
 export interface Product {
   product_type: string;
-  product_id: number;
-  option_id: number;
-  zone_id: number,
-  ticket_id: number;
-  schedule_time_id: number;
-  date: string;
+  product_id: number | string;
+  option_id: number | string;
+  zone_id: number | string | null;
+  ticket_id: number | string | null;
+  schedule_time_id: number | string | null;
+  date: string | null;
   quantities: Quantity[];
 }
 
