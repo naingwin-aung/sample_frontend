@@ -10,6 +10,7 @@ import Image from "../components/global/Image";
 import { useEffect } from "react";
 import moment from "moment";
 import { Armchair, Clock, TicketCheck } from "lucide-react";
+import { truncateWord } from "../lib/helper";
 
 const Checkout = () => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const [searchParams] = useSearchParams();
+
   const guid = searchParams.get("shoppingcart_guid");
   const cartQuery = useQuery({
     ...listShoppingCartGuidOptionQuery(guid || ""),
@@ -76,17 +78,17 @@ const Checkout = () => {
     return <Container>Error loading checkout.</Container>;
 
   return (
-    <section className="bg-gray-100 pt-1 pb-12">
+    <section className="bg-gray-100 pt-1 pb-12 text-sm">
       <Container>
         <section className="block md:flex gap-6 mt-5">
           <div className="w-full md:w-2/3 mb-5 md:mb-0 bg-white overflow-hidden rounded-xl">
             <div className="border border-gray-100 rounded-xl h-fit p-4">
               <div className="mb-6">
                 <h4 className="text-[18px] font-medium mb-2">Contact info</h4>
-                <p className="text-gray-500 mb-3 text-sm">
+                <p className="text-gray-500 mb-3">
                   We'll contact you only if there's any updates to your booking
                 </p>
-                <div className="border border-gray-200 rounded-lg p-4 flex gap-4 text-sm">
+                <div className="border border-gray-200 rounded-lg p-4 flex gap-4">
                   <div className="w-full flex items-center">
                     <div className="w-1/4 text-gray-500 flex flex-col gap-3 font-normal">
                       <div>First name</div>
@@ -118,19 +120,19 @@ const Checkout = () => {
                           className="w-24 h-24 rounded-md object-cover"
                         />
                         <div>
-                          <h5 className="font-medium mb-1">
-                            {checkout.product.product.name}
+                          <h5 className="font-medium mb-1" title={checkout.product.product.name}>
+                            {truncateWord(checkout.product.product.name, 66)}
                           </h5>
-                          <p className="text-gray-500 text-sm mb-3">
+                          <p className="text-gray-500 mb-3">
                             {checkout.product.boat.name}
                           </p>
-                          <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
+                          <p className="ms-1 text-gray-500 mb-1.5 flex items-center gap-4">
                             <Armchair /> {checkout.product.zone.name}
                           </p>
-                          <p className="text-gray-500 text-sm mb-2 flex items-center gap-4">
+                          <p className="ms-1 text-gray-500 mb-1.5 flex items-center gap-4">
                             <TicketCheck /> {checkout.product.ticket.name}
                           </p>
-                          <p className="text-gray-500 text-sm flex items-center gap-4">
+                          <p className="ms-1 text-gray-500 flex items-center gap-4">
                             <Clock />
                             {moment(
                               checkout.product.schedule_time?.start_time,
@@ -153,7 +155,7 @@ const Checkout = () => {
                 <div className="flex justify-end">
                   <button
                     onClick={() => checkoutConfirmHandler()}
-                    className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
+                    className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer"
                   >
                     Pay Now
                   </button>
@@ -162,7 +164,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="w-full md:w-1/3 text-sm">
+          <div className="w-full md:w-1/3">
             {checkout_data?.data.map((checkout: any, index: number) => (
               <div key={index}>
                 {checkout?.product_type === "boat" && (
@@ -213,7 +215,7 @@ const Checkout = () => {
               </div>
               <div className="flex items-center justify-between">
                 <div className="text-gray-500">Payment amount</div>
-                <div className="text-primary text-xl font-medium">
+                <div className="text-primary text-[21px] font-medium">
                   THB {checkout_data?.total_price.toLocaleString("en-US")}
                 </div>
               </div>
@@ -224,7 +226,7 @@ const Checkout = () => {
             <div className="flex justify-end mt-7">
               <button
                 onClick={() => checkoutConfirmHandler()}
-                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer text-sm"
+                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer"
               >
                 Pay Now
               </button>
