@@ -7,6 +7,7 @@ import Gallery from "../components/pages/Detail/Gallery";
 import { useQuery } from "@tanstack/react-query";
 import { GetProductBySlugQueryOption } from "../api/product/products";
 import RelatedProducts from "../components/pages/Detail/RelatedProducts";
+import { truncateWord } from "../lib/helper";
 
 type ParamTypes = {
   slug: string;
@@ -95,7 +96,7 @@ const ProductDetail = () => {
       {/* description */}
       <div className="flex gap-4 mb-7">
         <div className="w-full md:w-3/4 h-max border border-gray-200 rounded-2xl p-4 leading-6.5">
-          <div dangerouslySetInnerHTML={{ __html: detail.description }} />
+          <div dangerouslySetInnerHTML={{ __html: truncateWord(detail.description, 695) }} />
         </div>
         <div className="hidden md:block w-1/4 h-[120px] border border-gray-200 rounded-2xl p-5">
           <div className="text-xl font-medium">
