@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import useDebounce from "../../../../hooks/useDebounce";
+import useDebounceSearch from "../../../../hooks/useDebounceSearch";
 import { useQuery } from "@tanstack/react-query";
 import { ListPierQueryOption } from "../../../../api/pier";
 import { Ship, X } from "lucide-react";
@@ -19,7 +19,7 @@ const FromPier = ({
 }) => {
   const [fromPierInput, setFromPierInput] = useState<string>("");
 
-  const debouncedSearch = useDebounce(fromPierInput, 500);
+  const debouncedSearch = useDebounceSearch(fromPierInput, 500);
 
   const { data, isPending, error } = useQuery({
     ...ListPierQueryOption(debouncedSearch, 1, 8),

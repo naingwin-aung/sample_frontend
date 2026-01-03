@@ -17,6 +17,14 @@ interface PriceWithQuantity {
   quantity: number;
 }
 
+interface AdditionalOptionQuantity {
+  id: number;
+  name: string;
+  description: string;
+  net_price: number;
+  quantity: number;
+}
+
 const OptionDetail = ({
   slug,
   optionId,
@@ -35,6 +43,10 @@ const OptionDetail = ({
   const [activeQuantities, setActiveQuantities] = useState<PriceWithQuantity[]>(
     []
   );
+  const [
+    activeAdditionalOptionQuantities,
+    setActiveAdditionalOptionQuantities,
+  ] = useState<AdditionalOptionQuantity[]>([]);
   const [isOpenLogin, setIsOpenLogin] = useState<boolean>(false);
 
   useEffect(() => {
@@ -45,6 +57,12 @@ const OptionDetail = ({
       setActiveQuantities(
         option.tickets[0].prices.map((price: any) => ({
           ...price,
+          quantity: 0,
+        }))
+      );
+      setActiveAdditionalOptionQuantities(
+        option.additional_options.map((addOption: any) => ({
+          ...addOption,
           quantity: 0,
         }))
       );
@@ -61,6 +79,14 @@ const OptionDetail = ({
     setActiveQuantities(quantitiesWithQuantity);
   };
 
+  const quantityPlus = (index: number) => {
+    updateQuantity(index, 1);
+  };
+
+  const quantityMinus = (index: number) => {
+    updateQuantity(index, -1);
+  };
+
   const updateQuantity = (index: number, delta: 1 | -1) => {
     setActiveQuantities((prevQuantities: any) =>
       prevQuantities.map((item: any, i: number) => {
@@ -75,12 +101,27 @@ const OptionDetail = ({
     );
   };
 
-  const quantityPlus = (index: number) => {
-    updateQuantity(index, 1);
+  const additionalOptionQuantityPlus = (index: number) => {
+      updateAdditionalOptionQuantity(index, 1);
   };
 
-  const quantityMinus = (index: number) => {
-    updateQuantity(index, -1);
+  const additionalOptionQuantityMinus = (index: number) => {
+    updateAdditionalOptionQuantity(index, -1);
+  };
+
+  const updateAdditionalOptionQuantity = (index: number, delta: 1 | -1) => {
+    setActiveAdditionalOptionQuantities((prevOptions: any) =>
+      prevOptions.map((item: any, i: number) => {
+        if (item.quantity == 10 && delta === 1) return item; // max 10
+
+        if (i === index) {
+          const newQuantity = Math.max(0, item.quantity + delta);
+          return { ...item, quantity: newQuantity };
+        }
+
+        return item;
+      })
+    );
   };
 
   const { totalPrice } = useMemo(() => {
@@ -88,8 +129,16 @@ const OptionDetail = ({
       (sum, item) => sum + item?.net_price * item?.quantity,
       0
     );
-    return { totalPrice: totalP };
-  }, [activeQuantities]);
+
+    const additionalTotal = activeAdditionalOptionQuantities.reduce(
+      (sum, item) => sum + item?.net_price * item?.quantity,
+      0
+    );
+
+    const totalPrice = totalP + additionalTotal;
+
+    return { totalPrice };
+  }, [activeQuantities, activeAdditionalOptionQuantities]);
 
   const resetSelect = () => {
     setActiveZone(null);
@@ -115,7 +164,7 @@ const OptionDetail = ({
       setIsOpenLogin(true);
       return;
     }
-    
+
     if (
       !activeZone ||
       !activeTicket ||
@@ -302,6 +351,42 @@ const OptionDetail = ({
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {activeAdditionalOptionQuantities.length > 0 && (
+            <div className="mb-7">
+              <h4 className="text-md text-gray-500 mb-3">Additional Options</h4>
+
+              <div className="flex flex-col gap-3">
+                {activeAdditionalOptionQuantities?.map(
+                  (option: any, index: number) => (
+                    <div
+                      key={option.id}
+                      className="px-4 py-5 rounded-md border border-gray-200 hover:shadow transition-shadow duration-200"
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="text-md font-medium">{option.name}</div>
+                        <div className="flex items-center gap-3 text-md font-medium">
+                          <button
+                            onClick={() => additionalOptionQuantityMinus(index)}
+                            className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
+                          >
+                            <Minus size={16} />
+                          </button>
+                          <span>{option.quantity}</span>
+                          <button
+                            onClick={() => additionalOptionQuantityPlus(index)}
+                            className="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
+                          >
+                            <Plus size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           )}
