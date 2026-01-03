@@ -90,19 +90,19 @@ const Checkout = () => {
                 </p>
                 <div className="border border-gray-200 rounded-lg p-4 flex gap-4">
                   <div className="w-full flex items-center">
-                    <div className="w-1/4 text-gray-500 flex flex-col gap-3 font-normal">
+                    <div className="w-1/2 md:w-1/4 text-gray-500 flex flex-col gap-3 font-normal">
                       <div>First name</div>
                       <div>Last name</div>
                       <div>Country/region</div>
                       <div>Phone number</div>
                       <div>Email address</div>
                     </div>
-                    <div className="w-/4 text-gray-800 flex flex-col gap-3">
+                    <div className="w-1/2 md:w-3/4 text-gray-800 flex flex-col gap-3">
                       <div>Naing</div>
                       <div>Win Aung</div>
                       <div>Thailand</div>
                       <div>+66 1234 5678</div>
-                      <div>naingwinaung1710@gmail.com</div>
+                      <div className="wrap-break-word">naingwinaung1710@gmail.com</div>
                     </div>
                   </div>
                 </div>
