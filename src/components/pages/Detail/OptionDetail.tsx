@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { shoppingCartGuidOptionQuery } from "../../../api/shopping-cart-guid/shoppingcart_guid";
 import useAuthStore from "../../../stores/useAuthStore";
 import AuthenticationModal from "../Auth/AuthenticationModal";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 interface PriceWithQuantity {
   id: number;
@@ -101,8 +102,12 @@ const OptionDetail = ({
     );
   };
 
+  // const additionalOptionQuantityPlus = useDebounce((index: number) => {
+  //   updateAdditionalOptionQuantity(index, 1);
+  // }, 400);
+
   const additionalOptionQuantityPlus = (index: number) => {
-      updateAdditionalOptionQuantity(index, 1);
+    updateAdditionalOptionQuantity(index, 1);
   };
 
   const additionalOptionQuantityMinus = (index: number) => {
