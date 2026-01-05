@@ -58,6 +58,12 @@ const Checkout = () => {
             id: variation.id,
             quantity: variation.quantity,
           })),
+          additional_options: checkout.product.additional_options.map(
+            (additional: any) => ({
+              id: additional.id,
+              quantity: additional.quantity,
+            })
+          ),
         });
       }
     });
@@ -102,7 +108,9 @@ const Checkout = () => {
                       <div>Win Aung</div>
                       <div>Thailand</div>
                       <div>+66 1234 5678</div>
-                      <div className="wrap-break-word">naingwinaung1710@gmail.com</div>
+                      <div className="wrap-break-word">
+                        naingwinaung1710@gmail.com
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -120,7 +128,10 @@ const Checkout = () => {
                           className="w-24 h-24 rounded-md object-cover"
                         />
                         <div>
-                          <h5 className="font-medium mb-1" title={checkout.product.product.name}>
+                          <h5
+                            className="font-medium mb-1"
+                            title={checkout.product.product.name}
+                          >
                             {truncateWord(checkout.product.product.name, 66)}
                           </h5>
                           <p className="text-gray-500 mb-3">
