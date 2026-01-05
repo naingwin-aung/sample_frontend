@@ -151,6 +151,12 @@ const OptionDetail = ({
     setActiveTime(null);
     setDate(undefined);
     setActiveQuantities([]);
+    setActiveAdditionalOptionQuantities(
+        option.additional_options.map((addOption: any) => ({
+          ...addOption,
+          quantity: 0,
+        }))
+      );
   };
 
   const navigate = useNavigate();
