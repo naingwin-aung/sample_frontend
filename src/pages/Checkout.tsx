@@ -207,18 +207,20 @@ const Checkout = () => {
                       </div>
                     </div>
 
-                    <div className="flex justify-between mb-4">
-                      <div className="text-gray-500">Additional Option</div>
-                      <div className="flex flex-col gap-1.5">
-                        {checkout.product.additional_options.map(
-                          (additional: any, aIndex: number) => (
-                            <div key={aIndex} className="text-gray-800">
-                              {additional.name} x {additional.quantity}
-                            </div>
-                          )
-                        )}
+                    {checkout.product.additional_options.length > 0 && (
+                      <div className="flex justify-between mb-4">
+                        <div className="text-gray-500">Additional Option</div>
+                        <div className="flex flex-col gap-1.5">
+                          {checkout.product.additional_options.map(
+                            (additional: any, aIndex: number) => (
+                              <div key={aIndex} className="text-gray-800">
+                                {additional.name} x {additional.quantity}
+                              </div>
+                            )
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <hr className="my-4" />
                     <div className="flex items-center justify-between">
                       <div className="text-gray-500">Total</div>
