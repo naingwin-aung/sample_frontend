@@ -146,7 +146,7 @@ const OptionDetail = ({
   }, [activeQuantities, activeAdditionalOptionQuantities]);
 
   const resetSelect = () => {
-    setActiveZone(null);
+    setActiveZone(option.zones[0].id);
     setActiveTicket(null);
     setActiveTime(null);
     setDate(undefined);
