@@ -117,7 +117,7 @@ const OptionDetail = ({
   const updateAdditionalOptionQuantity = (index: number, delta: 1 | -1) => {
     setActiveAdditionalOptionQuantities((prevOptions: any) =>
       prevOptions.map((item: any, i: number) => {
-        if (item.quantity == 10 && delta === 1) return item; // max 10
+        if (item.quantity == 1 && delta === 1) return item; // max 1
 
         if (i === index) {
           const newQuantity = Math.max(0, item.quantity + delta);
@@ -188,6 +188,13 @@ const OptionDetail = ({
         quantity: item.quantity,
       }));
 
+    const additionalOptionQuantities = activeAdditionalOptionQuantities
+      .filter((item) => item.quantity > 0)
+      .map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+      }));
+
     const payload = {
       product_type: "boat",
       product_id: option.product_id,
@@ -197,6 +204,7 @@ const OptionDetail = ({
       schedule_time_id: activeTime,
       date: date ? moment(date).format("YYYY-MM-DD") : null,
       quantities: quantities,
+      additional_options: additionalOptionQuantities,
     };
 
     const checkoutData = {
@@ -362,7 +370,7 @@ const OptionDetail = ({
 
           {activeAdditionalOptionQuantities.length > 0 && (
             <div className="mb-7">
-              <h4 className="text-md text-gray-500 mb-3">Additional Options</h4>
+              <h4 className="text-md text-gray-500 mb-3">Additional Option</h4>
 
               <div className="flex flex-col gap-3">
                 {activeAdditionalOptionQuantities?.map(

@@ -70,7 +70,7 @@ const Checkout = () => {
   };
 
   if (cartQuery.isLoading || checkoutQuery.isLoading)
-    return <Container>Validating booking...</Container>;
+    return <Container>Loading booking...</Container>;
 
   if (cartQuery.error) return <Container>Error loading cart.</Container>;
 
@@ -182,6 +182,7 @@ const Checkout = () => {
                         {moment(checkout.product.date).format("DD MMM YYYY")}
                       </div>
                     </div>
+
                     <div className="flex justify-between mb-4">
                       <div className="text-gray-500">Quantity</div>
                       <div className="flex flex-col gap-1.5">
@@ -189,6 +190,19 @@ const Checkout = () => {
                           (variation: any, vIndex: number) => (
                             <div key={vIndex} className="text-gray-800">
                               {variation.name} x {variation.quantity}
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between mb-4">
+                      <div className="text-gray-500">Additional Option</div>
+                      <div className="flex flex-col gap-1.5">
+                        {checkout.product.additional_options.map(
+                          (additional: any, aIndex: number) => (
+                            <div key={aIndex} className="text-gray-800">
+                              {additional.name} x {additional.quantity}
                             </div>
                           )
                         )}
