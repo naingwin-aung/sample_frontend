@@ -58,6 +58,13 @@ const Checkout = () => {
             id: variation.id,
             quantity: variation.quantity,
           })),
+          travelers: [
+            {
+              name: "zen",
+              email: "zen@gmail.com",
+              passport: "MI800000",
+            },
+          ],
           additional_options: checkout.product.additional_options.map(
             (additional: any) => ({
               id: additional.id,
