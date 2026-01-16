@@ -34,7 +34,8 @@ const Checkout = () => {
 
   const confirmCheckout = useMutation({
     ...checkoutConfirmMutationOption(),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data) // return of api response
       navigate("/");
     },
   });
