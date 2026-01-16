@@ -144,24 +144,26 @@ const Checkout = () => {
                           <p className="text-gray-500 mb-3">
                             {checkout.product.boat.name}
                           </p>
-                          <p className="ms-1 text-gray-500 mb-1.5 flex items-center gap-4">
-                            <Armchair /> {checkout.product.zone.name}
-                          </p>
-                          <p className="ms-1 text-gray-500 mb-1.5 flex items-center gap-4">
-                            <TicketCheck /> {checkout.product.ticket.name}
-                          </p>
-                          <p className="ms-1 text-gray-500 flex items-center gap-4">
-                            <Clock />
-                            {moment(
-                              checkout.product.schedule_time?.start_time,
-                              "HH:mm:ss"
-                            ).format("HH:mm")}{" "}
-                            -{" "}
-                            {moment(
-                              checkout.product.schedule_time?.end_time,
-                              "HH:mm:ss"
-                            ).format("HH:mm")}
-                          </p>
+                          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+                            <p className="text-gray-500 flex items-center gap-1.5">
+                              <Armchair /> {checkout.product.zone.name}
+                            </p>
+                            <p className="text-gray-500 flex items-center gap-1.5">
+                              <TicketCheck /> {checkout.product.ticket.name}
+                            </p>
+                            <p className="text-gray-500 flex items-center gap-1.5">
+                              <Clock />
+                              {moment(
+                                checkout.product.schedule_time?.start_time,
+                                "HH:mm:ss"
+                              ).format("HH:mm")}{" "}
+                              -{" "}
+                              {moment(
+                                checkout.product.schedule_time?.end_time,
+                                "HH:mm:ss"
+                              ).format("HH:mm")}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     )}
