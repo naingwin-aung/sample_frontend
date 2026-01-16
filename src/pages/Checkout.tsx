@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import moment from "moment";
 import { Armchair, Clock, TicketCheck } from "lucide-react";
 import { truncateWord } from "../lib/helper";
+import GrayBackground from "../components/global/GrayBackground";
 
 const Checkout = () => {
   useEffect(() => {
@@ -36,7 +37,7 @@ const Checkout = () => {
     ...checkoutConfirmMutationOption(),
     onSuccess: (data) => {
       console.log(data) // return of api response
-      navigate("/");
+      navigate(`/boats/${data.data.booking_number}/payment-success`);
     },
   });
 
@@ -92,7 +93,7 @@ const Checkout = () => {
     return <Container>Error loading checkout.</Container>;
 
   return (
-    <section className="bg-gray-100 pt-1 pb-12 text-sm">
+    <GrayBackground>
       <Container>
         <section className="block md:flex gap-6 mt-5">
           <div className="w-full md:w-2/3 mb-5 md:mb-0 bg-white overflow-hidden rounded-xl">
@@ -271,7 +272,7 @@ const Checkout = () => {
           )}
         </section>
       </Container>
-    </section>
+    </GrayBackground>
   );
 };
 

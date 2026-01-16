@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Checkout from "./pages/Checkout.tsx";
 import AppInitializer from "./layouts/AppInitializer.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import PaymentSuccess from "./pages/PaymentSuccess.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ export const router = createBrowserRouter([
               {
                 path: ":type/checkout",
                 Component: Checkout,
-              }
+              },
+              {
+                path: ":type/:booking_number/payment-success",
+                Component: PaymentSuccess,
+              },
             ]
           }
         ],
