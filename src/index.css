@@ -205,5 +205,5 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: gray;
+  background-color: gray !important;
 }
